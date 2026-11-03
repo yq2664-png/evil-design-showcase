@@ -1,0 +1,1442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forma — Considered homewares for everyday living</title>
+<meta name="description" content="Forma makes considered, low-impact homewares from natural and recycled materials. Shop the collection of ceramics, textiles and objects made to last.">
+<style>
+  :root{
+    --paper:#f6f1e8;
+    --paper-deep:#efe6d8;
+    --ink:#22201c;
+    --ink-soft:#4a453d;
+    --clay:#b4522f;
+    --clay-deep:#8c3d21;
+    --moss:#4b5c3c;
+    --sage:#c9d2b8;
+    --sand:#e3d3b8;
+    --line:#d8cbb6;
+    --white:#fffdf9;
+    --radius:18px;
+    --shadow:0 18px 50px rgba(60,42,24,.14);
+    --shadow-soft:0 10px 30px rgba(60,42,24,.10);
+    --maxw:1180px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --serif:Georgia, 'Times New Roman', 'Liberation Serif', serif;
+    --sans:ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  h1,h2,h3,h4{margin:0;font-family:var(--serif);font-weight:400;line-height:1.06;letter-spacing:-.015em}
+  p{margin:0}
+  ul{margin:0;padding:0;list-style:none}
+
+  .wrap{width:min(100% - 2.5rem, var(--maxw));margin-inline:auto}
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:.72rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    font-weight:650;
+    color:var(--clay);
+  }
+  .muted{color:var(--ink-soft)}
+
+  /* ---------- Skip link & focus ---------- */
+  .skip{
+    position:absolute;left:1rem;top:-100px;z-index:200;
+    background:var(--ink);color:var(--paper);
+    padding:.85rem 1.25rem;border-radius:999px;text-decoration:none;font-weight:650;
+    transition:top .2s var(--ease);
+  }
+  .skip:focus{top:1rem}
+  :focus-visible{
+    outline:3px solid var(--clay);
+    outline-offset:3px;
+    border-radius:6px;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.65rem;
+    padding:.95rem 1.75rem;border-radius:999px;
+    font-family:var(--sans);font-size:.95rem;font-weight:650;letter-spacing:.01em;
+    text-decoration:none;cursor:pointer;border:1.5px solid transparent;
+    transition:transform .25s var(--ease), background-color .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .btn-primary{background:var(--clay);color:#fff8f0;box-shadow:0 12px 26px rgba(140,61,33,.28)}
+  .btn-primary:hover{background:var(--clay-deep);transform:translateY(-2px);box-shadow:0 18px 34px rgba(140,61,33,.32)}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:rgba(34,32,28,.28)}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);transform:translateY(-2px)}
+  .btn-light{background:var(--white);color:var(--ink)}
+  .btn-light:hover{transform:translateY(-2px);box-shadow:var(--shadow-soft)}
+  .btn .arrow{transition:transform .25s var(--ease)}
+  .btn:hover .arrow{transform:translateX(4px)}
+
+  /* ---------- Header ---------- */
+  .site-header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(246,241,232,.86);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(216,203,182,.8);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+    min-height:76px;
+  }
+  .brand{
+    display:inline-flex;align-items:center;gap:.65rem;
+    text-decoration:none;font-family:var(--serif);font-size:1.65rem;letter-spacing:.02em;
+  }
+  .brand-mark{
+    width:34px;height:34px;border-radius:50%;
+    background:conic-gradient(from 210deg, var(--clay), var(--sand), var(--moss), var(--clay));
+    box-shadow:inset 0 0 0 4px var(--paper);
+    flex:none;
+  }
+  .nav-links{display:flex;align-items:center;gap:2.1rem}
+  .nav-links a{
+    position:relative;text-decoration:none;font-size:.93rem;font-weight:560;letter-spacing:.01em;
+    padding:.35rem 0;
+  }
+  .nav-links a::after{
+    content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;
+    background:var(--clay);transform:scaleX(0);transform-origin:right;
+    transition:transform .3s var(--ease);
+  }
+  .nav-links a:hover::after,.nav-links a:focus-visible::after{transform:scaleX(1);transform-origin:left}
+  .nav-actions{display:flex;align-items:center;gap:.75rem}
+  .nav-actions .btn{padding:.72rem 1.35rem;font-size:.88rem}
+  .menu-toggle{
+    display:none;align-items:center;gap:.6rem;
+    background:transparent;border:1.5px solid rgba(34,32,28,.25);
+    border-radius:999px;padding:.65rem 1.15rem;cursor:pointer;
+    font-family:var(--sans);font-size:.88rem;font-weight:650;color:var(--ink);
+  }
+  .menu-toggle .bars{display:inline-flex;flex-direction:column;gap:4px}
+  .menu-toggle .bars span{width:18px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s var(--ease), opacity .2s}
+  .menu-toggle[aria-expanded="true"] .bars span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .menu-toggle[aria-expanded="true"] .bars span:nth-child(2){opacity:0}
+  .menu-toggle[aria-expanded="true"] .bars span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+  .mobile-panel{
+    display:none;
+    border-top:1px solid var(--line);
+    background:var(--paper);
+  }
+  .mobile-panel[data-open="true"]{display:block}
+  .mobile-panel ul{padding:1.15rem 0 1.65rem;display:grid;gap:.35rem}
+  .mobile-panel a{
+    display:block;text-decoration:none;padding:.85rem .25rem;
+    font-family:var(--serif);font-size:1.5rem;
+    border-bottom:1px solid rgba(216,203,182,.7);
+  }
+  .mobile-panel .btn{width:100%;margin-top:1.15rem}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:clamp(3.25rem,7vw,6.5rem) 0 clamp(3.5rem,7vw,6rem);
+    overflow:hidden;
+    background:
+      radial-gradient(1100px 520px at 82% 8%, rgba(227,211,184,.85), transparent 62%),
+      radial-gradient(760px 480px at 6% 92%, rgba(201,210,184,.55), transparent 60%);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.02fr .98fr;
+    gap:clamp(2.25rem,5vw,4.75rem);
+    align-items:center;
+  }
+  .hero-copy{max-width:36rem}
+  .hero h1{
+    font-size:clamp(3.15rem,7.6vw,6.15rem);
+    line-height:.95;
+    margin:1.15rem 0 1.5rem;
+    letter-spacing:-.035em;
+  }
+  .hero h1 em{font-style:italic;color:var(--clay)}
+  .hero-lead{
+    font-size:clamp(1.06rem,1.6vw,1.28rem);
+    color:var(--ink-soft);
+    max-width:31rem;
+  }
+  .hero-actions{display:flex;flex-wrap:wrap;gap:.95rem;margin-top:2.15rem}
+  .hero-facts{
+    display:flex;flex-wrap:wrap;gap:1.9rem;margin-top:2.65rem;
+    padding-top:1.75rem;border-top:1px solid var(--line);
+  }
+  .fact strong{
+    display:block;font-family:var(--serif);font-size:1.95rem;line-height:1;letter-spacing:-.02em;
+  }
+  .fact span{font-size:.83rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+
+  /* ---------- CSS product illustration ---------- */
+  .art{
+    position:relative;
+    aspect-ratio:1/1.02;
+    border-radius:26px;
+    background:linear-gradient(160deg, #efe0c6 0%, #e7d4b4 46%, #dcc7a3 100%);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .art::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(60% 42% at 22% 16%, rgba(255,252,244,.75), transparent 70%),
+      radial-gradient(52% 40% at 88% 88%, rgba(122,88,52,.22), transparent 72%);
+  }
+  .art-caption{
+    position:absolute;left:1.55rem;bottom:1.45rem;z-index:6;
+    background:rgba(255,253,249,.82);
+    backdrop-filter:blur(6px);
+    border-radius:14px;padding:.72rem 1.05rem;
+    font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:650;
+    color:var(--ink-soft);
+    box-shadow:0 8px 22px rgba(90,62,32,.14);
+  }
+  .art-badge{
+    position:absolute;right:1.35rem;top:1.35rem;z-index:6;
+    width:104px;height:104px;border-radius:50%;
+    background:var(--moss);color:#f2f5ea;
+    display:grid;place-items:center;text-align:center;
+    font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;line-height:1.5;
+    padding:.75rem;
+    box-shadow:0 14px 30px rgba(46,58,36,.28);
+    animation:bob 7s ease-in-out infinite;
+  }
+  @keyframes bob{
+    0%,100%{transform:translateY(0) rotate(-6deg)}
+    50%{transform:translateY(-11px) rotate(-2deg)}
+  }
+
+  .scene{position:absolute;inset:0;z-index:3}
+  .tabletop{
+    position:absolute;left:0;right:0;bottom:0;height:31%;
+    background:linear-gradient(180deg,#c9a878,#b68f5f);
+    box-shadow:0 -14px 30px rgba(120,86,48,.18);
+  }
+  .tabletop::after{
+    content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(96deg, rgba(255,255,255,.09) 0 3px, transparent 3px 26px);
+    mix-blend-mode:overlay;
+  }
+  .shadow{
+    position:absolute;border-radius:50%;
+    background:radial-gradient(closest-side, rgba(92,62,32,.34), rgba(92,62,32,0));
+    filter:blur(2px);
+  }
+  .shadow-vase{width:52%;height:9%;left:12%;bottom:22%}
+  .shadow-bowl{width:34%;height:6%;right:6%;bottom:19%}
+  .shadow-arch{width:26%;height:5%;left:47%;bottom:34%}
+
+  .vase{
+    position:absolute;left:14%;bottom:22%;width:36%;height:52%;
+    border-radius:46% 46% 30% 30% / 22% 22% 12% 12%;
+    background:
+      linear-gradient(105deg, rgba(255,255,255,.5) 0 16%, transparent 34%),
+      linear-gradient(160deg,#e07a4e 0%, #c2562c 52%, #9c3d1e 100%);
+    box-shadow:
+      inset -14px -12px 26px rgba(112,44,18,.42),
+      inset 12px 10px 22px rgba(255,196,158,.42),
+      0 22px 34px rgba(112,62,28,.24);
+  }
+  .vase::before{
+    content:"";position:absolute;left:50%;top:-6%;transform:translateX(-50%);
+    width:44%;height:12%;border-radius:50%;
+    background:linear-gradient(180deg,#8f3418,#c2562c);
+    box-shadow:inset 0 5px 8px rgba(74,24,8,.55);
+  }
+  .vase::after{
+    content:"";position:absolute;left:12%;top:16%;width:22%;height:56%;
+    border-radius:50%;
+    background:linear-gradient(180deg, rgba(255,222,199,.62), rgba(255,222,199,0));
+    filter:blur(2px);
+  }
+
+  .stem{position:absolute;bottom:60%;width:4px;border-radius:4px;background:var(--moss);transform-origin:bottom center}
+  .stem-1{left:29%;height:32%;transform:rotate(-13deg)}
+  .stem-2{left:33%;height:38%;transform:rotate(1deg)}
+  .stem-3{left:37%;height:29%;transform:rotate(15deg)}
+  .leaf{
+    position:absolute;width:16%;height:8%;
+    border-radius:60% 8% 60% 8%;
+    background:linear-gradient(120deg,#7c8c5c,#4b5c3c);
+    box-shadow:inset -4px -3px 8px rgba(30,42,22,.35);
+  }
+  .leaf-1{left:19%;bottom:83%;transform:rotate(-32deg)}
+  .leaf-2{left:31%;bottom:92%;transform:rotate(12deg)}
+  .leaf-3{left:43%;bottom:84%;transform:rotate(38deg)}
+  .leaf-4{left:23%;bottom:74%;transform:rotate(-8deg)}
+
+  .bowl{
+    position:absolute;right:8%;bottom:19%;width:30%;height:17%;
+    border-radius:12% 12% 52% 52% / 10% 10% 92% 92%;
+    background:linear-gradient(170deg,#f4ead8,#d8c4a2);
+    box-shadow:
+      inset -10px -8px 16px rgba(140,110,72,.32),
+      inset 8px 6px 14px rgba(255,255,255,.62),
+      0 16px 24px rgba(112,80,44,.22);
+  }
+  .bowl::before{
+    content:"";position:absolute;left:6%;right:6%;top:-11%;height:34%;
+    border-radius:50%;
+    background:linear-gradient(180deg,#b9a27e,#e6d7bd);
+    box-shadow:inset 0 -6px 10px rgba(120,92,58,.35);
+  }
+  .bowl-fruit{
+    position:absolute;border-radius:50%;
+    box-shadow:inset -5px -4px 9px rgba(90,52,20,.35), inset 4px 4px 8px rgba(255,220,180,.5);
+  }
+  .fruit-1{right:20%;bottom:32%;width:9%;aspect-ratio:1;background:radial-gradient(circle at 32% 28%,#f0a173,#c2532c)}
+  .fruit-2{right:27%;bottom:34%;width:8%;aspect-ratio:1;background:radial-gradient(circle at 32% 28%,#e8d28c,#b98f3c)}
+
+  .arch{
+    position:absolute;left:50%;bottom:34%;width:19%;height:26%;
+    transform:translateX(-18%);
+    border-radius:52% 52% 10% 10% / 46% 46% 8% 8%;
+    background:linear-gradient(150deg,#5e7050,#3b4a2f);
+    box-shadow:
+      inset -8px -8px 16px rgba(22,32,16,.45),
+      inset 7px 7px 14px rgba(160,180,140,.32),
+      0 18px 26px rgba(48,58,34,.26);
+  }
+  .arch::after{
+    content:"";position:absolute;left:26%;right:26%;top:22%;bottom:0;
+    border-radius:50% 50% 0 0 / 40% 40% 0 0;
+    background:linear-gradient(180deg, rgba(28,38,20,.5), rgba(28,38,20,.12));
+    box-shadow:inset 0 6px 12px rgba(18,26,12,.5);
+  }
+
+  .sparkle{
+    position:absolute;width:10px;height:10px;border-radius:50%;
+    background:rgba(255,252,244,.85);
+    box-shadow:0 0 16px rgba(255,248,232,.9);
+    animation:twinkle 5.5s ease-in-out infinite;
+  }
+  .sparkle-1{left:12%;top:14%}
+  .sparkle-2{right:22%;top:34%;animation-delay:1.6s}
+  .sparkle-3{left:44%;top:8%;width:7px;height:7px;animation-delay:3s}
+  @keyframes twinkle{
+    0%,100%{opacity:.25;transform:scale(.7)}
+    50%{opacity:1;transform:scale(1.15)}
+  }
+
+  /* ---------- Marquee strip ---------- */
+  .strip{
+    background:var(--ink);color:var(--paper);
+    padding:1.15rem 0;overflow:hidden;
+  }
+  .strip-track{
+    display:flex;gap:3.25rem;align-items:center;
+    white-space:nowrap;width:max-content;
+    animation:slide 34s linear infinite;
+    font-family:var(--serif);font-size:1.32rem;letter-spacing:.02em;
+  }
+  .strip:hover .strip-track{animation-play-state:paused}
+  .strip-track span{display:inline-flex;align-items:center;gap:3.25rem}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--clay);display:inline-block}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- Sections ---------- */
+  section{position:relative}
+  .section{padding:clamp(4rem,8vw,7.5rem) 0}
+  .section-head{
+    display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:end;
+    margin-bottom:clamp(2.5rem,5vw,4rem);
+  }
+  .section-head h2{font-size:clamp(2.35rem,4.6vw,3.85rem);letter-spacing:-.03em}
+  .section-head p{color:var(--ink-soft);max-width:32rem}
+
+  /* Benefits */
+  .benefits{background:var(--white)}
+  .benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.55rem}
+  .benefit{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:2.35rem 2.15rem 2.5rem;
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+    position:relative;overflow:hidden;
+  }
+  .benefit:hover{transform:translateY(-7px);box-shadow:var(--shadow-soft);border-color:var(--sand)}
+  .benefit-icon{
+    width:62px;height:62px;border-radius:16px;
+    display:grid;place-items:center;margin-bottom:1.55rem;
+    background:var(--sand);color:var(--clay-deep);
+  }
+  .benefit:nth-child(2) .benefit-icon{background:var(--sage);color:var(--moss)}
+  .benefit:nth-child(3) .benefit-icon{background:#e8cfc0;color:var(--clay-deep)}
+  .benefit-icon svg{width:30px;height:30px}
+  .benefit h3{font-size:1.72rem;margin-bottom:.85rem}
+  .benefit p{color:var(--ink-soft);font-size:1.01rem}
+  .benefit .tag{
+    display:inline-block;margin-top:1.55rem;
+    font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+    color:var(--clay);
+  }
+
+  /* Materials / editorial split */
+  .materials{background:var(--paper-deep)}
+  .split{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2.5rem,6vw,5.5rem);align-items:center;
+  }
+  .split h2{font-size:clamp(2.35rem,4.6vw,3.75rem);margin:1.15rem 0 1.55rem}
+  .split p + p{margin-top:1.15rem}
+  .split p{color:var(--ink-soft)}
+  .checklist{margin-top:2.15rem;display:grid;gap:.95rem}
+  .checklist li{display:flex;gap:.95rem;align-items:flex-start;font-size:1.02rem}
+  .check{
+    flex:none;width:26px;height:26px;border-radius:50%;
+    background:var(--moss);color:#fff;display:grid;place-items:center;margin-top:.15rem;
+    font-size:.82rem;font-weight:700;
+  }
+  .stat-card{
+    background:var(--white);border:1px solid var(--line);border-radius:22px;
+    padding:2.35rem;box-shadow:var(--shadow-soft);
+  }
+  .stat-row{display:grid;grid-template-columns:1fr 1fr;gap:1.35rem}
+  .stat{
+    padding:1.35rem 1.25rem;border-radius:14px;background:var(--paper);
+    border:1px solid var(--line);
+  }
+  .stat strong{display:block;font-family:var(--serif);font-size:2.35rem;line-height:1;letter-spacing:-.03em;color:var(--clay-deep)}
+  .stat span{font-size:.83rem;letter-spacing:.08em;text-transform:uppercase;font-weight:650;color:var(--ink-soft)}
+  .stat-card h3{font-size:1.65rem;margin:.25rem 0 1.15rem}
+  .stat-card .note{font-size:.92rem;color:var(--ink-soft);margin-top:1.35rem;line-height:1.6}
+
+  /* Products */
+  .products{background:var(--white)}
+  .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem}
+  .product{
+    border-radius:var(--radius);overflow:hidden;background:var(--paper);
+    border:1px solid var(--line);
+    display:flex;flex-direction:column;
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+  }
+  .product:hover{transform:translateY(-6px);box-shadow:var(--shadow-soft)}
+  .product-visual{
+    aspect-ratio:4/3.35;position:relative;overflow:hidden;
+    display:grid;place-items:center;
+  }
+  .pv-1{background:linear-gradient(150deg,#e9d7bd,#d6bb96)}
+  .pv-2{background:linear-gradient(150deg,#d9e0cb,#b8c6a2)}
+  .pv-3{background:linear-gradient(150deg,#ecc9b6,#d39a7c)}
+  .obj{position:relative;transition:transform .5s var(--ease)}
+  .product:hover .obj{transform:translateY(-8px) rotate(-2deg)}
+  .obj-pot{
+    width:46%;aspect-ratio:1/1.12;
+    border-radius:44% 44% 32% 32% / 26% 26% 14% 14%;
+    background:linear-gradient(155deg,#f2e6d2,#c9ab84);
+    box-shadow:inset -10px -9px 20px rgba(122,92,56,.32), inset 9px 8px 18px rgba(255,255,255,.55), 0 20px 30px rgba(110,80,44,.22);
+  }
+  .obj-pot::before{
+    content:"";position:absolute;left:50%;top:-5%;transform:translateX(-50%);
+    width:46%;height:11%;border-radius:50%;background:#b1936c;
+    box-shadow:inset 0 5px 8px rgba(84,60,32,.5);
+  }
+  .obj-throw{
+    width:56%;aspect-ratio:1/.82;border-radius:16px;
+    background:
+      repeating-linear-gradient(90deg, rgba(255,255,255,.28) 0 6px, transparent 6px 16px),
+      linear-gradient(150deg,#6d8055,#42512f);
+    box-shadow:inset -12px -10px 22px rgba(24,34,16,.38), 0 20px 30px rgba(58,72,38,.24);
+    transform:rotate(-4deg);
+  }
+  .obj-throw::after{
+    content:"";position:absolute;left:8%;right:8%;bottom:-9%;height:16%;
+    border-radius:0 0 12px 12px;
+    background:repeating-linear-gradient(90deg,#5a6b42 0 5px,#4a5a35 5px 11px);
+  }
+  .obj-lamp{
+    width:34%;aspect-ratio:1/1.55;
+    background:linear-gradient(160deg,#e08c62,#b25a30);
+    border-radius:50% 50% 42% 42% / 34% 34% 12% 12%;
+    box-shadow:inset -10px -9px 20px rgba(112,44,18,.38), inset 9px 8px 18px rgba(255,206,172,.42), 0 20px 30px rgba(110,58,28,.22);
+  }
+  .obj-lamp::before{
+    content:"";position:absolute;left:50%;top:-26%;transform:translateX(-50%);
+    width:150%;height:42%;border-radius:50% 50% 42% 42% / 62% 62% 32% 32%;
+    background:linear-gradient(160deg,#f6ead6,#dcc4a1);
+    box-shadow:inset -8px -6px 14px rgba(122,92,56,.28), 0 12px 20px rgba(110,80,44,.18);
+  }
+  .product-body{padding:1.65rem 1.65rem 1.85rem;display:flex;flex-direction:column;gap:.55rem;flex:1}
+  .product-body h3{font-size:1.55rem}
+  .product-body p{color:var(--ink-soft);font-size:.97rem}
+  .product-meta{
+    margin-top:auto;padding-top:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    border-top:1px solid var(--line);
+  }
+  .price{font-family:var(--serif);font-size:1.42rem}
+  .swatches{display:flex;gap:.45rem}
+  .swatch{width:19px;height:19px;border-radius:50%;border:1.5px solid rgba(34,32,28,.18)}
+  .sw-1{background:#c2562c}.sw-2{background:#4b5c3c}.sw-3{background:#e3d3b8}.sw-4{background:#2f2c27}
+
+  /* Proof */
+  .proof{background:var(--clay);color:#fdf3e8}
+  .proof .eyebrow{color:#f6d9c2}
+  .proof h2{font-size:clamp(2.35rem,4.6vw,3.75rem);color:#fff6ec}
+  .proof .section-head p{color:#f7ddca}
+  .quote-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.55rem}
+  .quote{
+    background:rgba(255,247,236,.11);
+    border:1px solid rgba(255,240,224,.28);
+    border-radius:var(--radius);
+    padding:2.15rem 2rem;
+    display:flex;flex-direction:column;gap:1.35rem;
+    transition:transform .35s var(--ease), background-color .35s var(--ease);
+  }
+  .quote:hover{transform:translateY(-6px);background:rgba(255,247,236,.17)}
+  .stars{display:flex;gap:.28rem;color:#ffd9a8;font-size:1.02rem;letter-spacing:.12em}
+  .quote blockquote{
+    margin:0;font-family:var(--serif);font-size:1.32rem;line-height:1.42;letter-spacing:-.012em;
+  }
+  .quote figcaption{margin-top:auto;display:flex;align-items:center;gap:.95rem}
+  .avatar{
+    width:46px;height:46px;border-radius:50%;flex:none;
+    display:grid;place-items:center;font-family:var(--serif);font-size:1.15rem;
+    background:#f7e2cd;color:var(--clay-deep);
+    border:1.5px solid rgba(255,255,255,.5);
+  }
+  .quote:nth-child(2) .avatar{background:#dfe6d0;color:var(--moss)}
+  .quote:nth-child(3) .avatar{background:#efd7c6;color:var(--clay-deep)}
+  .quote figcaption div{display:grid;line-height:1.35}
+  .quote .name{font-weight:680;font-size:.98rem}
+  .quote .role{font-size:.85rem;opacity:.82}
+
+  .proof-stats{
+    margin-top:clamp(2.5rem,5vw,3.75rem);
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;
+    border-top:1px solid rgba(255,238,222,.32);padding-top:2.35rem;
+  }
+  .pstat strong{display:block;font-family:var(--serif);font-size:clamp(2.15rem,3.4vw,2.95rem);line-height:1;letter-spacing:-.03em}
+  .pstat span{font-size:.87rem;opacity:.86;letter-spacing:.05em}
+
+  /* FAQ */
+  .faq{background:var(--paper)}
+  .faq-wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(2.5rem,6vw,5rem);align-items:start}
+  .faq h2{font-size:clamp(2.25rem,4.2vw,3.35rem);margin:1.15rem 0 1.35rem}
+  .faq-list{border-top:1px solid var(--line)}
+  .faq-item{border-bottom:1px solid var(--line)}
+  .faq-q{
+    width:100%;background:transparent;border:0;cursor:pointer;
+    display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+    padding:1.55rem .25rem;text-align:left;
+    font-family:var(--serif);font-size:1.32rem;color:var(--ink);
+  }
+  .faq-q:hover{color:var(--clay-deep)}
+  .faq-icon{
+    flex:none;width:32px;height:32px;border-radius:50%;
+    border:1.5px solid var(--line);display:grid;place-items:center;
+    font-family:var(--sans);font-size:1.15rem;line-height:1;
+    transition:transform .3s var(--ease), background-color .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+  }
+  .faq-q[aria-expanded="true"] .faq-icon{
+    transform:rotate(45deg);background:var(--clay);color:#fff;border-color:var(--clay);
+  }
+  .faq-a{padding:0 .25rem 1.75rem;max-width:46rem;color:var(--ink-soft)}
+  .faq-a[hidden]{display:none}
+
+  /* Newsletter + CTA */
+  .cta{background:var(--moss);color:#f3f6ec;overflow:hidden;position:relative}
+  .cta::before{
+    content:"";position:absolute;right:-140px;top:-140px;width:520px;height:520px;
+    border-radius:50%;background:rgba(255,255,255,.07);
+  }
+  .cta::after{
+    content:"";position:absolute;left:-120px;bottom:-180px;width:420px;height:420px;
+    border-radius:50%;background:rgba(255,255,255,.06);
+  }
+  .cta-inner{
+    position:relative;z-index:2;
+    display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2.5rem,6vw,5rem);align-items:center;
+  }
+  .cta h2{font-size:clamp(2.55rem,5.2vw,4.35rem);color:#fbfdf7;letter-spacing:-.032em}
+  .cta p{color:#e2ead6;margin-top:1.35rem;font-size:1.11rem;max-width:33rem}
+  .cta-actions{display:flex;flex-wrap:wrap;gap:.95rem;margin-top:2.25rem}
+  .cta .btn-ghost{color:#f2f6ea;border-color:rgba(242,246,234,.5)}
+  .cta .btn-ghost:hover{background:#f2f6ea;color:var(--moss);border-color:#f2f6ea}
+  .signup{
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.26);
+    border-radius:22px;padding:2.15rem;
+  }
+  .signup h3{font-size:1.62rem;color:#fbfdf7;margin-bottom:.75rem}
+  .signup p{font-size:.98rem;margin:0 0 1.35rem;color:#e0e9d3}
+  .field{display:grid;gap:.55rem;margin-bottom:1.05rem}
+  .field label{font-size:.82rem;letter-spacing:.11em;text-transform:uppercase;font-weight:700;color:#e6eeda}
+  .field input{
+    width:100%;padding:.95rem 1.15rem;border-radius:12px;
+    border:1.5px solid rgba(255,255,255,.35);
+    background:rgba(255,255,255,.94);color:var(--ink);
+    font-family:var(--sans);font-size:1rem;
+  }
+  .field input::placeholder{color:#8b8578}
+  .field input:focus-visible{outline:3px solid #fff;outline-offset:2px}
+  .signup .btn{width:100%}
+  .form-note{font-size:.83rem;color:#d5e0c6;margin-top:.95rem;line-height:1.55}
+  .form-status{
+    margin-top:1rem;font-size:.95rem;font-weight:600;
+    padding:.85rem 1.05rem;border-radius:11px;
+    background:rgba(255,255,255,.16);color:#fff;
+  }
+  .form-status[hidden]{display:none}
+
+  /* Footer */
+  .site-footer{background:var(--ink);color:#e9e2d6;padding:clamp(3.5rem,6vw,5.25rem) 0 2.25rem}
+  .footer-top{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;
+    padding-bottom:3.15rem;border-bottom:1px solid rgba(233,226,214,.18);
+  }
+  .footer-brand .brand{color:#f4ece0}
+  .footer-brand .brand-mark{box-shadow:inset 0 0 0 4px var(--ink)}
+  .footer-brand p{margin-top:1.15rem;color:#b8b0a2;max-width:24rem;font-size:.98rem}
+  .footer-col h4{
+    font-family:var(--sans);font-size:.78rem;letter-spacing:.19em;text-transform:uppercase;
+    font-weight:700;color:#c8bfae;margin-bottom:1.35rem;
+  }
+  .footer-col ul{display:grid;gap:.78rem}
+  .footer-col a{
+    text-decoration:none;color:#e2dacd;font-size:.98rem;
+    transition:color .22s var(--ease), padding-left .22s var(--ease);
+  }
+  .footer-col a:hover{color:#fff;padding-left:5px}
+  .footer-bottom{
+    padding-top:2.15rem;display:flex;flex-wrap:wrap;gap:1.25rem;
+    align-items:center;justify-content:space-between;
+    color:#a49b8d;font-size:.88rem;
+  }
+  .footer-bottom ul{display:flex;flex-wrap:wrap;gap:1.55rem}
+  .footer-bottom a{text-decoration:none}
+  .footer-bottom a:hover{color:#f0e8dc}
+  .demo-note{
+    display:inline-flex;align-items:center;gap:.55rem;
+    background:rgba(180,82,47,.22);color:#f2c6b1;
+    border:1px solid rgba(242,198,177,.35);
+    padding:.42rem .95rem;border-radius:999px;font-size:.78rem;letter-spacing:.09em;
+    text-transform:uppercase;font-weight:700;
+  }
+
+  /* Reveal animation */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease), transform .8s var(--ease)}
+  .reveal.is-visible{opacity:1;transform:none}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:1024px){
+    .hero-grid{grid-template-columns:1fr;gap:3.25rem}
+    .hero-copy{max-width:44rem}
+    .art{max-width:620px;margin-inline:auto;width:100%}
+    .benefit-grid,.product-grid,.quote-grid{grid-template-columns:1fr 1fr}
+    .split{grid-template-columns:1fr;gap:3rem}
+    .cta-inner{grid-template-columns:1fr;gap:2.75rem}
+    .faq-wrap{grid-template-columns:1fr;gap:2.5rem}
+    .footer-top{grid-template-columns:1fr 1fr;gap:2.5rem 2rem}
+  }
+  @media (max-width:860px){
+    .nav-links,.nav-actions .btn-ghost{display:none}
+    .menu-toggle{display:inline-flex}
+    .section-head{grid-template-columns:1fr;gap:1.35rem;align-items:start}
+    .proof-stats{grid-template-columns:1fr 1fr;gap:1.75rem 1.25rem}
+  }
+  @media (max-width:640px){
+    body{font-size:16.5px}
+    .wrap{width:min(100% - 1.75rem, var(--maxw))}
+    .hero{padding-top:2.75rem}
+    .hero h1{font-size:clamp(2.75rem,13vw,4.15rem)}
+    .hero-actions .btn{width:100%}
+    .hero-facts{gap:1.5rem}
+    .benefit-grid,.product-grid,.quote-grid,.stat-row{grid-template-columns:1fr}
+    .footer-top{grid-template-columns:1fr}
+    .footer-bottom{flex-direction:column;align-items:flex-start}
+    .art-badge{width:88px;height:88px;font-size:.62rem}
+    .art-caption{left:1.15rem;bottom:1.15rem;font-size:.72rem}
+    .strip-track{font-size:1.12rem;gap:2.25rem}
+    .strip-track span{gap:2.25rem}
+    .cta-actions .btn{width:100%}
+    .quote blockquote{font-size:1.22rem}
+    .faq-q{font-size:1.18rem}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="#top" aria-label="Forma home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Forma</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#collection">Collection</a></li>
+        <li><a href="#materials">Materials</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="#newsletter">Join the list</a>
+        <a class="btn btn-primary" href="#collection">Shop the collection</a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="menu-label">Menu</span>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <div class="mobile-panel" id="mobileMenu" data-open="false">
+    <div class="wrap">
+      <ul>
+        <li><a href="#collection">Collection</a></li>
+        <li><a href="#materials">Materials</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#newsletter">Join the list</a></li>
+      </ul>
+      <a class="btn btn-primary" href="#collection">Shop the collection</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="hero-copy reveal">
+        <p class="eyebrow">Sustainable homewares · Est. 2019</p>
+        <h1 id="hero-title">Quiet objects for a <em>well&#8209;lived</em> home.</h1>
+        <p class="hero-lead">
+          Forma makes ceramics, textiles and everyday objects from natural and recycled
+          materials — designed to be used daily, kept for decades, and passed on when
+          you're done.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#collection">
+            Shop the collection
+            <span class="arrow" aria-hidden="true">&#8594;</span>
+          </a>
+          <a class="btn btn-ghost" href="#materials">Our materials</a>
+        </div>
+
+        <div class="hero-facts">
+          <div class="fact">
+            <strong>92%</strong>
+            <span>Recycled or renewable</span>
+          </div>
+          <div class="fact">
+            <strong>10 yr</strong>
+            <span>Repair guarantee</span>
+          </div>
+          <div class="fact">
+            <strong>4.9/5</strong>
+            <span>From 2,140 reviews</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CSS-made product illustration -->
+      <figure class="art reveal" role="img" aria-label="Illustration of a terracotta vase with leaves, a stoneware bowl of fruit and a green ceramic arch on a wooden table.">
+        <div class="scene" aria-hidden="true">
+          <div class="tabletop"></div>
+
+          <div class="shadow shadow-vase"></div>
+          <div class="shadow shadow-bowl"></div>
+          <div class="shadow shadow-arch"></div>
+
+          <div class="stem stem-1"></div>
+          <div class="stem stem-2"></div>
+          <div class="stem stem-3"></div>
+          <div class="leaf leaf-1"></div>
+          <div class="leaf leaf-2"></div>
+          <div class="leaf leaf-3"></div>
+          <div class="leaf leaf-4"></div>
+
+          <div class="vase"></div>
+          <div class="arch"></div>
+
+          <div class="bowl"></div>
+          <div class="bowl-fruit fruit-1"></div>
+          <div class="bowl-fruit fruit-2"></div>
+
+          <div class="sparkle sparkle-1"></div>
+          <div class="sparkle sparkle-2"></div>
+          <div class="sparkle sparkle-3"></div>
+        </div>
+
+        <div class="art-badge" aria-hidden="true">Made<br>to last</div>
+        <figcaption class="art-caption">The Terra set · clay, stoneware &amp; oak</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="strip" aria-hidden="true">
+    <div class="strip-track">
+      <span>
+        Plastic-free packaging <i class="dot"></i>
+        Small-batch production <i class="dot"></i>
+        Repair, don't replace <i class="dot"></i>
+        Fair, traceable supply <i class="dot"></i>
+        Carbon-measured shipping <i class="dot"></i>
+      </span>
+      <span>
+        Plastic-free packaging <i class="dot"></i>
+        Small-batch production <i class="dot"></i>
+        Repair, don't replace <i class="dot"></i>
+        Fair, traceable supply <i class="dot"></i>
+        Carbon-measured shipping <i class="dot"></i>
+      </span>
+    </div>
+  </div>
+
+  <!-- BENEFITS -->
+  <section class="section benefits" id="benefits" aria-labelledby="benefits-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Why Forma</p>
+          <h2 id="benefits-title">Fewer, better things.</h2>
+        </div>
+        <p>
+          We design around three simple principles. Everything we make has to earn its
+          place in your home — and stay there for a very long time.
+        </p>
+      </div>
+
+      <div class="benefit-grid">
+        <article class="benefit reveal">
+          <div class="benefit-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 21c0-6 3.5-10 9-11-1 6-4 9-9 11Z"/>
+              <path d="M12 21c0-5-2.8-8.4-8-9.3.9 5 3.6 8 8 9.3Z"/>
+              <path d="M12 21v-6"/>
+            </svg>
+          </div>
+          <h3>Materials with a past</h3>
+          <p>
+            Recycled stoneware, reclaimed oak and GOTS-certified cotton. Every material
+            is traceable to its source and chosen for how gracefully it ages.
+          </p>
+          <span class="tag">Traceable to source</span>
+        </article>
+
+        <article class="benefit reveal">
+          <div class="benefit-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="8.2"/>
+              <path d="M12 6.6v5.6l3.6 2.2"/>
+              <path d="M4.4 4.4 6.8 6.8"/>
+            </svg>
+          </div>
+          <h3>Made in small batches</h3>
+          <p>
+            We produce in runs of 200 or fewer with a workshop we've partnered with since
+            day one — less waste, fairer wages, and no surplus stock heading to landfill.
+          </p>
+          <span class="tag">Runs of 200 or fewer</span>
+        </article>
+
+        <article class="benefit reveal">
+          <div class="benefit-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.2 12a8.2 8.2 0 1 1-2.6-6"/>
+              <path d="M20.6 4.2v4.4h-4.4"/>
+              <path d="M8.6 12.2 11 14.6l4.6-5"/>
+            </svg>
+          </div>
+          <h3>Kept, repaired, returned</h3>
+          <p>
+            A ten-year repair guarantee on every piece, plus free take-back when you're
+            finished with it — so nothing you buy from us ends up as waste.
+          </p>
+          <span class="tag">10-year guarantee</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATERIALS -->
+  <section class="section materials" id="materials" aria-labelledby="materials-title">
+    <div class="wrap split">
+      <div class="reveal">
+        <p class="eyebrow">Materials &amp; making</p>
+        <h2 id="materials-title">Honest materials, measured impact.</h2>
+        <p>
+          We publish the footprint of every product we make — the clay, the glaze, the
+          freight and the packaging. Not because it looks good on a page, but because
+          you can't improve what you don't count.
+        </p>
+        <p>
+          Our workshop in Stoke-on-Trent fires with renewable electricity, reclaims its
+          process water, and turns trimmings back into usable clay. Nothing is wasted,
+          and nothing is hidden.
+        </p>
+
+        <ul class="checklist">
+          <li>
+            <span class="check" aria-hidden="true">&#10003;</span>
+            <span><strong>Plastic-free packaging</strong> — moulded recycled paper, paper tape, zero filler.</span>
+          </li>
+          <li>
+            <span class="check" aria-hidden="true">&#10003;</span>
+            <span><strong>Water-based, lead-free glazes</strong> tested to food-contact standards.</span>
+          </li>
+          <li>
+            <span class="check" aria-hidden="true">&#10003;</span>
+            <span><strong>Carbon-measured delivery</strong> with 1% of revenue to verified restoration projects.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="stat-card reveal">
+        <h3>Our 2024 impact, in numbers</h3>
+        <div class="stat-row">
+          <div class="stat">
+            <strong>18.4t</strong>
+            <span>CO₂e avoided</span>
+          </div>
+          <div class="stat">
+            <strong>100%</strong>
+            <span>Renewable-fired kilns</span>
+          </div>
+          <div class="stat">
+            <strong>0</strong>
+            <span>Plastic in packaging</span>
+          </div>
+          <div class="stat">
+            <strong>1,320</strong>
+            <span>Pieces repaired</span>
+          </div>
+        </div>
+        <p class="note">
+          Figures independently reviewed by a third-party lifecycle assessor and published
+          in full in our annual impact report.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTION -->
+  <section class="section products" id="collection" aria-labelledby="collection-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">The collection</p>
+          <h2 id="collection-title">Objects that earn their keep.</h2>
+        </div>
+        <p>
+          A tight edit of the pieces our customers reach for every day — stackable,
+          repairable, and quietly beautiful in any room.
+        </p>
+      </div>
+
+      <div class="product-grid">
+        <article class="product reveal">
+          <div class="product-visual pv-1">
+            <div class="obj obj-pot" aria-hidden="true"></div>
+          </div>
+          <div class="product-body">
+            <h3>Terra Vessel</h3>
+            <p>Hand-thrown recycled stoneware with a soft matte glaze. Watertight, so it works with or without stems.</p>
+            <div class="product-meta">
+              <span class="price">£68</span>
+              <div class="swatches" role="img" aria-label="Available in clay, moss, sand and charcoal">
+                <span class="swatch sw-1"></span>
+                <span class="swatch sw-2"></span>
+                <span class="swatch sw-3"></span>
+                <span class="swatch sw-4"></span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="product reveal">
+          <div class="product-visual pv-2">
+            <div class="obj obj-throw" aria-hidden="true"></div>
+          </div>
+          <div class="product-body">
+            <h3>Field Throw</h3>
+            <p>Woven in Lancashire from undyed British wool and recycled cotton. Warm, breathable, and machine washable.</p>
+            <div class="product-meta">
+              <span class="price">£124</span>
+              <div class="swatches" role="img" aria-label="Available in moss, sand and charcoal">
+                <span class="swatch sw-2"></span>
+                <span class="swatch sw-3"></span>
+                <span class="swatch sw-4"></span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="product reveal">
+          <div class="product-visual pv-3">
+            <div class="obj obj-lamp" aria-hidden="true"></div>
+          </div>
+          <div class="product-body">
+            <h3>Halo Table Light</h3>
+            <p>Recycled aluminium base with a linen shade and repairable, replaceable wiring. Ships flat to cut freight emissions.</p>
+            <div class="product-meta">
+              <span class="price">£156</span>
+              <div class="swatches" role="img" aria-label="Available in clay and sand">
+                <span class="swatch sw-1"></span>
+                <span class="swatch sw-3"></span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div style="margin-top:2.75rem;text-align:center" class="reveal">
+        <a class="btn btn-primary" href="#newsletter">
+          Shop the collection
+          <span class="arrow" aria-hidden="true">&#8594;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section class="section proof" id="reviews" aria-labelledby="reviews-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Customer proof</p>
+          <h2 id="reviews-title">Loved in 40,000 homes.</h2>
+        </div>
+        <p>
+          We ask every customer the same question a year later: would you buy it again?
+          Here's what they told us.
+        </p>
+      </div>
+
+      <div class="quote-grid">
+        <figure class="quote reveal">
+          <div class="stars" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>
+            “The Terra Vessel has been on our table every single day for two years and it
+            still looks new. It's the rare thing that's better in person.”
+          </blockquote>
+          <figcaption>
+            <span class="avatar" aria-hidden="true">MA</span>
+            <div>
+              <span class="name">Maren A.</span>
+              <span class="role">Copenhagen · Verified buyer</span>
+            </div>
+          </figcaption>
+        </figure>
+
+        <figure class="quote reveal">
+          <div class="stars" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>
+            “I chipped the rim of my bowl and Forma repaired it within a fortnight, free.
+            That's the whole promise, actually kept.”
+          </blockquote>
+          <figcaption>
+            <span class="avatar" aria-hidden="true">JO</span>
+            <div>
+              <span class="name">James O.</span>
+              <span class="role">Bristol · Verified buyer</span>
+            </div>
+          </figcaption>
+        </figure>
+
+        <figure class="quote reveal">
+          <div class="stars" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>
+            “Beautifully made, no plastic anywhere, and the impact report is genuinely
+            readable. It's the only homeware brand I've stayed loyal to.”
+          </blockquote>
+          <figcaption>
+            <span class="avatar" aria-hidden="true">PS</span>
+            <div>
+              <span class="name">Priya S.</span>
+              <span class="role">Edinburgh · Verified buyer</span>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="proof-stats reveal">
+        <div class="pstat">
+          <strong>4.9 / 5</strong>
+          <span>Average rating across 2,140 reviews</span>
+        </div>
+        <div class="pstat">
+          <strong>94%</strong>
+          <span>Would buy from us again</span>
+        </div>
+        <div class="pstat">
+          <strong>48 hrs</strong>
+          <span>Average dispatch time</span>
+        </div>
+        <div class="pstat">
+          <strong>30 days</strong>
+          <span>No-quibble returns window</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq" id="faq" aria-labelledby="faq-title">
+    <div class="wrap faq-wrap">
+      <div class="reveal">
+        <p class="eyebrow">Good to know</p>
+        <h2 id="faq-title">Questions, answered plainly.</h2>
+        <p class="muted">
+          Still unsure about something? Our team answers every message within one working
+          day — no bots, no scripts.
+        </p>
+        <p style="margin-top:1.75rem">
+          <a class="btn btn-ghost" href="#newsletter">Talk to a real person</a>
+        </p>
+      </div>
+
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <h3>
+            <button class="faq-q" id="faq-q1" type="button" aria-expanded="true" aria-controls="faq-a1">
+              <span>What makes Forma products sustainable?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1">
+            <p>
+              Three things: we use recycled or renewable materials wherever possible, we
+              produce in small batches so nothing is over-made, and we guarantee every
+              piece for ten years with free repairs. We also publish a lifecycle footprint
+              for each product so you can see the numbers behind the claims.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <h3>
+            <buttonclass="faq-q" id="faq-q2" type="button" aria-expanded="false" aria-controls="faq-a2">
+              <span>How does the ten-year repair guarantee work?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2" hidden>
+            <p>
+              If a piece chips, cracks or fails through normal use within ten years, send
+              it back to us and we'll repair it free of charge, including return postage.
+              If it genuinely can't be repaired, we'll replace it and reclaim the original
+              materials for reuse.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <h3>
+            <button class="faq-q" id="faq-q3" type="button" aria-expanded="false" aria-controls="faq-a3">
+              <span>What is your packaging made from?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3" hidden>
+            <p>
+              Moulded recycled paper pulp, paper tape and recycled card — no plastic,
+              no polystyrene, no foam. Everything is kerbside recyclable, and the outer
+              box is made from 100% post-consumer waste.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <h3>
+            <button class="faq-q" id="faq-q4" type="button" aria-expanded="false" aria-controls="faq-a4">
+              <span>Where do you ship, and how long does it take?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div class="faq-a" id="faq-a4" role="region" aria-labelledby="faq-q4" hidden>
+            <p>
+              We ship across the UK and EU, with dispatch within 48 hours on working days.
+              UK delivery is typically 2–3 days, EU delivery 4–7 days. Orders over £80
+              ship free, and all delivery emissions are measured and offset.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <h3>
+            <button class="faq-q" id="faq-q5" type="button" aria-expanded="false" aria-controls="faq-a5">
+              <span>Can I return something if it isn't right?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div class="faq-a" id="faq-a5" role="region" aria-labelledby="faq-q5" hidden>
+            <p>
+              Yes — you have 30 days to return anything unused in its original packaging
+              for a full refund, and we cover the return postage within the UK. If a piece
+              arrives damaged, we'll replace it immediately, no photographs required.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA + NEWSLETTER -->
+  <section class="section cta" id="newsletter" aria-labelledby="cta-title">
+    <div class="wrap cta-inner">
+      <div class="reveal">
+        <p class="eyebrow" style="color:#d6e2c4">Ready when you are</p>
+        <h2 id="cta-title">Bring home things worth keeping.</h2>
+        <p>
+          Explore the full Forma collection — ceramics, textiles and lighting made in
+          small batches, backed by a ten-year guarantee, and delivered plastic-free.
+        </p>
+        <div class="cta-actions">
+          <a class="btn btn-light" href="#collection">
+            Shop the collection
+            <span class="arrow" aria-hidden="true">&#8594;</span>
+          </a>
+          <a class="btn btn-ghost" href="#materials">Read the impact report</a>
+        </div>
+      </div>
+
+      <div class="signup reveal">
+        <h3>Join the Forma list</h3>
+        <p>Early access to new batches, care guides, and 10% off your first order.</p>
+
+        <form id="signupForm" novalidate>
+          <div class="field">
+            <label for="signupName">First name</label>
+            <input id="signupName" name="name" type="text" autocomplete="given-name" placeholder="Alex">
+          </div>
+          <div class="field">
+            <label for="signupEmail">Email address</label>
+            <input id="signupEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="emailHint">
+          </div>
+          <button class="btn btn-light" type="submit">
+            Sign me up
+            <span class="arrow" aria-hidden="true">&#8594;</span>
+          </button>
+          <p class="form-note" id="emailHint">
+            No spam, ever. Unsubscribe in one click. This is a concept demo — nothing is
+            sent anywhere.
+          </p>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite" hidden></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="Forma home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Forma</span>
+        </a>
+        <p>
+          Considered homewares made from natural and recycled materials, in small batches,
+          designed to be kept for a lifetime.
+        </p>
+        <p style="margin-top:1.5rem">
+          <span class="demo-note">Concept demo · Fictional brand</span>
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-labelledby="footer-shop">
+        <h4 id="footer-shop">Shop</h4>
+        <ul>
+          <li><a href="#collection">Ceramics</a></li>
+          <li><a href="#collection">Textiles</a></li>
+          <li><a href="#collection">Lighting</a></li>
+          <li><a href="#collection">Gift cards</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-col" aria-labelledby="footer-about">
+        <h4 id="footer-about">About</h4>
+        <ul>
+          <li><a href="#materials">Our materials</a></li>
+          <li><a href="#materials">Impact report</a></li>
+          <li><a href="#benefits">Repair guarantee</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-col" aria-labelledby="footer-help">
+        <h4 id="footer-help">Help</h4>
+        <ul>
+          <li><a href="#faq">Delivery &amp; returns</a></li>
+          <li><a href="#faq">Care guides</a></li>
+          <li><a href="#newsletter">Contact us</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; <span id="year">2024</span> Forma Homewares. A fictional brand created as a design concept.</p>
+      <ul>
+        <li><a href="#top">Privacy</a></li>
+        <li><a href="#top">Terms</a></li>
+        <li><a href="#top">Accessibility</a></li>
+        <li><a href="#top">Back to top</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Mobile menu ---------- */
+  var menuToggle = document.getElementById("menuToggle");
+  var mobileMenu = document.getElementById("mobileMenu");
+
+  function setMenu(open) {
+    menuToggle.setAttribute("aria-expanded", String(open));
+    mobileMenu.setAttribute("data-open", String(open));
+    var label = menuToggle.querySelector(".menu-label");
+    if (label) label.textContent = open ? "Close" : "Menu";
+  }
+
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener("click", function () {
+      var open = menuToggle.getAttribute("aria-expanded") === "true";
+      setMenu(!open);
+    });
+
+    mobileMenu.addEventListener("click", function (e) {
+      if (e.target.tagName === "A") setMenu(false);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") {
+        setMenu(false);
+        menuToggle.focus();
+      }
+    });
+
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 860) setMenu(false);
+    });
+  }
+
+  /* ---------- FAQ accordion ---------- */
+  var faqButtons = Array.prototype.slice.call(document.querySelectorAll(".faq-q"));
+
+  faqButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var expanded = btn.getAttribute("aria-expanded") === "true";
+      var panel = document.getElementById(btn.getAttribute("aria-controls"));
+
+      // Close all others for a clean single-open accordion
+      faqButtons.forEach(function (other) {
+        if (other === btn) return;
+        other.setAttribute("aria-expanded", "false");
+        var otherPanel = document.getElementById(other.getAttribute("aria-controls"));
+        if (otherPanel) otherPanel.hidden = true;
+      });
+
+      btn.setAttribute("aria-expanded", String(!expanded));
+      if (panel) panel.hidden = expanded;
+    });
+  });
+
+  /* ---------- Newsletter form (local only) ---------- */
+  var form = document.getElementById("signupForm");
+  var status = document.getElementById("formStatus");
+  var emailInput = document.getElementById("signupEmail");
+
+  if (form && status) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      var nameField = document.getElementById("signupName");
+      var name = nameField ? nameField.value.trim() : "";
+      var email = emailInput ? emailInput.value.trim() : "";
+      var validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      status.hidden = false;
+
+      if (!validEmail) {
+        status.textContent = "Please enter a valid email address so we can reach you.";
+        if (emailInput) {
+          emailInput.setAttribute("aria-invalid", "true");
+          emailInput.focus();
+        }
+        return;
+      }
+
+      if (emailInput) emailInput.removeAttribute("aria-invalid");
+
+      status.textContent =
+        "Thank you" + (name ? ", " + name : "") +
+        " — you're on the list. This is a concept demo, so nothing was actually sent.";
+
+      form.reset();
+    });
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  var revealEls = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+
+  if ("IntersectionObserver" in window && revealEls.length) {
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    revealEls.forEach(function (el, i) {
+      el.style.transitionDelay = Math.min(i % 3, 2) * 90 + "ms";
+      observer.observe(el);
+    });
+  } else {
+    revealEls.forEach(function (el) {
+      el.classList.add("is-visible");
+    });
+  }
+
+  /* ---------- Current year ---------- */
+  var yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+})();
+</script>
+</body>
+</html>
+
+

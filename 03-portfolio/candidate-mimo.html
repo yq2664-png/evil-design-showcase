@@ -1,0 +1,1309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mina Chen — Independent Art Director</title>
+<meta name="description" content="Portfolio of Mina Chen, independent art director working across brand identity, editorial design, and campaign art direction.">
+<style>
+  :root{
+    --ink:#141210;
+    --paper:#f4f0e9;
+    --paper-2:#eae3d8;
+    --accent:#d2442c;
+    --accent-2:#1f4f43;
+    --muted:#6b6259;
+    --line:rgba(20,18,16,.16);
+    --focus:#2b4fff;
+    --maxw:1240px;
+    --pad:clamp(1.15rem, 4vw, 3.5rem);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *{animation-duration:.001ms !important; transition-duration:.001ms !important}
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size:clamp(1rem, .96rem + .2vw, 1.125rem);
+    line-height:1.62;
+    overflow-x:hidden;
+  }
+  img,svg{max-width:100%; display:block}
+  a{color:inherit}
+  :focus-visible{
+    outline:3px solid var(--focus);
+    outline-offset:3px;
+    border-radius:3px;
+  }
+  .skip{
+    position:absolute; left:-9999px; top:0;
+    background:var(--ink); color:var(--paper);
+    padding:.85rem 1.25rem; z-index:200; font-weight:650;
+  }
+  .skip:focus{left:1rem; top:1rem}
+
+  .wrap{width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--pad)}
+
+  /* ---------- Typography ---------- */
+  .display{
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    font-weight:600;
+    letter-spacing:-.022em;
+    line-height:.98;
+  }
+  .eyebrow{
+    font-size:.72rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--accent);
+    margin:0 0 1.1rem;
+    display:flex; align-items:center; gap:.75rem;
+  }
+  .eyebrow::after{
+    content:""; height:1px; flex:1; background:var(--line);
+  }
+  .lede{font-size:clamp(1.12rem, 1.02rem + .5vw, 1.42rem); line-height:1.55; color:#2c2723}
+  .muted{color:var(--muted)}
+
+  /* ---------- Header ---------- */
+  header.site{
+    position:sticky; top:0; z-index:100;
+    background:rgba(244,240,233,.92);
+    backdrop-filter:saturate(140%) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .bar{
+    display:flex; align-items:center; gap:1.25rem;
+    min-height:72px;
+  }
+  .brand{
+    display:flex; align-items:baseline; gap:.65rem;
+    text-decoration:none; font-weight:750; letter-spacing:-.015em;
+    font-size:1.06rem;
+  }
+  .brand .dot{
+    width:11px; height:11px; border-radius:50%;
+    background:var(--accent); display:inline-block; flex:none;
+    transform:translateY(-1px);
+  }
+  .brand small{font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); font-weight:650}
+  nav.primary{margin-left:auto}
+  nav.primary ul{
+    list-style:none; margin:0; padding:0;
+    display:flex; gap:.35rem; align-items:center; flex-wrap:wrap;
+  }
+  nav.primary a{
+    text-decoration:none; font-size:.86rem; font-weight:640;
+    letter-spacing:.02em; padding:.55rem .85rem; border-radius:999px;
+    border:1px solid transparent; position:relative;
+  }
+  nav.primary a:hover{background:var(--paper-2); border-color:var(--line)}
+  nav.primary a[aria-current="true"]{background:var(--ink); color:var(--paper)}
+  .nav-cta{
+    background:var(--accent) !important; color:#fff !important;
+    border-color:var(--accent) !important;
+  }
+  .nav-cta:hover{background:#b93722 !important}
+  .menu-btn{
+    display:none; margin-left:auto;
+    background:var(--ink); color:var(--paper);
+    border:0; border-radius:999px; padding:.72rem 1.15rem;
+    font:inherit; font-size:.85rem; font-weight:700; letter-spacing:.06em;
+    text-transform:uppercase; cursor:pointer;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:clamp(3.25rem, 8vw, 6.5rem) 0 clamp(2.5rem, 6vw, 4.5rem);
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1.35fr) minmax(0,.85fr);
+    gap:clamp(1.75rem, 5vw, 4.5rem);
+    align-items:end;
+  }
+  h1.hero-title{
+    margin:0;
+    font-size:clamp(2.85rem, 2rem + 5.4vw, 6.6rem);
+  }
+  h1.hero-title em{
+    font-style:italic;
+    color:var(--accent);
+  }
+  .hero-title .line{display:block}
+  .hero-side{
+    border-left:2px solid var(--ink);
+    padding-left:clamp(1rem,2.2vw,1.75rem);
+  }
+  .hero-side p{margin:0 0 1.15rem}
+  .hero-actions{display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1.65rem}
+  .btn{
+    display:inline-flex; align-items:center; gap:.65rem;
+    text-decoration:none; font-weight:700; font-size:.92rem;
+    padding:.95rem 1.55rem; border-radius:999px;
+    border:2px solid var(--ink); background:var(--ink); color:var(--paper);
+    transition:transform .18s ease, background .18s ease, color .18s ease;
+  }
+  .btn:hover{transform:translateY(-3px); background:var(--accent); border-color:var(--accent); color:#fff}
+  .btn.ghost{background:transparent; color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+  .btn .arrow{transition:transform .18s ease}
+  .btn:hover .arrow{transform:translateX(4px)}
+
+  .ticker{
+    margin-top:clamp(2.75rem, 6vw, 4.5rem);
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:1.05rem 0;
+    display:flex; gap:2.5rem; align-items:center;
+    overflow:hidden; white-space:nowrap;
+  }
+  .ticker-track{
+    display:flex; gap:2.5rem; align-items:center;
+    animation:slide 32s linear infinite;
+  }
+  .ticker:hover .ticker-track{animation-play-state:paused}
+  .ticker span{
+    font-family:"Iowan Old Style",Palatino,Georgia,serif;
+    font-size:clamp(1.05rem,1.6vw,1.45rem); font-style:italic; color:var(--muted);
+  }
+  .ticker .sep{color:var(--accent); font-style:normal; font-weight:800}
+  @keyframes slide{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+
+  /* ---------- Sections ---------- */
+  section{padding:clamp(3.25rem, 7vw, 6rem) 0}
+  .section-head{
+    display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);
+    gap:clamp(1.25rem,4vw,3.5rem); align-items:end;
+    margin-bottom:clamp(2rem,4.5vw,3.25rem);
+  }
+  h2.section-title{
+    margin:0; font-size:clamp(2.15rem, 1.55rem + 2.7vw, 3.95rem);
+    letter-spacing:-.025em;
+  }
+  .section-head p{margin:0}
+
+  /* ---------- Work ---------- */
+  #work{background:var(--paper-2)}
+  .projects{display:grid; gap:clamp(1.75rem,3.5vw,2.75rem)}
+  .project{
+    display:grid;
+    grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);
+    gap:clamp(1.5rem,4vw,3.25rem);
+    align-items:center;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:clamp(1.15rem,2.6vw,2.15rem);
+  }
+  .project:nth-child(even){grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}
+  .project:nth-child(even) .project-media{order:2}
+  .project:nth-child(even) .project-body{order:1}
+  .project-media{
+    border-radius:14px; overflow:hidden; position:relative;
+    aspect-ratio:4/3;
+  }
+  .project-media svg{width:100%; height:100%}
+  .project-body h3{
+    margin:.35rem 0 .85rem;
+    font-family:"Iowan Old Style",Palatino,Georgia,serif;
+    font-size:clamp(1.65rem,1.35rem + 1.35vw,2.55rem);
+    letter-spacing:-.022em; line-height:1.08;
+  }
+  .project-num{
+    font-size:.72rem; letter-spacing:.22em; text-transform:uppercase;
+    font-weight:750; color:var(--accent);
+  }
+  .project-body p{margin:0 0 1.15rem}
+  .meta{
+    display:flex; flex-wrap:wrap; gap:.5rem; margin:0 0 1.35rem; padding:0; list-style:none;
+  }
+  .meta li{
+    font-size:.74rem; letter-spacing:.11em; text-transform:uppercase; font-weight:700;
+    padding:.42rem .85rem; border-radius:999px;
+    border:1px solid var(--line); color:#3a332d; background:rgba(255,255,255,.5);
+  }
+  .project-link{
+    display:inline-flex; align-items:center; gap:.55rem;
+    font-weight:720; text-decoration:none;
+    border-bottom:2px solid var(--accent); padding-bottom:.28rem;
+  }
+  .project-link:hover{color:var(--accent)}
+  .project-link .arrow{transition:transform .18s ease}
+  .project-link:hover .arrow{transform:translateX(5px)}
+  .result{
+    margin-top:1.35rem; padding-top:1.15rem; border-top:1px dashed var(--line);
+    display:flex; gap:1.75rem; flex-wrap:wrap;
+  }
+  .result div strong{
+    display:block; font-family:"Iowan Old Style",Palatino,Georgia,serif;
+    font-size:1.65rem; letter-spacing:-.02em; color:var(--accent-2); line-height:1.1;
+  }
+  .result div span{font-size:.78rem; letter-spacing:.11em; text-transform:uppercase; color:var(--muted); font-weight:680}
+
+  /* ---------- Approach ---------- */
+  .approach-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:clamp(1.15rem,2.5vw,2rem);
+  }
+  .approach-card{
+    border-top:3px solid var(--ink); padding-top:1.15rem;
+  }
+  .approach-card .num{
+    font-family:"Iowan Old Style",Palatino,Georgia,serif;
+    font-size:2.45rem; line-height:1; color:var(--accent); letter-spacing:-.03em;
+  }
+  .approach-card h3{
+    margin:.65rem 0 .55rem; font-size:1.14rem; letter-spacing:-.012em;
+  }
+  .approach-card p{margin:0; font-size:.95rem; color:var(--muted)}
+
+  /* ---------- About ---------- */
+  #about{background:var(--ink); color:var(--paper)}
+  #about .eyebrow{color:#f0a08e}
+  #about .eyebrow::after{background:rgba(244,240,233,.25)}
+  .about-grid{
+    display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
+    gap:clamp(1.85rem,5vw,4.5rem); align-items:start;
+  }
+  .portrait{
+    border-radius:18px; overflow:hidden; background:#211d19;
+    aspect-ratio:4/5;
+  }
+  .portrait svg{width:100%; height:100%}
+  .about-copy h2{font-size:clamp(2.15rem,1.55rem + 2.7vw,3.65rem); margin:0 0 1.35rem; letter-spacing:-.025em}
+  .about-copy p{color:rgba(244,240,233,.82); margin:0 0 1.15rem}
+  .about-copy p.first::first-letter{
+    float:left; font-family:"Iowan Old Style",Palatino,Georgia,serif;
+    font-size:3.55rem; line-height:.82; padding:.12em .16em 0 0;
+    color:#f0a08e; font-weight:700;
+  }
+  .facts{
+    list-style:none; margin:2rem 0 0; padding:0;
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(165px,1fr)); gap:1.15rem;
+  }
+  .facts li{
+    border-top:1px solid rgba(244,240,233,.25); padding-top:.85rem;
+  }
+  .facts strong{display:block; font-size:1.02rem; letter-spacing:-.01em}
+  .facts span{font-size:.78rem; letter-spacing:.13em; text-transform:uppercase; color:rgba(244,240,233,.6); font-weight:650}
+
+  /* ---------- Clients ---------- */
+  .clients-list{
+    list-style:none; margin:0; padding:0;
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
+    border-top:1px solid var(--line); border-left:1px solid var(--line);
+  }
+  .clients-list li{
+    border-right:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:1.35rem 1.15rem;
+    font-family:"Iowan Old Style",Palatino,Georgia,serif;
+    font-size:1.16rem; letter-spacing:-.012em;
+    display:flex; align-items:center; gap:.65rem;
+    transition:background .18s ease, color .18s ease;
+  }
+  .clients-list li:hover{background:var(--ink); color:var(--paper)}
+  .clients-list li .mark{
+    width:7px; height:7px; border-radius:50%; background:var(--accent); flex:none;
+  }
+  .clients-note{
+    margin-top:1.5rem; font-size:.92rem; color:var(--muted);
+  }
+
+  /* ---------- Services / process strip ---------- */
+  .services{
+    background:var(--accent-2); color:#eef2ef;
+  }
+  .services .eyebrow{color:#ffd9a8}
+  .services .eyebrow::after{background:rgba(238,242,239,.28)}
+  .services h2{color:#fff}
+  .service-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(255px,1fr));
+    gap:clamp(1.25rem,3vw,2.5rem); margin-top:2.25rem;
+  }
+  .service{
+    background:rgba(255,255,255,.075);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:16px; padding:1.55rem;
+  }
+  .service h3{margin:.25rem 0 .65rem; font-size:1.16rem; letter-spacing:-.012em}
+  .service p{margin:0; color:rgba(238,242,239,.82); font-size:.95rem}
+  .service .tag{
+    font-size:.71rem; letter-spacing:.19em; text-transform:uppercase;
+    font-weight:750; color:#ffd9a8;
+  }
+
+  /* ---------- Contact ---------- */
+  #contact{background:var(--paper-2)}
+  .contact-grid{
+    display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+    gap:clamp(1.85rem,5vw,4.25rem); align-items:start;
+  }
+  .contact-title{
+    margin:0 0 1.25rem;
+    font-size:clamp(2.35rem,1.75rem + 3.4vw,4.65rem);
+    letter-spacing:-.03em; line-height:.98;
+  }
+  .contact-title em{font-style:italic; color:var(--accent)}
+  .big-link{
+    display:inline-flex; align-items:center; gap:.75rem;
+    font-family:"Iowan Old Style",Palatino,Georgia,serif;
+    font-size:clamp(1.28rem,1.15rem + 1vw,1.95rem);
+    letter-spacing:-.018em; text-decoration:none;
+    border-bottom:3px solid var(--accent); padding-bottom:.32rem;
+    margin-top:.55rem;
+  }
+  .big-link:hover{color:var(--accent)}
+  .contact-meta{
+    list-style:none; margin:2.25rem 0 0; padding:0;
+    display:grid; gap:.95rem;
+  }
+  .contact-meta li{display:flex; gap:.95rem; align-items:baseline}
+  .contact-meta .k{
+    font-size:.72rem; letter-spacing:.19em; text-transform:uppercase;
+    font-weight:750; color:var(--muted); min-width:6.5rem;
+  }
+  .contact-meta .v{font-weight:620}
+
+  form.enquiry{
+    background:var(--paper); border:1px solid var(--line);
+    border-radius:20px; padding:clamp(1.35rem,3vw,2.15rem);
+  }
+  form.enquiry h3{margin:0 0 .35rem; font-size:1.28rem; letter-spacing:-.018em}
+  form.enquiry p.hint{margin:0 0 1.35rem; font-size:.92rem; color:var(--muted)}
+  .field{margin-bottom:1.15rem}
+  .field label{
+    display:block; font-size:.76rem; letter-spacing:.15em;
+    text-transform:uppercase; font-weight:750; margin-bottom:.45rem;
+  }
+  .field input, .field select, .field textarea{
+    width:100%; font:inherit; font-size:1rem;
+    padding:.85rem 1rem; border-radius:11px;
+    border:1.5px solid var(--line); background:#fffdf9; color:var(--ink);
+  }
+  .field textarea{min-height:118px; resize:vertical}
+  .field input:hover, .field select:hover, .field textarea:hover{border-color:var(--muted)}
+  .field .err{
+    display:block; margin-top:.42rem; font-size:.82rem;
+    color:#a5271a; font-weight:650;
+  }
+  .field [aria-invalid="true"]{border-color:#a5271a; background:#fff4f2}
+  form.enquiry button{
+    width:100%; border:0; cursor:pointer; font:inherit;
+    background:var(--ink); color:var(--paper);
+    padding:1.05rem 1.5rem; border-radius:999px;
+    font-weight:750; letter-spacing:.03em; font-size:1rem;
+    transition:background .18s ease, transform .18s ease;
+  }
+  form.enquiry button:hover{background:var(--accent); transform:translateY(-2px)}
+  .form-status{
+    margin:1.15rem 0 0; padding:.95rem 1.15rem; border-radius:11px;
+    background:#e4f0e6; color:#1c4c2c; font-weight:640; font-size:.93rem;
+    border:1px solid rgba(28,76,44,.25);
+  }
+  .form-status[hidden]{display:none}
+
+  /* ---------- FAQ ---------- */
+  .faq{border-top:1px solid var(--line)}
+  .faq details{border-bottom:1px solid var(--line)}
+  .faq summary{
+    cursor:pointer; list-style:none; padding:1.35rem 3.25rem 1.35rem 0;
+    position:relative; font-weight:680; letter-spacing:-.012em;
+    font-size:clamp(1.02rem,1rem + .25vw,1.22rem);
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{
+    content:"+"; position:absolute; right:.35rem; top:50%;
+    transform:translateY(-50%);
+    font-family:"Iowan Old Style",Palatino,Georgia,serif;
+    font-size:1.85rem; line-height:1; color:var(--accent);
+  }
+  .faq details[open] summary::after{content:"–"}
+  .faq summary:hover{color:var(--accent)}
+  .faq .answer{padding:0 3.25rem 1.55rem 0; margin:0; color:var(--muted)}
+
+  /* ---------- Footer ---------- */
+  footer.site{
+    background:var(--ink); color:rgba(244,240,233,.78);
+    padding:clamp(2.75rem,6vw,4.5rem) 0 2.25rem;
+  }
+  .footer-top{
+    display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);
+    gap:clamp(1.5rem,4vw,3.25rem);
+    padding-bottom:2.5rem; border-bottom:1px solid rgba(244,240,233,.18);
+  }
+  .footer-top h2{
+    margin:0 0 1rem; color:var(--paper);
+    font-family:"Iowan Old Style",Palatino,Georgia,serif;
+    font-size:clamp(1.75rem,1.45rem + 1.5vw,2.65rem);
+    letter-spacing:-.024em; line-height:1.06;
+  }
+  .footer-top p{margin:0 0 1.15rem; font-size:.96rem}
+  .footer-col h3{
+    font-size:.72rem; letter-spacing:.22em; text-transform:uppercase;
+    color:rgba(244,240,233,.55); margin:0 0 1.05rem; font-weight:750;
+  }
+  .footer-col ul{list-style:none; margin:0; padding:0; display:grid; gap:.62rem}
+  .footer-col a{
+    text-decoration:none; font-size:.96rem;
+    border-bottom:1px solid transparent; padding-bottom:.12rem;
+  }
+  .footer-col a:hover{color:var(--paper); border-color:var(--accent)}
+  .footer-bottom{
+    display:flex; flex-wrap:wrap; gap:1.15rem; justify-content:space-between;
+    padding-top:1.75rem; font-size:.84rem; color:rgba(244,240,233,.58);
+  }
+  .footer-bottom a{text-decoration:none; border-bottom:1px solid rgba(244,240,233,.3)}
+  .footer-bottom a:hover{color:var(--paper)}
+  .badge{
+    display:inline-flex; align-items:center; gap:.55rem;
+    padding:.42rem .95rem; border-radius:999px;
+    border:1px solid rgba(244,240,233,.32); font-size:.75rem;
+    letter-spacing:.13em; text-transform:uppercase; font-weight:700;
+    color:rgba(244,240,233,.72);
+  }
+  .badge .pulse{
+    width:8px; height:8px; border-radius:50%; background:#7ee0a3;
+    box-shadow:0 0 0 0 rgba(126,224,163,.65);
+    animation:pulse 2.4s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(126,224,163,.6)}
+    70%{box-shadow:0 0 0 9px rgba(126,224,163,0)}
+    100%{box-shadow:0 0 0 0 rgba(126,224,163,0)}
+  }
+
+  /* ---------- Back to top ---------- */
+  .to-top{
+    position:fixed; right:1.15rem; bottom:1.15rem; z-index:120;
+    width:52px; height:52px; border-radius:50%;
+    background:var(--ink); color:var(--paper);
+    border:0; cursor:pointer; font-size:1.32rem; line-height:1;
+    box-shadow:0 10px 26px rgba(20,18,16,.28);
+    opacity:0; visibility:hidden; transform:translateY(12px);
+    transition:opacity .22s ease, transform .22s ease, visibility .22s;
+  }
+  .to-top.show{opacity:1; visibility:visible; transform:translateY(0)}
+  .to-top:hover{background:var(--accent)}
+
+  /* ---------- Reveal ---------- */
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease}
+  .reveal.in{opacity:1; transform:none}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 960px){
+    .hero-grid{grid-template-columns:1fr; align-items:start}
+    .hero-side{border-left:0; border-top:2px solid var(--ink); padding-left:0; padding-top:1.5rem}
+    .section-head{grid-template-columns:1fr}
+    .project, .project:nth-child(even){grid-template-columns:1fr}
+    .project:nth-child(even) .project-media{order:0}
+    .project:nth-child(even) .project-body{order:1}
+    .about-grid{grid-template-columns:1fr}
+    .portrait{max-width:420px}
+    .contact-grid{grid-template-columns:1fr}
+    .footer-top{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width: 760px){
+    .menu-btn{display:inline-block}
+    nav.primary{
+      position:absolute; left:0; right:0; top:100%;
+      background:var(--paper); border-bottom:1px solid var(--line);
+      padding:.85rem var(--pad) 1.35rem;
+      display:none;
+    }
+    nav.primary.open{display:block}
+    nav.primary ul{flex-direction:column; align-items:stretch; gap:.35rem}
+    nav.primary a{padding:.95rem 1.15rem; border-radius:12px; font-size:1.02rem}
+    .nav-cta{text-align:center}
+    .footer-top{grid-template-columns:1fr}
+    .result{gap:1.25rem}
+    .result div strong{font-size:1.42rem}
+  }
+  @media (max-width: 420px){
+    .hero-actions .btn{width:100%; justify-content:center}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Mina Chen, Art Director — home">
+      <span class="dot" aria-hidden="true"></span>
+      Mina&nbsp;Chen
+      <small>Art Direction</small>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+    <nav class="primary" id="primaryNav" aria-label="Primary">
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#clients">Clients</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a class="nav-cta" href="#contact">Start a project</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <span id="top"></span>
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Independent Art Director · Lisbon &amp; Remote</p>
+          <h1 class="display hero-title" id="hero-title">
+            <span class="line">Ideas with</span>
+            <span class="line"><em>a point of view</em></span>
+            <span class="line">— built to last.</span>
+          </h1>
+        </div>
+        <div class="hero-side">
+          <p class="lede">
+            I'm Mina Chen, an independent art director shaping brands, books and campaigns
+            for people who care about the details. I turn strategy into visual systems that
+            feel considered, warm and unmistakably theirs.
+          </p>
+          <p class="muted">
+            Fifteen years across editorial, culture, hospitality and consumer brands —
+            from first sketch to final print check.
+          </p>
+          <div class="hero-actions">
+            <a class="btn" href="#work">See selected work <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="btn ghost" href="#contact">Book an intro call</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker-track">
+          <span>Brand identity</span><span class="sep">✳</span>
+          <span>Editorial design</span><span class="sep">✳</span>
+          <span>Campaign art direction</span><span class="sep">✳</span>
+          <span>Packaging</span><span class="sep">✳</span>
+          <span>Typography</span><span class="sep">✳</span>
+          <span>Brand identity</span><span class="sep">✳</span>
+          <span>Editorial design</span><span class="sep">✳</span>
+          <span>Campaign art direction</span><span class="sep">✳</span>
+          <span>Packaging</span><span class="sep">✳</span>
+          <span>Typography</span><span class="sep">✳</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" aria-labelledby="work-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Selected work · 2023—2025</p>
+          <h2 class="display section-title" id="work-title">Three projects, start to finish.</h2>
+        </div>
+        <p class="lede">
+          A small, deliberate selection. Each one shows the same thing: a clear idea,
+          a system that scales, and craft that survives contact with the real world.
+        </p>
+      </div>
+
+      <div class="projects">
+
+        <!-- Project 1 -->
+        <article class="project reveal" aria-labelledby="p1-title">
+          <div class="project-media">
+            <svg viewBox="0 0 800 600" role="img" aria-label="Abstract composition for Solstice Coffee: warm terracotta background with layered circular forms and a bold serif wordmark.">
+              <rect width="800" height="600" fill="#c9502f"/>
+              <circle cx="255" cy="300" r="185" fill="#f2c14e"/>
+              <circle cx="255" cy="300" r="120" fill="#2c1c14"/>
+              <circle cx="255" cy="300" r="58" fill="#f2c14e"/>
+              <rect x="470" y="120" width="230" height="360" rx="115" fill="#f6ece0"/>
+              <rect x="510" y="170" width="150" height="260" rx="75" fill="#7d2f1c"/>
+              <text x="585" y="315" text-anchor="middle" fill="#f6ece0" font-family="Georgia, serif" font-size="52" font-style="italic">SOL</text>
+              <text x="585" y="372" text-anchor="middle" fill="#f6ece0" font-family="Georgia, serif" font-size="52" font-style="italic">STICE</text>
+              <g fill="#f6ece0" opacity=".85">
+                <circle cx="70" cy="70" r="7"/><circle cx="105" cy="70" r="7"/><circle cx="140" cy="70" r="7"/>
+                <circle cx="70" cy="530" r="7"/><circle cx="105" cy="530" r="7"/><circle cx="140" cy="530" r="7"/>
+              </g>
+            </svg>
+          </div>
+          <div class="project-body">
+            <p class="project-num">Project 01 — Brand identity</p>
+            <h3 id="p1-title">Solstice Coffee Roasters</h3>
+            <p>
+              A twelve-year-old roastery had outgrown its hand-stamped bags. I built a
+              warm, sun-driven identity around a single idea — <em>light, roasted</em> —
+              spanning packaging, retail fit-out and a wholesale system baristas could
+              actually use at 7am.
+            </p>
+            <ul class="meta">
+              <li>Identity</li>
+              <li>Packaging</li>
+              <li>Art direction</li>
+              <li>2024</li>
+            </ul>
+            <a class="project-link" href="#contact">Request the full case study <span class="arrow" aria-hidden="true">→</span></a>
+            <div class="result">
+              <div><strong>+38%</strong><span>Wholesale enquiries</span></div>
+              <div><strong>42 SKUs</strong><span>Launched in one system</span></div>
+              <div><strong>3 markets</strong><span>Portugal, Spain, France</span></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project reveal" aria-labelledby="p2-title">
+          <div class="project-media">
+            <svg viewBox="0 0 800 600" role="img" aria-label="Abstract composition for Margin Journal: deep green background with stacked editorial page forms, a large numeral and typographic rules.">
+              <rect width="800" height="600" fill="#1f4f43"/>
+              <rect x="90" y="90" width="290" height="420" rx="8" fill="#f4f0e9"/>
+              <rect x="420" y="90" width="290" height="420" rx="8" fill="#e6b8a2"/>
+              <rect x="125" y="130" width="220" height="12" rx="6" fill="#1f4f43"/>
+              <rect x="125" y="162" width="180" height="12" rx="6" fill="#1f4f43" opacity=".55"/>
+              <rect x="125" y="194" width="205" height="12" rx="6" fill="#1f4f43" opacity=".55"/>
+              <rect x="125" y="380" width="220" height="90" rx="6" fill="#d2442c"/>
+              <text x="235" y="443" text-anchor="middle" fill="#f4f0e9" font-family="Georgia, serif" font-size="62" font-style="italic">M</text>
+              <text x="565" y="330" text-anchor="middle" fill="#1f4f43" font-family="Georgia, serif" font-size="200" font-weight="700">04</text>
+              <rect x="455" y="380" width="220" height="10" rx="5" fill="#1f4f43" opacity=".6"/>
+              <rect x="455" y="410" width="170" height="10" rx="5" fill="#1f4f43" opacity=".6"/>
+              <rect x="455" y="440" width="200" height="10" rx="5" fill="#1f4f43" opacity=".6"/>
+            </svg>
+          </div>
+          <div class="project-body">
+            <p class="project-num">Project 02 — Editorial design</p>
+            <h3 id="p2-title">Margin — A Journal of Craft</h3>
+            <p>
+              An independent quarterly about makers and material culture. I art directed
+              issues 01–04, built a flexible grid that lets long essays and photo essays
+              breathe, and gave the masthead a voice quiet enough to get out of the way.
+            </p>
+            <ul class="meta">
+              <li>Editorial</li>
+              <li>Typography</li>
+              <li>Photo direction</li>
+              <li>2023—2025</li>
+            </ul>
+            <a class="project-link" href="#contact">Request the full case study <span class="arrow" aria-hidden="true">→</span></a>
+            <div class="result">
+              <div><strong>4 issues</strong><span>Art directed &amp; produced</span></div>
+              <div><strong>2×</strong><span>Subscriber growth</span></div>
+              <div><strong>D&amp;AD</strong><span>Wood Pencil, Magazine Design</span></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="project reveal" aria-labelledby="p3-title">
+          <div class="project-media">
+            <svg viewBox="0 0 800 600" role="img" aria-label="Abstract composition for Tidewater campaign: pale sand background with sweeping blue wave shapes and a bold typographic lockup.">
+              <rect width="800" height="600" fill="#e8dcc8"/>
+              <path d="M0 400 C 160 320, 300 470, 460 390 S 720 300, 800 350 L800 600 L0 600 Z" fill="#2b5f86"/>
+              <path d="M0 470 C 180 400, 320 530, 500 455 S 740 390, 800 425 L800 600 L0 600 Z" fill="#1c3f5c"/>
+              <circle cx="620" cy="150" r="82" fill="#e9a13b"/>
+              <text x="70" y="180" fill="#1c3f5c" font-family="Helvetica, Arial, sans-serif" font-size="72" font-weight="700" letter-spacing="-2">TIDE</text>
+              <text x="70" y="255" fill="#1c3f5c" font-family="Helvetica, Arial, sans-serif" font-size="72" font-weight="700" letter-spacing="-2">WATER</text>
+              <rect x="72" y="285" width="150" height="10" rx="5" fill="#d2442c"/>
+              <text x="70" y="345" fill="#1c3f5c" font-family="Georgia, serif" font-size="30" font-style="italic">coastline, collected.</text>
+            </svg>
+          </div>
+          <div class="project-body">
+            <p class="project-num">Project 03 — Campaign</p>
+            <h3 id="p3-title">Tidewater Coastal Trust</h3>
+            <p>
+              A conservation charity needed a campaign that felt hopeful rather than
+              heavy. I developed the visual concept, commissioned photography along 400km
+              of coast, and directed out-of-home, print and social from one adaptable kit.
+            </p>
+            <ul class="meta">
+              <li>Campaign</li>
+              <li>Art direction</li>
+              <li>Photography</li>
+              <li>2025</li>
+            </ul>
+            <a class="project-link" href="#contact">Request the full case study <span class="arrow" aria-hidden="true">→</span></a>
+            <div class="result">
+              <div><strong>1.2M</strong><span>Campaign reach</span></div>
+              <div><strong>+61%</strong><span>Donation sign-ups</span></div>
+              <div><strong>18</strong><span>Regional partners activated</span></div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section id="approach" aria-labelledby="approach-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">How I work</p>
+          <h2 class="display section-title" id="approach-title">A process built for clarity.</h2>
+        </div>
+        <p class="lede">
+          No mystery, no theatre. Four stages, honest conversations, and work you can
+          defend in a boardroom and use on a Tuesday morning.
+        </p>
+      </div>
+
+      <div class="approach-grid">
+        <div class="approach-card reveal">
+          <div class="num" aria-hidden="true">01</div>
+          <h3>Listen &amp; frame</h3>
+          <p>Workshops, interviews and a hard look at the category. We agree on the problem before anyone opens a design file.</p>
+        </div>
+        <div class="approach-card reveal">
+          <div class="num" aria-hidden="true">02</div>
+          <h3>Find the idea</h3>
+          <p>Two or three distinct territories — each with a real point of view, a rationale, and somewhere to grow.</p>
+        </div>
+        <div class="approach-card reveal">
+          <div class="num" aria-hidden="true">03</div>
+          <h3>Build the system</h3>
+          <p>Typography, colour, image, motion and tone, documented so your team can run with it confidently.</p>
+        </div>
+        <div class="approach-card reveal">
+          <div class="num" aria-hidden="true">04</div>
+          <h3>Make it real</h3>
+          <p>Art direction on set, print production, rollout support. I stay until the work is out in the world.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" aria-labelledby="about-title">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="portrait reveal">
+          <svg viewBox="0 0 480 600" role="img" aria-label="Stylised abstract portrait of Mina Chen composed of layered geometric shapes in warm tones.">
+            <rect width="480" height="600" fill="#2b241f"/>
+            <circle cx="240" cy="235" r="130" fill="#e8b48c"/>
+            <path d="M110 235 a130 130 0 0 1 260 0 z" fill="#241a15"/>
+            <path d="M118 218 q122 -118 244 0 q-30 -70 -122 -74 q-92 4 -122 74 z" fill="#161010"/>
+            <ellipse cx="196" cy="238" rx="13" ry="9" fill="#2b241f"/>
+            <ellipse cx="286" cy="238" rx="13" ry="9" fill="#2b241f"/>
+            <path d="M212 292 q28 22 56 0" stroke="#2b241f" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <path d="M240 252 l-12 26 h24 z" fill="#d99a72"/>
+            <rect x="150" y="380" width="180" height="220" rx="88" fill="#d2442c"/>
+            <rect x="196" y="372" width="88" height="60" rx="30" fill="#e8b48c"/>
+            <circle cx="240" cy="470" r="30" fill="#f2c14e"/>
+            <rect x="0" y="0" width="480" height="600" fill="none" stroke="#f4f0e9" stroke-opacity=".12" stroke-width="12"/>
+          </svg>
+        </div>
+
+        <div class="about-copy reveal">
+          <p class="eyebrow">About Mina</p>
+          <h2 class="display" id="about-title">Fifteen years of making ideas visible.</h2>
+          <p class="first">
+            I started as a junior designer at a small magazine in Taipei, where the art
+            director taught me that a good idea can survive a bad printer — but only if
+            you fight for it. I've carried that with me ever since.
+          </p>
+          <p>
+            Today I work independently with founders, cultural institutions and in-house
+            teams who want senior art direction without the agency overhead. Sometimes
+            that's a full identity; sometimes it's a week of focused direction before a
+            shoot. I'm equally happy leading or plugging into a team that already exists.
+          </p>
+          <p>
+            My work tends to feel warm, typographic and quietly confident — but the real
+            through-line is fit. The best work doesn't look like me. It looks like you,
+            at your clearest.
+          </p>
+
+          <ul class="facts">
+            <li><strong>Based in Lisbon</strong><span>Working worldwide</span></li>
+            <li><strong>EN · 中文 · PT</strong><span>Languages</span></li>
+            <li><strong>Small teams</strong><span>2–20 people</span></li>
+            <li><strong>Available</strong><span>From March 2026</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTS -->
+  <section id="clients" aria-labelledby="clients-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Selected clients</p>
+          <h2 class="display section-title" id="clients-title">Good company.</h2>
+        </div>
+        <p class="lede">
+          Independent brands, publishers, hospitality groups and cultural institutions —
+          plus a handful of in-house creative teams who bring me in for a second opinion.
+        </p>
+      </div>
+
+      <ul class="clients-list reveal">
+        <li><span class="mark" aria-hidden="true"></span>Solstice Coffee</li>
+        <li><span class="mark" aria-hidden="true"></span>Margin Journal</li>
+        <li><span class="mark" aria-hidden="true"></span>Tidewater Trust</li>
+        <li><span class="mark" aria-hidden="true"></span>Atelier Nord</li>
+        <li><span class="mark" aria-hidden="true"></span>Casa Verde Hotels</li>
+        <li><span class="mark" aria-hidden="true"></span>Field &amp; Fold</li>
+        <li><span class="mark" aria-hidden="true"></span>The Lantern Museum</li>
+        <li><span class="mark" aria-hidden="true"></span>Northbank Press</li>
+        <li><span class="mark" aria-hidden="true"></span>Ora Skincare</li>
+        <li><span class="mark" aria-hidden="true"></span>Meridian Arts Council</li>
+        <li><span class="mark" aria-hidden="true"></span>Hollow Ceramics</li>
+        <li><span class="mark" aria-hidden="true"></span>Bright Harbour</li>
+      </ul>
+      <p class="clients-note">
+        Client names shown here are fictional and used for demonstration purposes in this concept portfolio.
+      </p>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">What I offer</p>
+          <h2 class="display section-title" id="services-title">Ways to work together.</h2>
+        </div>
+        <p class="lede" style="color:rgba(238,242,239,.86)">
+          Engagements are scoped to the problem, not to a template. Most projects run
+          four to twelve weeks; retainers start at two days a month.
+        </p>
+      </div>
+
+      <div class="service-grid">
+        <div class="service reveal">
+          <p class="tag">01 — Identity</p>
+          <h3>Brand identity &amp; systems</h3>
+          <p>Positioning support, visual identity, typography, colour, art direction and a guideline set your team can actually use.</p>
+        </div>
+        <div class="service reveal">
+          <p class="tag">02 — Editorial</p>
+          <h3>Books, reports &amp; magazines</h3>
+          <p>Grid design, masthead, typographic systems, cover direction and hands-on production through to press.</p>
+        </div>
+        <div class="service reveal">
+          <p class="tag">03 — Campaign</p>
+          <h3>Campaign art direction</h3>
+          <p>Concept development, photography and film direction, casting, on-set art direction and multi-channel rollout.</p>
+        </div>
+        <div class="service reveal">
+          <p class="tag">04 — Advisory</p>
+          <h3>Creative direction on retainer</h3>
+          <p>Senior art direction for in-house teams: reviews, hiring support, pitch work and quality control without the agency fee.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="reveal">
+          <p class="eyebrow">Contact</p>
+          <h2 class="display contact-title" id="contact-title">Let's make something <em>worth keeping</em>.</h2>
+          <p class="lede">
+            Tell me a little about what you're working on. I read every message and reply
+            within two working days — usually with questions, sometimes with a sketch.
+          </p>
+
+          <a class="big-link" href="mailto:hello@minachen.studio">hello@minachen.studio <span class="arrow" aria-hidden="true">↗</span></a>
+
+          <ul class="contact-meta">
+            <li><span class="k">Studio</span><span class="v">Rua das Flores 42, Lisbon, Portugal</span></li>
+            <li><span class="k">Hours</span><span class="v">Mon–Thu, 09:00–17:00 WET</span></li>
+            <li><span class="k">Availability</span><span class="v">Booking projects from March 2026</span></li>
+            <li><span class="k">Elsewhere</span><span class="v">Instagram · LinkedIn · Are.na</span></li>
+          </ul>
+        </div>
+
+        <form class="enquiry reveal" id="enquiryForm" novalidate>
+          <h3>Project enquiry</h3>
+          <p class="hint">This demo form is local only — nothing is sent anywhere.</p>
+
+          <div class="field">
+            <label for="fName">Your name</label>
+            <input id="fName" name="name" type="text" autocomplete="name" required aria-describedby="errName">
+            <span class="err" id="errName" hidden>Please add your name.</span>
+          </div>
+
+          <div class="field">
+            <label for="fEmail">Email address</label>
+            <input id="fEmail" name="email" type="email" autocomplete="email" required aria-describedby="errEmail">
+            <span class="err" id="errEmail" hidden>Please enter a valid email address.</span>
+          </div>
+
+          <div class="field">
+            <label for="fType">Type of project</label>
+            <select id="fType" name="type">
+              <option>Brand identity &amp; system</option>
+              <option>Editorial / publication</option>
+              <option>Campaign art direction</option>
+              <option>Creative direction retainer</option>
+              <option>Something else</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="fBudget">Approximate budget</label>
+            <select id="fBudget" name="budget">
+              <option>Under €10,000</option>
+              <option>€10,000 – €25,000</option>
+              <option>€25,000 – €60,000</option>
+              <option>€60,000+</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="fMsg">Tell me about it</label>
+            <textarea id="fMsg" name="message" required aria-describedby="errMsg"></textarea>
+            <span class="err" id="errMsg" hidden>Please share a few details about the project.</span>
+          </div>
+
+          <button type="submit">Send enquiry</button>
+          <p class="form-status" id="formStatus" role="status" hidden></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Good to know</p>
+          <h2 class="display section-title" id="faq-title">Frequently asked.</h2>
+        </div>
+        <p class="lede">
+          The things people usually ask before we start. Anything else, just get in touch.
+        </p>
+      </div>
+
+      <div class="faq reveal">
+        <details>
+          <summary>What does a typical project cost?</summary>
+          <p class="answer">
+            Identity projects generally start around €18,000 and scale with the number of
+            applications. Editorial and campaign work is scoped per engagement. I'll always
+            give you a fixed fee and a clear breakdown before we begin — no hourly surprises.
+          </p>
+        </details>
+        <details>
+          <summary>Do you work with in-house teams?</summary>
+          <p class="answer">
+            Often. Roughly half my work is alongside an existing marketing or design team.
+            I can lead, co-lead, or act as an outside eye on work already in progress.
+          </p>
+        </details>
+        <details>
+          <summary>Can you handle production and print?</summary>
+          <p class="answer">
+            Yes. I specify, proof and attend press checks, and I have trusted printers and
+            fabricators in Portugal, the UK and the Netherlands. For digital, I work closely
+            with developers and can art direct front-end build.
+          </p>
+        </details>
+        <details>
+          <summary>How far ahead should I get in touch?</summary>
+          <p class="answer">
+            Six to ten weeks before you'd like to start is ideal for identity and editorial
+            work. Shorter timelines are sometimes possible — it's always worth asking.
+          </p>
+        </details>
+        <details>
+          <summary>Do you take on speculative or pitch work?</summary>
+          <p class="answer">
+            No unpaid speculative work, but I'm glad to share detailed case studies,
+            references and a considered proposal once we've spoken. Paid discovery sprints
+            are available for early-stage teams.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <h2>Art direction with a point of view — and the craft to back it up.</h2>
+        <p>
+          Mina Chen is an independent art director working with brands, publishers and
+          cultural organisations from Lisbon and wherever the work takes her.
+        </p>
+        <span class="badge"><span class="pulse" aria-hidden="true"></span> Concept demo portfolio</span>
+      </div>
+
+      <div class="footer-col">
+        <h3>Navigate</h3>
+        <ul>
+          <li><a href="#work">Selected work</a></li>
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="#about">About Mina</a></li>
+          <li><a href="#clients">Clients</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Get in touch</h3>
+        <ul>
+          <li><a href="mailto:hello@minachen.studio">hello@minachen.studio</a></li>
+          <li><a href="#contact">Project enquiry form</a></li>
+          <li><a href="#top">Back to top</a></li>
+          <li><a href="#contact">Availability &amp; rates</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year">2025</span> Mina Chen Studio. Fictional portfolio created as a design concept.</p>
+      <p>
+        <a href="#top">Privacy</a> ·
+        <a href="#top">Accessibility</a> ·
+        <a href="#top">Colophon</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Back to top" title="Back to top">↑</button>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Mobile navigation ---------- */
+  var menuBtn = document.getElementById("menuBtn");
+  var nav = document.getElementById("primaryNav");
+
+  function closeMenu() {
+    nav.classList.remove("open");
+    menuBtn.setAttribute("aria-expanded", "false");
+    menuBtn.textContent = "Menu";
+  }
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", function () {
+      var open = nav.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      menuBtn.textContent = open ? "Close" : "Menu";
+    });
+
+    nav.addEventListener("click", function (e) {
+      if (e.target.closest("a")) closeMenu();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && nav.classList.contains("open")) {
+        closeMenu();
+        menuBtn.focus();
+      }
+    });
+
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 760) closeMenu();
+    });
+  }
+
+  /* ---------- Active section highlighting ---------- */
+  var navLinks = Array.prototype.slice.call(
+    document.querySelectorAll('nav.primary a[href^="#"]')
+  );
+  var sections = navLinks
+    .map(function (a) {
+      return document.querySelector(a.getAttribute("href"));
+    })
+    .filter(Boolean);
+
+  if ("IntersectionObserver" in window && sections.length) {
+    var activeObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            navLinks.forEach(function (a) {
+              var match = a.getAttribute("href") === "#" + entry.target.id;
+              if (match) {
+                a.setAttribute("aria-current", "true");
+              } else {
+                a.removeAttribute("aria-current");
+              }
+            });
+          }
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+    );
+    sections.forEach(function (s) {
+      activeObserver.observe(s);
+    });
+  }
+
+  /* ---------- Scroll reveal ---------- */
+  var reveals = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+  if ("IntersectionObserver" in window) {
+    var revealObserver = new IntersectionObserver(
+      function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+    );
+    reveals.forEach(function (el) {
+      revealObserver.observe(el);
+    });
+  } else {
+    reveals.forEach(function (el) {
+      el.classList.add("in");
+    });
+  }
+
+  /* ---------- Back to top ---------- */
+  var toTop = document.getElementById("toTop");
+  if (toTop) {
+    var onScroll = function () {
+      if (window.scrollY > 700) {
+        toTop.classList.add("show");
+      } else {
+        toTop.classList.remove("show");
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    toTop.addEventListener("click", function () {
+      window.scrollTo({
+        top: 0,
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth"
+      });
+      var brand = document.querySelector(".brand");
+      if (brand) brand.focus({ preventScroll: true });
+    });
+  }
+
+  /* ---------- Local form validation ---------- */
+  var form = document.getElementById("enquiryForm");
+  if (form) {
+    var status = document.getElementById("formStatus");
+
+    var fields = [
+      { input: "fName", error: "errName", test: function (v) { return v.trim().length > 1; } },
+      {
+        input: "fEmail",
+        error: "errEmail",
+        test: function (v) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
+        }
+      },
+      { input: "fMsg", error: "errMsg", test: function (v) { return v.trim().length > 4; } }
+    ];
+
+    function validateField(def) {
+      var input = document.getElementById(def.input);
+      var err = document.getElementById(def.error);
+      var ok = def.test(input.value);
+      if (ok) {
+        input.setAttribute("aria-invalid", "false");
+        err.hidden = true;
+      } else {
+        input.setAttribute("aria-invalid", "true");
+        err.hidden = false;
+      }
+      return ok;
+    }
+
+    fields.forEach(function (def) {
+      var input = document.getElementById(def.input);
+      input.addEventListener("blur", function () {
+        if (input.value.trim() !== "") validateField(def);
+      });
+      input.addEventListener("input", function () {
+        if (input.getAttribute("aria-invalid") === "true") validateField(def);
+      });
+    });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      var firstInvalid = null;
+      var allValid = true;
+
+      fields.forEach(function (def) {
+        var ok = validateField(def);
+        if (!ok) {
+          allValid = false;
+          if (!firstInvalid) firstInvalid = document.getElementById(def.input);
+        }
+      });
+
+      if (!allValid) {
+        status.hidden = true;
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
+      var name = document.getElementById("fName").value.trim();
+      status.textContent =
+        "Thanks, " + name + " — your enquiry has been noted locally. " +
+        "This is a concept demo, so nothing was sent. In a live site this would reach Mina directly.";
+      status.hidden = false;
+      form.reset();
+
+      fields.forEach(function (def) {
+        var input = document.getElementById(def.input);
+        var err = document.getElementById(def.error);
+        input.setAttribute("aria-invalid", "false");
+        err.hidden = true;
+      });
+
+      status.focus && status.focus();
+    });
+  }
+
+  /* ---------- FAQ: close others when one opens ---------- */
+  var faqDetails = Array.prototype.slice.call(
+    document.querySelectorAll(".faq details")
+  );
+  faqDetails.forEach(function (detail) {
+    detail.addEventListener("toggle", function () {
+      if (detail.open) {
+        faqDetails.forEach(function (other) {
+          if (other !== detail) other.open = false;
+        });
+      }
+    });
+  });
+
+  /* ---------- Footer year ---------- */
+  var yearEl = document.getElementById("year");
+  if (yearEl) {
+    yearEl.textContent = String(new Date().getFullYear());
+  }
+})();
+</script>
+</body>
+</html>
+

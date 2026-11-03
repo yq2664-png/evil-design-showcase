@@ -1,0 +1,695 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#173e39">
+<meta name="description" content="Meet AtlasFlow, a concept warehouse operations platform that connects your people, systems, and next best action.">
+<title>AtlasFlow — Every shift, in sync.</title>
+<style>
+:root{--ink:#17332f;--muted:#64716b;--green:#174f43;--green-dark:#123c34;--lime:#d9ed9a;--paper:#f8f8f2;--line:#dce1d6;--orange:#d96d3e;--white:#fff;--radius:14px;--shadow:0 24px 70px #183a2912}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:98px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer}
+button:disabled{cursor:default}
+:focus-visible{outline:3px solid #c16a2f;outline-offset:5px}
+::selection{background:var(--lime);color:var(--green-dark)}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{line-height:1.12}
+.container{width:min(1240px,calc(100% - 96px));margin-inline:auto}
+.skip{position:fixed;top:10px;left:10px;z-index:100;background:var(--green);color:white;padding:12px;transform:translateY(-160%)}
+.skip:focus{transform:translateY(0)}
+.announcement{background:var(--green-dark);color:#f0f4e6;text-align:center;font-size:11px;letter-spacing:.08em;padding:8px 20px;text-transform:uppercase}
+.announcement span{opacity:.65;margin:0 12px}
+.site-header{position:sticky;top:0;z-index:20;background:rgba(248,248,242,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.header-inner{height:83px;display:flex;align-items:center;justify-content:space-between;gap:30px}
+.logo{display:inline-flex;align-items:center;gap:10px;font-weight:760;font-size:25px;letter-spacing:-1px;white-space:nowrap}
+.logo-mark{width:30px;height:32px;position:relative;display:inline-block}
+.logo-mark:before,.logo-mark:after{content:"";position:absolute;background:var(--green);width:10px;height:30px;transform:skew(-24deg);left:6px;top:1px}
+.logo-mark:after{height:19px;left:19px;top:12px;transform:skew(24deg)}
+.nav{display:flex;align-items:center;gap:30px;font-size:13px;font-weight:550}
+.nav a:not(.btn):hover{color:#548052}
+.nav a:nth-of-type(2){font-size:15.2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:22px;padding:13px 20px;border-radius:5px;border:1px solid transparent;background:var(--green);color:#fff;font-size:13px;font-weight:650;line-height:1.5;transition:background .2s,transform .2s}
+.btn:hover{background:var(--green-dark);transform:translateY(-1px)}
+.btn .arrow{font-size:19px;font-weight:400;line-height:1}
+.btn-outline{background:transparent;border-color:#bac5b8;color:var(--ink)}
+.btn-outline:hover{background:#ecf0e5}
+.btn-lime{background:var(--lime);color:var(--green-dark)}
+.btn-lime:hover{background:#e4f5b4}
+#header-demo{padding:8px 2px}
+.mobile-toggle{display:none;background:none;border:1px solid var(--line);border-radius:5px;width:42px;height:40px;color:var(--ink);font-size:22px}
+.hero{padding:79px 0 64px;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns: .92fr 1.15fr;gap:54px;align-items:center}
+.eyebrow{font-size:10px;letter-spacing:.15em;text-transform:uppercase;font-weight:750;display:flex;align-items:center;gap:9px;margin-bottom:22px}
+.eyebrow:before{content:"";height:7px;width:7px;background:var(--orange);display:inline-block}
+h1{font-size:clamp(54px,5.3vw,76px);font-weight:560;letter-spacing:-4px;line-height:1.02}
+h1 em{font-family:Georgia,"Times New Roman",serif;font-weight:400;color:var(--green);letter-spacing:-3px}
+.hero-copy>p{font-size:16px;color:var(--muted);max-width:405px;margin:25px 0 28px;line-height:1.8}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.micro{font-size:11px;color:var(--muted);margin-top:16px;display:flex;align-items:center;gap:8px}
+.micro .check{color:var(--green);font-weight:700}
+.hero-visual{position:relative;padding:16px 0 31px}
+.hero-visual:before{content:"";position:absolute;inset:-29px -80px -20px -23px;background:radial-gradient(circle at 48% 40%,#e4eacc 0,transparent 64%);z-index:-1}
+.dashboard{background:white;border:1px solid #d7dfd4;border-radius:10px;box-shadow:0 22px 55px #23453216;overflow:hidden;font-size:10px;transform:rotate(-1deg);position:relative}
+.dash-top{display:flex;align-items:center;gap:8px;background:#fbfcf9;border-bottom:1px solid #e8ece3;padding:11px 14px;color:#89958b}
+.window-dots{display:flex;gap:4px;margin-right:12px}
+.window-dots i{width:5px;height:5px;border-radius:50%;background:#d5dcd0}
+.dash-url{flex:1;text-align:center;font-size:8px;letter-spacing:.02em}
+.dash-shell{display:grid;grid-template-columns:46px 1fr;min-height:361px}
+.dash-rail{border-right:1px solid #e8ece3;display:flex;align-items:center;flex-direction:column;gap:17px;padding-top:17px}
+.mini-logo{width:17px;height:18px;border:5px solid var(--green);border-top:none;border-bottom:none;transform:skew(-15deg);margin-bottom:11px}
+.rail-icon{width:24px;height:24px;display:grid;place-items:center;border-radius:4px;color:#9aa59b;font-size:16px}
+.rail-icon.active{background:#e9efdf;color:var(--green)}
+.dash-content{padding:19px 17px 17px}
+.dash-title-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:10px}
+.dash-greeting{font-size:8px;color:#859183;margin-bottom:4px}
+.dash-title{font-size:16px;font-weight:650;letter-spacing:-.5px}
+.live{font-size:8px;display:flex;align-items:center;gap:5px;background:#eff5e8;padding:4px 6px;border-radius:3px;white-space:nowrap}
+.live:before{content:"";width:4px;height:4px;border-radius:50%;background:#4b8e5c}
+.dash-tabs{display:flex;border-bottom:1px solid #e5eadd;gap:17px;margin-bottom:13px}
+.dash-tab{padding:0 1px 8px;border:0;border-bottom:2px solid transparent;background:transparent;color:#7a8579;font-size:9px}
+.dash-tab[aria-pressed=true]{border-color:var(--green);color:var(--green);font-weight:700}
+.dash-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.mini-metric{padding:11px 9px;border:1px solid #e6eadf;border-radius:5px}
+.mini-metric .label{font-size:8px;color:#7a8579;white-space:nowrap}
+.mini-metric strong{display:block;font-size:23px;letter-spacing:-1px;line-height:1.4;font-weight:600}
+.mini-metric small{font-size:7px;color:#54835c}
+.dash-panels{display:grid;grid-template-columns:1.3fr 1fr;gap:10px;margin-top:12px}
+.chart-panel,.floor-panel{border:1px solid #e6eadf;border-radius:5px;padding:10px;min-width:0}
+.panel-title{display:flex;align-items:center;justify-content:space-between;font-size:9px;font-weight:650;margin-bottom:10px}
+.panel-title small{font-size:7px;color:#7f897b;font-weight:400}
+.chart{height:81px;display:flex;align-items:flex-end;gap:7px;background:repeating-linear-gradient(to top,#e9ede4 0,#e9ede4 1px,transparent 1px,transparent 26px);padding:0 6px}
+.bar-group{height:100%;flex:1;display:flex;align-items:flex-end;gap:3px}
+.bar{width:50%;background:var(--green);border-radius:2px 2px 0 0;height:var(--h);transition:height .4s}
+.bar.light{background:#d4e3b0}
+.chart-axis{display:flex;justify-content:space-around;font-size:6px;color:#899382;margin-top:5px}
+.chart-legend{display:flex;gap:10px;font-size:6px;color:#6d7c6b;margin-top:9px}
+.chart-legend span:before{content:"";display:inline-block;width:5px;height:5px;background:var(--green);margin-right:3px}
+.chart-legend span+span:before{background:#d4e3b0}
+.floor-map{background:#f5f6f0;padding:7px;display:grid;grid-template-columns:repeat(5,1fr);gap:5px;height:85px;border:1px solid #e8ecdf}
+.rack{background:repeating-linear-gradient(to bottom,#c1d5b0 0,#c1d5b0 8px,#f5f6f0 8px,#f5f6f0 11px);border-radius:1px}
+.rack:nth-child(2){background:repeating-linear-gradient(to bottom,#729b76 0,#729b76 8px,#f5f6f0 8px,#f5f6f0 11px)}
+.rack:nth-child(4){background:repeating-linear-gradient(to bottom,#e5bc85 0,#e5bc85 8px,#f5f6f0 8px,#f5f6f0 11px)}
+.floor-note{font-size:6px;margin-top:8px;color:#7c8975;display:flex;justify-content:space-between}
+.dash-bottom{margin-top:12px;border-top:1px solid #e8ece3;padding-top:10px;display:flex;justify-content:space-between;align-items:center;font-size:8px}
+.dash-bottom span:first-child{display:flex;gap:5px;align-items:center}
+.green-dot{width:5px;height:5px;border-radius:50%;background:#6b9259;display:inline-block}
+.floating-insight{position:absolute;bottom:5px;right:21px;width:270px;background:white;border:1px solid #dce4d6;border-radius:7px;box-shadow:0 10px 24px #1a352b15;padding:14px;display:flex;gap:10px;transform:rotate(1deg)}
+.insight-icon{width:29px;height:29px;background:#edf2dc;display:grid;place-items:center;color:var(--green);border-radius:5px;font-size:17px;flex-shrink:0}
+.insight-title{font-size:10px;font-weight:700;margin-bottom:3px}
+.insight-copy{font-size:8px;line-height:1.6;color:#7c8778}
+.hero-caption{position:absolute;bottom:-17px;left:48px;font-size:9px;color:#84917f}
+.trust-section{padding:25px 0 42px}
+.trust-title{text-align:center;color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.customer-logos{display:flex;justify-content:space-between;align-items:center;gap:28px;margin-top:23px;color:#657263}
+.customer{font-size:21px;font-weight:700;letter-spacing:-.8px;white-space:nowrap}
+.customer:nth-child(2){font-family:Georgia,serif;font-style:italic;font-weight:600;font-size:25px}
+.customer:nth-child(3){letter-spacing:2px;font-size:16px}
+.customer:nth-child(4){font-weight:500;letter-spacing:-1px}
+.customer:nth-child(5){font-family:Georgia,serif;font-size:24px}
+.section{padding:92px 0}
+.section-heading{max-width:650px}
+h2{font-size:clamp(34px,3.6vw,46px);font-weight:550;letter-spacing:-1.9px}
+.section-heading>p{margin-top:18px;color:var(--muted);max-width:520px;font-size:15px;line-height:1.8}
+.problem-section{border-top:1px solid var(--line)}
+.problem-header{display:flex;justify-content:space-between;gap:50px;align-items:flex-end;margin-bottom:40px}
+.problem-header>p{max-width:330px;color:var(--muted);font-size:14px;line-height:1.8}
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.problem-card{padding:28px 27px;background:#efF1e8;border:1px solid #e5e8dd;border-radius:8px}
+.line-icon{width:37px;height:37px;color:var(--green);margin-bottom:25px}
+.line-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.problem-card h3{font-size:18px;letter-spacing:-.4px;margin-bottom:12px;font-weight:600}
+.problem-card p{font-size:13px;line-height:1.8;color:var(--muted)}
+.solution-line{margin-top:25px;display:flex;justify-content:center;align-items:center;gap:10px;font-size:12px;color:var(--green)}
+.solution-line span{font-size:18px}
+.workflow-section{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.workflow-header{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:48px}
+.text-link{display:inline-flex;align-items:center;gap:16px;font-size:13px;font-weight:650;border-bottom:1px solid #b7c7af;padding-bottom:6px;white-space:nowrap}
+.text-link:hover{color:#668039}
+.workflow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:39px}
+.workflow-card{position:relative}
+.workflow-number{font-size:11px;color:#7a8976;letter-spacing:.09em;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:22px;display:flex;align-items:center;justify-content:space-between}
+.workflow-number span{font-size:18px;color:var(--green)}
+.workflow-art{height:152px;background:#f5f6ef;border:1px solid #e8ebdf;border-radius:6px;margin-bottom:23px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.flow-connect{display:flex;align-items:center;gap:11px}
+.app-stack{display:grid;gap:8px}
+.app-pill{width:63px;padding:7px 4px;background:white;box-shadow:0 2px 4px #192f1e06;border:1px solid #e1e6d8;border-radius:4px;font-size:8px;text-align:center;font-weight:650}
+.connector{height:1px;width:22px;background:#b7c8ab;position:relative}
+.connector:after{content:"";position:absolute;width:5px;height:5px;border-top:1px solid #8aa47a;border-right:1px solid #8aa47a;transform:rotate(45deg);right:0;top:-2px}
+.flow-hub{width:54px;height:54px;background:var(--green);border-radius:10px;display:grid;place-items:center;color:var(--lime);font-size:25px;font-weight:700}
+.task-preview{width:82%;background:white;border:1px solid #dce3d3;border-radius:6px;padding:13px;box-shadow:0 5px 15px #19391c08}
+.task-preview-header{font-size:9px;font-weight:650;display:flex;justify-content:space-between;margin-bottom:12px}
+.task-preview-header span{font-size:7px;color:#6e7b61}
+.task-row{display:flex;align-items:center;gap:7px;font-size:8px;margin-top:8px}
+.task-dot{width:7px;height:7px;border:1px solid #a5ba95;border-radius:50%}
+.task-row:first-of-type .task-dot{background:#d4b27e;border-color:#d4b27e}
+.task-row small{margin-left:auto;color:#819071;font-size:7px}
+.progress-track{width:79%;background:white;border:1px solid #dee5d5;border-radius:6px;padding:14px}
+.progress-label{font-size:9px;display:flex;justify-content:space-between;margin-bottom:10px}
+.progress-bar{height:7px;border-radius:8px;background:#edf0e6;overflow:hidden}
+.progress-bar:before{content:"";display:block;width:88%;height:100%;background:#779b60;border-radius:8px}
+.progress-success{font-size:8px;color:#4e7743;display:flex;align-items:center;gap:7px;margin-top:13px;background:#f0f5e6;padding:6px;border-radius:3px}
+.workflow-card h3{font-size:21px;letter-spacing:-.5px;font-weight:600;margin-bottom:13px}
+.workflow-card p{font-size:13px;line-height:1.85;color:var(--muted)}
+.outcomes{background:var(--green-dark);color:white;position:relative;overflow:hidden}
+.outcomes:after{content:"";width:450px;height:450px;border:1px solid #ffffff0d;border-radius:50%;position:absolute;right:-150px;top:-200px;box-shadow:0 0 0 45px #ffffff03,0 0 0 90px #ffffff03;pointer-events:none}
+.outcomes .eyebrow{color:#d0ddc7}
+.outcome-header{display:flex;align-items:flex-end;justify-content:space-between;gap:50px}
+.outcome-header h2{max-width:550px}
+.outcome-header p{max-width:300px;font-size:13px;line-height:1.8;color:#c1cfc1}
+.outcome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:52px}
+.outcome-item{border-top:1px solid #ffffff2a;padding-top:24px}
+.outcome-value{font-size:65px;letter-spacing:-3px;line-height:1.15;font-weight:450;color:var(--lime)}
+.outcome-value span{font-size:35px}
+.outcome-item h3{font-size:15px;margin-top:16px;font-weight:550}
+.outcome-item p{font-size:12px;color:#bdcdbf;max-width:260px;margin-top:10px;line-height:1.8}
+.outcome-note{font-size:10px;color:#aebfae;margin-top:35px}
+.integrations-grid{display:grid;grid-template-columns:1fr 1fr;gap:85px;align-items:center}
+.integrations-copy .section-heading>p{max-width:430px}
+.integration-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:25px}
+.tag{border:1px solid #d8dfd0;border-radius:3px;font-size:10px;padding:5px 9px;color:#596c55;background:#f3f5ec}
+.integration-note{font-size:10px;color:#788475;margin-top:20px}
+.integration-wall{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;position:relative}
+.integration-card{background:white;border:1px solid #e0e5d8;border-radius:7px;min-height:86px;display:flex;align-items:center;gap:12px;padding:15px;box-shadow:0 5px 15px #1a3e2303}
+.integration-symbol{width:34px;height:34px;border-radius:6px;display:grid;place-items:center;font-size:14px;font-weight:750;background:#f0f3eb;flex-shrink:0}
+.integration-card strong{font-size:12px;font-weight:650;display:block}
+.integration-card small{display:block;font-size:9px;color:#87917f;margin-top:3px}
+.sap{color:#2585ab}.netsuite{color:#385773}.shopify{color:#6c8c3a}.dynamics{color:#6b61a3}.api{color:#ba754b}
+.security-section{padding:0 0 88px}
+.security-box{display:grid;grid-template-columns:.9fr 1.2fr;gap:68px;border:1px solid #d9e1d0;border-radius:9px;padding:43px 46px;background:#f0f3e8}
+.security-box h2{font-size:32px;letter-spacing:-1.2px}
+.security-box p{font-size:13px;color:var(--muted);margin-top:16px;line-height:1.8}
+.security-features{display:grid;grid-template-columns:1fr 1fr;gap:27px 24px;align-content:center}
+.security-feature{display:flex;gap:10px}
+.security-feature .check-icon{height:20px;width:20px;background:#e0e9d5;border-radius:50%;display:grid;place-items:center;color:var(--green);font-size:11px;flex-shrink:0}
+.security-feature h3{font-size:12px;font-weight:650;line-height:1.6}
+.security-feature p{font-size:11px;margin-top:4px;line-height:1.65}
+.cta-section{border-top:1px solid var(--line);padding:74px 0;background:#e9eecf}
+.cta-inner{display:flex;justify-content:space-between;align-items:center;gap:50px}
+.cta-inner h2{font-size:44px;max-width:650px}
+.cta-inner p{font-size:14px;color:#64735a;margin-top:16px}
+.cta-actions{text-align:center;flex-shrink:0}
+.cta-actions .btn{min-width:186px}
+.cta-actions small{display:block;font-size:10px;color:#6d795e;margin-top:12px}
+footer{padding:48px 0 24px;background:#f8f8f2}
+.footer-main{display:flex;justify-content:space-between;gap:40px;padding-bottom:33px}
+.footer-brand p{font-size:12px;color:var(--muted);margin-top:13px;max-width:250px}
+.footer-links{display:flex;gap:55px}
+.footer-group h3{font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.footer-group a,.footer-group button{display:block;font-size:12px;color:var(--muted);margin-top:8px;background:none;border:none;padding:0;text-align:left}
+.footer-group a:hover,.footer-group button:hover{color:var(--green);text-decoration:underline}
+.footer-bottom{border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;gap:20px;color:#7e8878;font-size:10px}
+.concept-label{display:inline-flex;align-items:center;gap:6px}
+.concept-label:before{content:"";width:5px;height:5px;background:var(--orange);border-radius:50%}
+dialog{border:1px solid #d8e0d0;border-radius:12px;padding:0;background:var(--paper);color:var(--ink);width:min(520px,calc(100% - 32px));max-height:90vh;box-shadow:0 20px 100px #102e3540}
+dialog::backdrop{background:#0d2928aa;backdrop-filter:blur(4px)}
+.dialog-content{padding:36px}
+.dialog-close{position:absolute;right:13px;top:12px;background:none;border:0;width:32px;height:32px;font-size:24px;color:#6d7c66;border-radius:4px}
+.dialog-close:hover{background:#e9eddf}
+dialog h2{font-size:32px;margin-bottom:14px}
+.dialog-intro{font-size:13px;color:var(--muted);margin-bottom:24px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:12px;font-weight:650}
+.field input,.field select{width:100%;border:1px solid #cbd6c2;background:white;padding:10px 11px;border-radius:4px;color:var(--ink);font-size:13px;min-height:43px}
+.form-disclaimer{font-size:10px;color:var(--muted);line-height:1.7;margin:17px 0}
+form .btn{width:100%}
+.success-panel{text-align:center;padding:25px 0}
+.success-icon{display:grid;place-items:center;width:56px;height:56px;margin:0 auto 20px;background:#e4eecf;color:var(--green);font-size:26px;border-radius:50%}
+.success-panel p{font-size:14px;color:var(--muted);margin:18px 0 25px}
+[hidden]{display:none!important}
+@media(min-width:1450px){.hero{padding-top:95px;padding-bottom:80px}.hero-grid{gap:70px}}
+@media(max-width:1100px){.container{width:calc(100% - 64px)}.hero-grid{gap:30px;grid-template-columns:.9fr 1.1fr}.nav{gap:22px}h1{font-size:59px}.dash-content{padding:14px 12px}.dash-shell{grid-template-columns:36px 1fr}.mini-metric strong{font-size:21px}.chart{gap:4px}.hero-actions .btn{padding:12px 15px;gap:12px}.customer{font-size:18px}.integrations-grid{gap:45px}.security-box{gap:40px;padding:35px}.problem-card{padding:24px 21px}.workflow-grid{gap:25px}}
+@media(max-width:850px){.container{width:calc(100% - 48px)}.nav{gap:17px;font-size:12px}.nav .btn{padding:11px 13px;gap:12px}.hero{padding-top:55px}.hero-grid{grid-template-columns:1fr;gap:30px}.hero-copy{max-width:600px}.hero-copy>p{max-width:485px}h1{font-size:72px}.hero-visual{width:100%;max-width:600px;justify-self:center;margin-top:10px}.dashboard{transform:rotate(-1deg)}.dash-content{padding:22px}.dash-shell{grid-template-columns:47px 1fr}.dash-title{font-size:19px}.dash-panels{gap:14px}.chart{height:95px}.floor-map{height:99px}.dash-metrics strong{font-size:28px}.floating-insight{bottom:2px}.customer-logos{flex-wrap:wrap;justify-content:center;gap:22px 36px}.problem-header{display:block}.problem-header>p{margin-top:20px;max-width:500px}.section{padding:70px 0}.problem-grid{gap:14px}.problem-card{padding:22px 18px}.problem-card h3{font-size:16px}.workflow-grid{gap:20px}.workflow-art{height:135px}.flow-connect{gap:6px}.connector{width:14px}.app-pill{width:51px}.flow-hub{width:42px;height:42px}.workflow-card h3{font-size:18px}.outcome-header{display:block}.outcome-header p{margin-top:20px;max-width:480px}.outcome-grid{gap:25px}.outcome-value{font-size:56px}.integrations-grid{gap:32px}.integration-card{padding:12px;gap:8px}.integration-symbol{width:28px;height:28px}.security-box{grid-template-columns:1fr;gap:32px}.security-box>div:first-child{max-width:520px}.cta-inner h2{font-size:35px}.footer-links{gap:35px}}
+@media(max-width:640px){.container{width:calc(100% - 40px)}.announcement{font-size:9px;padding:7px 10px;letter-spacing:.06em}.announcement span{margin:0 6px}.header-inner{height:69px}.logo{font-size:24px}.mobile-toggle{display:block}.nav{display:none;position:absolute;top:69px;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--line);padding:20px;flex-direction:column;align-items:stretch;gap:0;box-shadow:0 15px 20px #123c3408}.nav.open{display:flex}.nav>a:not(.btn){padding:12px 3px;font-size:14px}.nav .btn{margin-top:12px;padding:12px}.hero{padding:43px 0 48px}.eyebrow{font-size:9px;margin-bottom:20px}h1{font-size:60px;letter-spacing:-3.5px}h1 em{letter-spacing:-2.5px}.hero-copy>p{font-size:15px;margin-top:22px}.hero-grid{gap:20px}.hero-actions{gap:9px}.hero-actions .btn{font-size:12px;padding:12px 14px}.micro{font-size:10px}.hero-visual{margin-top:8px;padding-bottom:34px}.dash-shell{grid-template-columns:29px 1fr;min-height:310px}.dash-rail{gap:15px;padding-top:16px}.rail-icon{width:20px;height:20px;font-size:13px}.mini-logo{width:13px;height:14px;border-width:4px}.dash-top{padding:8px 10px}.dash-content{padding:14px 10px}.dash-greeting{font-size:7px}.dash-title{font-size:14px}.live{font-size:6px;padding:4px}.dash-title-row{margin-bottom:13px}.dash-tabs{gap:15px;margin-bottom:11px}.dash-tab{font-size:8px}.dash-metrics{gap:5px}.mini-metric{padding:8px 6px}.mini-metric .label{font-size:6px}.dash-metrics strong{font-size:21px}.mini-metric small{font-size:6px}.dash-panels{gap:6px;margin-top:9px}.chart-panel,.floor-panel{padding:7px}.panel-title{font-size:7px;gap:4px}.panel-title small{font-size:6px}.chart{height:70px;gap:3px;padding:0 2px}.bar-group{gap:2px}.floor-map{height:74px;gap:4px;padding:5px}.chart-legend{font-size:5px;gap:5px}.floor-note{font-size:5px}.dash-bottom{font-size:6px}.floating-insight{right:8px;width:224px;padding:11px;bottom:4px}.insight-title{font-size:9px}.insight-copy{font-size:7px}.hero-caption{left:8px;bottom:-14px;font-size:8px}.trust-section{padding:17px 0 35px}.trust-title{font-size:8px}.customer-logos{gap:18px 27px}.customer{font-size:17px}.customer:nth-child(2),.customer:nth-child(5){font-size:21px}.customer:nth-child(3){font-size:13px}.section{padding:56px 0}h2{font-size:33px;letter-spacing:-1.3px}.problem-header{margin-bottom:28px}.problem-header>p{font-size:13px}.problem-grid{grid-template-columns:1fr;gap:12px}.problem-card{padding:24px;display:grid;grid-template-columns:35px 1fr;column-gap:18px}.line-icon{width:31px;height:31px;grid-row:1/3;margin:0}.problem-card h3{font-size:18px}.problem-card p{font-size:12px}.solution-line{font-size:10px;gap:7px}.workflow-header{display:block;margin-bottom:32px}.workflow-header .text-link{margin-top:24px}.workflow-grid{grid-template-columns:1fr;gap:34px}.workflow-art{height:160px}.workflow-number{margin-bottom:16px}.flow-connect{gap:17px}.connector{width:35px}.app-pill{width:77px;font-size:9px}.flow-hub{width:58px;height:58px}.task-preview{max-width:300px}.progress-track{max-width:300px}.task-row,.progress-label{font-size:10px}.workflow-card h3{font-size:21px}.outcome-grid{grid-template-columns:1fr;gap:27px;margin-top:33px}.outcome-item{display:grid;grid-template-columns:115px 1fr;column-gap:15px;padding-top:20px}.outcome-value{font-size:49px;grid-row:1/3;letter-spacing:-2px}.outcome-value span{font-size:25px}.outcome-item h3{margin-top:4px;font-size:14px}.outcome-item p{font-size:11px;margin-top:6px}.outcome-note{font-size:9px}.integrations-grid{grid-template-columns:1fr;gap:32px}.integration-card{min-height:80px;padding:14px}.integration-card strong{font-size:11px}.security-section{padding-bottom:55px}.security-box{padding:26px 23px}.security-box h2{font-size:29px}.security-features{grid-template-columns:1fr;gap:19px}.security-feature p{font-size:12px}.security-feature h3{font-size:13px}.cta-section{padding:49px 0}.cta-inner{display:block}.cta-inner h2{font-size:35px}.cta-inner p{font-size:13px}.cta-actions{margin-top:25px;text-align:left}.cta-actions small{margin-left:3px}.footer-main{flex-direction:column;gap:30px}.footer-links{gap:60px}.footer-bottom{flex-direction:column;gap:9px}.dialog-content{padding:33px 24px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+</style>
+<style id="evil-design-neutral-style-transfer">
+:root{--ink:#12211c!important;--muted:#5d6d66!important;--green:#125c53!important;--green-dark:#0d443d!important;--lime:#f2c14e!important;--paper:#f6f4ee!important;--line:#d9d6cb!important;--orange:#e2603b!important;--white:#fffdf8!important}
+body{background-color:rgb(246, 244, 238)!important;color:rgb(18, 33, 28)!important;font-family:"Avenir Next", "Segoe UI", Inter, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif!important}
+h1, h2, h3, h4, .logo, .dash-title, .mini-metric strong, .outcome-value{font-family:"Avenir Next", "Segoe UI", Inter, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif!important}
+h1 em{font-family:inherit!important;font-style:normal!important;color:rgb(18, 92, 83)!important}
+.announcement{background-color:rgb(13, 68, 61)!important;color:rgb(238, 244, 241)!important}
+.site-header{background-color:rgba(246, 244, 238, 0.94)!important}
+.logo-mark::before, .logo-mark::after{background-color:rgb(18, 92, 83)!important}
+.nav a:not(.btn):hover{color:rgb(18, 92, 83)!important}
+.btn{background-color:rgb(18, 33, 28)!important;color:rgb(255, 255, 255)!important}
+.btn:hover{background-color:rgb(13, 68, 61)!important}
+.btn-outline{background-color:transparent!important;color:rgb(18, 33, 28)!important}
+.btn-outline:hover{background-color:rgb(255, 253, 248)!important}
+.btn-lime{background-color:rgb(242, 193, 78)!important;color:rgb(18, 33, 28)!important}
+.btn-lime:hover{background-color:rgb(233, 181, 58)!important}
+.eyebrow{color:rgb(18, 92, 83)!important}
+.eyebrow::before{background-color:rgb(226, 96, 59)!important}
+.hero-visual::before{background-color:initial!important}
+.dashboard{background-color:rgb(255, 253, 248)!important;box-shadow:rgba(18, 33, 28, 0.16) 0px 24px 60px!important}
+.dash-top{background-color:rgb(13, 68, 61)!important;color:rgb(233, 241, 238)!important}
+.window-dots i{background-color:rgba(255, 255, 255, 0.32)!important}
+.rail-icon{color:rgb(139, 148, 142)!important}
+.rail-icon.active{background-color:rgb(223, 236, 231)!important;color:rgb(18, 92, 83)!important}
+.dash-greeting{color:rgb(93, 109, 102)!important}
+.live{background-color:rgb(223, 236, 231)!important;color:rgb(13, 68, 61)!important}
+.live::before{background-color:rgb(18, 92, 83)!important}
+.dash-tab{color:rgb(93, 109, 102)!important}
+.dash-tab[aria-pressed="true"]{color:rgb(18, 92, 83)!important}
+.mini-metric{background-color:rgb(246, 244, 238)!important}
+.mini-metric .label{color:rgb(93, 109, 102)!important}
+.mini-metric small{color:rgb(47, 125, 92)!important}
+.chart-panel, .floor-panel{background-color:rgb(246, 244, 238)!important}
+.panel-title small{color:rgb(93, 109, 102)!important}
+.chart{background-color:initial!important}
+.bar{background-color:rgb(18, 92, 83)!important}
+.bar.light{background-color:rgb(223, 236, 231)!important}
+.chart-axis{color:rgb(93, 109, 102)!important}
+.chart-legend{color:rgb(93, 109, 102)!important}
+.chart-legend span::before{background-color:rgb(18, 92, 83)!important}
+.chart-legend span + span::before{background-color:rgb(223, 236, 231)!important}
+.floor-map{background-color:rgb(246, 244, 238)!important}
+.rack{background-color:initial!important}
+.rack:nth-child(2){background-color:initial!important}
+.rack:nth-child(4){background-color:initial!important}
+.floor-note{color:rgb(93, 109, 102)!important}
+.green-dot{background-color:rgb(47, 125, 92)!important}
+.floating-insight{background-color:rgb(255, 253, 248)!important;box-shadow:rgba(18, 33, 28, 0.08) 0px 1px 2px, rgba(18, 33, 28, 0.06) 0px 6px 16px!important}
+.insight-icon{background-color:rgb(223, 236, 231)!important;color:rgb(18, 92, 83)!important}
+.insight-copy{color:rgb(93, 109, 102)!important}
+.hero-caption{color:rgb(93, 109, 102)!important}
+.trust-title{color:rgb(93, 109, 102)!important}
+.customer-logos{color:rgb(139, 148, 142)!important}
+.problem-card{background-color:rgb(255, 253, 248)!important;box-shadow:rgba(18, 33, 28, 0.08) 0px 1px 2px, rgba(18, 33, 28, 0.06) 0px 6px 16px!important}
+.line-icon{color:rgb(18, 92, 83)!important}
+.solution-line{color:rgb(18, 92, 83)!important}
+.workflow-section{background-color:rgb(255, 253, 248)!important}
+.text-link:hover{color:rgb(18, 92, 83)!important}
+.workflow-number{color:rgb(93, 109, 102)!important}
+.workflow-number span{color:rgb(18, 92, 83)!important}
+.workflow-art{background-color:rgb(246, 244, 238)!important}
+.app-pill{background-color:rgb(255, 253, 248)!important;color:rgb(18, 33, 28)!important}
+.connector{background-color:rgb(201, 216, 210)!important}
+.flow-hub{background-color:rgb(18, 92, 83)!important;color:rgb(242, 193, 78)!important}
+.task-preview{background-color:rgb(255, 253, 248)!important}
+.task-preview-header span{color:rgb(93, 109, 102)!important}
+.task-row:first-of-type .task-dot{background-color:rgb(242, 193, 78)!important}
+.task-row small{color:rgb(93, 109, 102)!important}
+.progress-track{background-color:rgb(255, 253, 248)!important}
+.progress-bar{background-color:rgb(232, 229, 219)!important}
+.progress-bar::before{background-color:rgb(18, 92, 83)!important}
+.progress-success{background-color:rgb(223, 236, 231)!important;color:rgb(13, 68, 61)!important}
+.outcomes{background-color:rgb(13, 68, 61)!important;color:rgb(238, 244, 241)!important}
+.outcomes .eyebrow{color:rgb(242, 193, 78)!important}
+.outcome-header p{color:rgba(238, 244, 241, 0.82)!important}
+.outcome-value{color:rgb(242, 193, 78)!important}
+.outcome-item p{color:rgba(238, 244, 241, 0.76)!important}
+.outcome-note{color:rgba(238, 244, 241, 0.7)!important}
+.tag{color:rgb(44, 59, 53)!important;background-color:rgb(246, 244, 238)!important}
+.integration-note{color:rgb(93, 109, 102)!important}
+.integration-card{background-color:rgb(255, 253, 248)!important;box-shadow:rgba(18, 33, 28, 0.08) 0px 1px 2px, rgba(18, 33, 28, 0.06) 0px 6px 16px!important}
+.integration-symbol{background-color:rgb(223, 236, 231)!important;color:rgb(18, 92, 83)!important}
+.integration-card small{color:rgb(93, 109, 102)!important}
+.sap, .netsuite, .shopify, .dynamics, .api{color:rgb(18, 92, 83)!important}
+.security-box{background-color:rgb(255, 253, 248)!important;box-shadow:rgba(18, 33, 28, 0.08) 0px 1px 2px, rgba(18, 33, 28, 0.06) 0px 6px 16px!important}
+.security-feature .check-icon{background-color:rgb(223, 236, 231)!important;color:rgb(18, 92, 83)!important}
+.cta-section{background-color:rgb(246, 244, 238)!important}
+.cta-inner p{color:rgb(93, 109, 102)!important}
+.cta-actions small{color:rgb(93, 109, 102)!important}
+footer{background-color:rgb(18, 33, 28)!important;color:rgb(195, 206, 200)!important}
+.footer-brand p{color:rgb(154, 168, 161)!important}
+.footer-group h3{color:rgb(255, 253, 248)!important}
+.footer-group a, .footer-group button{color:rgb(195, 206, 200)!important}
+.footer-group a:hover, .footer-group button:hover{color:rgb(242, 193, 78)!important}
+.footer-bottom{color:rgb(139, 154, 147)!important}
+.concept-label::before{background-color:rgb(226, 96, 59)!important}
+dialog{background-color:rgb(246, 244, 238)!important}
+dialog::backdrop{background-color:rgba(13, 41, 40, 0.67)!important}
+.dialog-close{color:rgb(93, 109, 102)!important}
+.dialog-close:hover{background-color:rgb(232, 229, 219)!important}
+.dialog-intro{color:rgb(93, 109, 102)!important}
+.field input, .field select{background-color:rgb(255, 253, 248)!important;color:rgb(18, 33, 28)!important}
+.form-disclaimer{color:rgb(93, 109, 102)!important}
+.success-icon{background-color:rgb(223, 236, 231)!important;color:rgb(18, 92, 83)!important}
+.success-panel p{color:rgb(93, 109, 102)!important}
+.skip{background-color:rgb(18, 33, 28)!important;color:rgb(255, 255, 255)!important}
+::selection{background-color:rgb(242, 193, 78)!important;color:rgb(18, 33, 28)!important}
+</style>
+<style id="evil-design-diverse-degradation">:root{--paper:#e8dec7;--ink:#4c4035;--muted:#766b5f;--line:#c6bba4;--green:#706a58;--green-dark:#585647;--lime:#ddd2a9;--orange:#ad8061}body{background:#e8dec7!important;color:#4c4035!important;font-family:Tahoma,Verdana,sans-serif!important}#hero-heading,#hero-heading em{font-family:'Courier New',Courier,monospace!important;font-size:82px!important;font-weight:700!important;font-style:normal!important;letter-spacing:-.075em!important;line-height:1.08!important}#hero-heading em{color:#877a61!important}.hero-grid{grid-template-columns:1.1fr .9fr!important;gap:31px!important}section.hero{padding-top:107px!important;padding-bottom:108px!important}#hero-demo{background:#b9ae96!important;border-color:#b9ae96!important;color:#4d473a!important}.hero-visual{filter:saturate(.35) contrast(.94)!important}.workflow-art{filter:saturate(.55)!important}@media(max-width:700px){#hero-heading,#hero-heading em{font-size:54px!important}.hero-grid{grid-template-columns:1fr!important}section.hero{padding-top:58px!important;padding-bottom:68px!important}}</style></head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="announcement">A clearer view. A better shift. <span>/</span> AtlasFlow product concept</div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="#" aria-label="AtlasFlow home"><span class="logo-mark" aria-hidden="true"></span>AtlasFlow</a>
+    <button id="menu-toggle" class="mobile-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation">☰</button>
+    <nav id="primary-nav" class="nav" aria-label="Main navigation">
+      <a href="#platform">Platform</a>
+      <a href="#workflow">How it works</a>
+      <a href="#integrations">Integrations</a>
+      <a href="#security">Security</a>
+      <button id="header-demo" class="btn" data-demo="">Request a demo <span class="arrow" aria-hidden="true">↗</span></button>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">The warehouse operations platform</div>
+        <h1 id="hero-heading">Every shift.<br><em>In sync.</em></h1>
+        <p>Turn disconnected warehouse data into a coordinated operation. Give your team the clarity to move faster, catch exceptions, and deliver on time.</p>
+        <div class="hero-actions">
+          <button id="hero-demo" class="btn" data-demo="">Request a demo <span class="arrow" aria-hidden="true">↗</span></button>
+          <a class="btn btn-outline" href="#workflow">See how it works <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="micro"><span class="check" aria-hidden="true">✓</span> Works with your WMS. Not against it.</div>
+      </div>
+      <div class="hero-visual">
+        <div class="dashboard" aria-label="Interactive concept dashboard with illustrative warehouse data">
+          <div class="dash-top"><div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div><span class="dash-url">atlasflow / operations overview</span><span aria-hidden="true">↗</span></div>
+          <div class="dash-shell">
+            <div class="dash-rail" aria-hidden="true"><span class="mini-logo"></span><span class="rail-icon active">▦</span><span class="rail-icon">▤</span><span class="rail-icon">◇</span><span class="rail-icon">↗</span><span class="rail-icon">⚙</span></div>
+            <div class="dash-content">
+              <div class="dash-title-row">
+                <div><div class="dash-greeting">NORTH HUB / SHIFT 01</div><div class="dash-title">Your operation, in focus.</div></div>
+                <span class="live">Live preview</span>
+              </div>
+              <div class="dash-tabs" role="group" aria-label="Dashboard operation">
+                <button id="tab-outbound" class="dash-tab" aria-pressed="true" data-view="outbound">Outbound</button>
+                <button id="tab-inbound" class="dash-tab" aria-pressed="false" data-view="inbound">Inbound</button>
+              </div>
+              <div class="dash-metrics" aria-live="polite" aria-atomic="true">
+                <div class="mini-metric"><span id="metric-label" class="label">Orders shipped</span><strong id="metric-orders">2,846</strong><small id="metric-trend">↗ 18% vs. last shift</small></div>
+                <div class="mini-metric"><span id="rate-label" class="label">On-time dispatch</span><strong id="metric-rate">99.2<span style="font-size:13px">%</span></strong><small>↑ Above target</small></div>
+                <div class="mini-metric"><span class="label">Open exceptions</span><strong id="metric-exceptions">04</strong><small id="exception-note">↓ 6 resolved this shift</small></div>
+              </div>
+              <div class="dash-panels">
+                <div class="chart-panel">
+                  <div class="panel-title"><span id="chart-title">Throughput by hour</span><small>Today</small></div>
+                  <div class="chart" role="img" aria-label="Illustrative hourly throughput bars, generally increasing from 6 AM to 11 AM">
+                    <div class="bar-group"><div class="bar" style="--h:38%"></div><div class="bar light" style="--h:46%"></div></div>
+                    <div class="bar-group"><div class="bar" style="--h:55%"></div><div class="bar light" style="--h:48%"></div></div>
+                    <div class="bar-group"><div class="bar" style="--h:64%"></div><div class="bar light" style="--h:56%"></div></div>
+                    <div class="bar-group"><div class="bar" style="--h:57%"></div><div class="bar light" style="--h:60%"></div></div>
+                    <div class="bar-group"><div class="bar" style="--h:83%"></div><div class="bar light" style="--h:67%"></div></div>
+                    <div class="bar-group"><div class="bar" style="--h:95%"></div><div class="bar light" style="--h:74%"></div></div>
+                  </div>
+                  <div class="chart-axis" aria-hidden="true"><span>06:00</span><span>07:00</span><span>08:00</span><span>09:00</span><span>10:00</span><span>11:00</span></div>
+                  <div class="chart-legend"><span>Actual</span><span>Planned</span></div>
+                </div>
+                <div class="floor-panel">
+                  <div class="panel-title">Floor activity <small>5 zones</small></div>
+                  <div class="floor-map" role="img" aria-label="Warehouse floor map with five rack zones; zone D has elevated activity"><div class="rack"></div><div class="rack"></div><div class="rack"></div><div class="rack"></div><div class="rack"></div></div>
+                  <div class="floor-note"><span>● Balanced</span><span>● High activity</span></div>
+                </div>
+              </div>
+              <div class="dash-bottom"><span><i class="green-dot"></i> All systems connected</span><span>Illustrative shift data</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="floating-insight">
+          <div class="insight-icon" aria-hidden="true">↗</div>
+          <div><div id="insight-title" class="insight-title">A small move. A smoother shift.</div><div id="insight-copy" class="insight-copy">Reassign 2 operators to Zone D to keep the next wave on schedule.</div></div>
+        </div>
+        <p class="hero-caption">A little less guesswork. A lot more flow. &nbsp; · &nbsp; Interactive product preview</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust-section" aria-label="Illustrative customer profiles">
+    <div class="container">
+      <p class="trust-title">Built for teams that keep the world moving</p>
+      <div class="customer-logos" aria-label="Fictional customer brands for this concept">
+        <span class="customer">◈ northline</span><span class="customer">Meridian</span><span class="customer">FIELDWORK</span><span class="customer">▧ Goodstock</span><span class="customer">Port &amp; Co.</span>
+      </div>
+      <p style="text-align:center;font-size:9px;color:#88917f;margin-top:14px">Illustrative brands, not customer endorsements.</p>
+    </div>
+  </section>
+
+  <section id="platform" class="section problem-section" aria-labelledby="problem-heading">
+    <div class="container">
+      <div class="problem-header">
+        <div class="section-heading"><div class="eyebrow">Less firefighting. More forward motion.</div><h2 id="problem-heading">Your operation moves fast.<br>Your visibility should, too.</h2></div>
+        <p>Spreadsheets, siloed systems, and radio calls can only take you so far. Get the full picture before a small delay becomes a missed promise.</p>
+      </div>
+      <div class="problem-grid">
+        <article class="problem-card">
+          <div class="line-icon" aria-hidden="true"><svg viewBox="0 0 40 40"><rect x="4" y="6" width="13" height="12" rx="2"></rect><rect x="23" y="23" width="13" height="12" rx="2"></rect><path d="M17 12h9a4 4 0 0 1 4 4v3M23 29h-9a4 4 0 0 1-4-4v-3M27 17l3 3 3-3"></path></svg></div>
+          <h3>One operation. Too many silos.</h3><p>Bring orders, inventory, labor, and carrier signals into one shared view. No more piecing the story together.</p>
+        </article>
+        <article class="problem-card">
+          <div class="line-icon" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 5 3 33h34L20 5Z"></path><path d="M20 15v9M20 28v1"></path><path d="m28 6 5 1M32 13l5 2"></path></svg></div>
+          <h3>Exceptions shouldn't be surprises.</h3><p>Surface at-risk orders and emerging bottlenecks early, with context your team can actually act on.</p>
+        </article>
+        <article class="problem-card">
+          <div class="line-icon" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="21" r="13"></circle><path d="M20 13v9l6 3M15 3h10M20 3v5M31 8l3 3"></path></svg></div>
+          <h3>Every handoff costs time.</h3><p>Give each issue an owner and every shift a clear plan. Replace follow-up calls with visible, accountable action.</p>
+        </article>
+      </div>
+      <div class="solution-line"><span aria-hidden="true">↳</span> AtlasFlow connects the dots. Your team keeps things moving.</div>
+    </div>
+  </section>
+
+  <section id="workflow" class="section workflow-section" aria-labelledby="workflow-heading">
+    <div class="container">
+      <div class="workflow-header">
+        <div class="section-heading"><div class="eyebrow">From signal to action</div><h2 id="workflow-heading">A better flow, from dock to door.</h2><p>One connected loop for planning the shift, managing the unexpected, and getting better every day.</p></div>
+        <button id="workflow-demo" style="background:none;border-top:0;border-left:0;border-right:0" class="text-link" data-demo="">Walk through the platform <span aria-hidden="true">↗</span></button>
+      </div>
+      <div class="workflow-grid">
+        <article class="workflow-card">
+          <div class="workflow-number">01 / CONNECT <span aria-hidden="true">↗</span></div>
+          <div class="workflow-art" aria-hidden="true"><div class="flow-connect"><div class="app-stack"><span class="app-pill">Your WMS</span><span class="app-pill">Your ERP</span><span class="app-pill">Your carriers</span></div><span class="connector"></span><div class="flow-hub">A</div><span class="connector"></span><span class="app-pill">One view</span></div></div>
+          <h3>Start with the full picture.</h3><p>Connect the systems you already rely on. Align order, inventory, and fulfillment data across sites without replacing your core stack.</p>
+        </article>
+        <article class="workflow-card">
+          <div class="workflow-number">02 / ORCHESTRATE <span aria-hidden="true">↗</span></div>
+          <div class="workflow-art" aria-hidden="true"><div class="task-preview"><div class="task-preview-header">Your next best actions <span>3 prioritized</span></div><div class="task-row"><span class="task-dot"></span> Rebalance Zone D <small>High</small></div><div class="task-row"><span class="task-dot"></span> Review carrier cutoff <small>Medium</small></div><div class="task-row"><span class="task-dot"></span> Release next pick wave <small>Ready</small></div></div></div>
+          <h3>Make the next move clear.</h3><p>Prioritize exceptions by operational impact. Assign actions, rebalance work, and keep everyone moving toward the same shift goals.</p>
+        </article>
+        <article class="workflow-card">
+          <div class="workflow-number">03 / IMPROVE <span aria-hidden="true">↗</span></div>
+          <div class="workflow-art" aria-hidden="true"><div class="progress-track"><div class="progress-label"><strong>Shift target</strong><span>88% complete</span></div><div class="progress-bar"></div><div class="progress-success"><span>✓</span> On track for your 16:00 cutoff</div></div></div>
+          <h3>Build on every shift.</h3><p>Track throughput, service levels, and recurring friction. Turn daily performance into practical improvements for the next shift.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="outcomes" class="section outcomes" aria-labelledby="outcomes-heading">
+    <div class="container">
+      <div class="outcome-header">
+        <div><div class="eyebrow">Operational clarity. Measurable impact.</div><h2 id="outcomes-heading">Better decisions on the floor.<br>Better numbers on the board.</h2></div>
+        <p>Build a baseline, agree on your targets, and measure what changes. Here's what an AtlasFlow pilot could aim for.</p>
+      </div>
+      <div class="outcome-grid">
+        <article class="outcome-item"><div class="outcome-value">20<span>%</span></div><h3>Less time managing exceptions</h3><p>Spend less time chasing information and more time resolving the issue.</p></article>
+        <article class="outcome-item"><div class="outcome-value">15<span>%</span></div><h3>Higher pick productivity</h3><p>Keep work balanced and reduce avoidable waiting between tasks.</p></article>
+        <article class="outcome-item"><div class="outcome-value">99<span>%+</span></div><h3>On-time dispatch target</h3><p>Spot cutoff risks early and protect the customer promise.</p></article>
+      </div>
+      <p class="outcome-note">Illustrative pilot targets only, not measured customer results or performance guarantees. Outcomes depend on your operation and baseline.</p>
+     </div></section>
+
+  <section id="integrations" class="section" aria-labelledby="integrations-heading">
+    <div class="container integrations-grid">
+      <div class="integrations-copy">
+        <div class="section-heading">
+          <div class="eyebrow">Fits your operation</div>
+          <h2 id="integrations-heading">Keep your systems.<br>Connect your potential.</h2>
+          <p>Your WMS remains the system of record. AtlasFlow adds a shared operational layer across your warehouse, business, and fulfillment tools.</p>
+        </div>
+        <div class="integration-tags"><span class="tag">WMS &amp; ERP</span><span class="tag">Commerce</span><span class="tag">Carriers &amp; 3PLs</span><span class="tag">API &amp; file exchange</span></div>
+        <p class="integration-note">Illustrative integration ecosystem. Connector availability, data access, and implementation scope would be confirmed during discovery.</p>
+      </div>
+      <div class="integration-wall" aria-label="Example integration categories and systems">
+        <div class="integration-card"><span class="integration-symbol sap" aria-hidden="true">SAP</span><div><strong>SAP</strong><small>Enterprise resource planning</small></div></div>
+        <div class="integration-card"><span class="integration-symbol netsuite" aria-hidden="true">N</span><div><strong>NetSuite</strong><small>Business operations</small></div></div>
+        <div class="integration-card"><span class="integration-symbol shopify" aria-hidden="true">S</span><div><strong>Shopify</strong><small>Commerce &amp; orders</small></div></div>
+        <div class="integration-card"><span class="integration-symbol dynamics" aria-hidden="true">D</span><div><strong>Dynamics 365</strong><small>ERP &amp; supply chain</small></div></div>
+        <div class="integration-card"><span class="integration-symbol" aria-hidden="true">▦</span><div><strong>Your WMS</strong><small>Warehouse execution data</small></div></div>
+        <div class="integration-card"><span class="integration-symbol api" aria-hidden="true">{ }</span><div><strong>APIs &amp; files</strong><small>A path for your existing stack</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="security" class="security-section" aria-labelledby="security-heading">
+    <div class="container">
+      <div class="security-box">
+        <div>
+          <div class="eyebrow">Confidence, built in</div>
+          <h2 id="security-heading">Operational visibility.<br>Thoughtful control.</h2>
+          <p>Your warehouse data deserves a clear security story. The AtlasFlow concept puts access, accountability, and data protection at the center of the platform.</p>
+          <p style="font-size:10px">Proposed capabilities for this fictional product; no certifications or production security claims are implied.</p>
+        </div>
+        <div class="security-features">
+          <div class="security-feature"><span class="check-icon" aria-hidden="true">✓</span><div><h3>Role-based access</h3><p>Scope visibility and actions to each person's role and site.</p></div></div>
+          <div class="security-feature"><span class="check-icon" aria-hidden="true">✓</span><div><h3>Enterprise sign-in</h3><p>Planned SSO support to align with your identity policies.</p></div></div>
+          <div class="security-feature"><span class="check-icon" aria-hidden="true">✓</span><div><h3>Protected data</h3><p>Encryption in transit and at rest as a core design requirement.</p></div></div>
+          <div class="security-feature"><span class="check-icon" aria-hidden="true">✓</span><div><h3>Accountable actions</h3><p>Planned audit trails for important changes and decisions.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" aria-labelledby="cta-heading">
+    <div class="container cta-inner">
+      <div><div class="eyebrow">Make room for a better shift</div><h2 id="cta-heading">Less chasing.<br>More moving forward.</h2><p>See how a connected operation could work for your team.</p></div>
+      <div class="cta-actions"><button id="closing-demo" class="btn" data-demo="">Request a demo <span class="arrow" aria-hidden="true">↗</span></button><small>A focused walkthrough. Your operation in mind.</small></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand"><a class="logo" href="#" aria-label="AtlasFlow home"><span class="logo-mark" aria-hidden="true"></span>AtlasFlow</a><p>The connected layer for a warehouse that moves as one.</p></div>
+      <div class="footer-links">
+        <div class="footer-group"><h3>Explore</h3><a href="#platform">Platform</a><a href="#workflow">How it works</a><a href="#outcomes">Outcomes</a></div>
+        <div class="footer-group"><h3>Connect</h3><a href="#integrations">Integrations</a><a href="#security">Security</a><button id="footer-demo" data-demo="">Request a demo</button></div>
+        <div class="footer-group"><h3>About this site</h3><button id="privacy-button">Privacy &amp; demo details</button><a href="#main">Back to top ↑</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© <span id="footer-year">2026</span> AtlasFlow. A fictional product.</span><span class="concept-label">Independent concept / No live services or customer claims</span></div>
+  </div>
+</footer>
+
+<dialog id="demo-dialog" aria-labelledby="demo-title" aria-describedby="demo-description">
+  <button id="demo-close" class="dialog-close" aria-label="Close demo request">×</button>
+  <div class="dialog-content">
+    <div id="demo-form-panel">
+      <div class="eyebrow">Let's talk operations</div>
+      <h2 id="demo-title">See a better flow.</h2>
+      <p id="demo-description" class="dialog-intro">Try this sample demo request. AtlasFlow is fictional: nothing is sent, saved, or booked.</p>
+      <form id="demo-form">
+        <div class="form-grid">
+          <div class="field"><label for="demo-name">Your name <span aria-hidden="true">*</span></label><input id="demo-name" maxlength="100" name="name" autocomplete="name" required=""></div>
+          <div class="field"><label for="demo-company">Company <span aria-hidden="true">*</span></label><input id="demo-company" maxlength="150" name="company" autocomplete="organization" required=""></div>
+          <div class="field full"><label for="demo-email">Work email <span aria-hidden="true">*</span></label><input id="demo-email" maxlength="200" name="email" type="email" autocomplete="email" required=""></div>
+          <div class="field full"><label for="demo-priority">Your biggest operational priority</label><select id="demo-priority" name="priority"><option value="">Choose a priority (optional)</option>Visibility across systemsException managementLabor and throughputOn-time dispatchMulti-site coordination</select></div>
+        </div>
+        <p class="form-disclaimer">Fields marked * are required. This local-only interaction demonstrates the request experience. Please use sample details; no follow-up will occur.</p>
+        <button id="demo-submit" class="btn" type="submit">Preview demo request <span class="arrow" aria-hidden="true">↗</span></button>
+      </form>
+    </div>
+    <div id="demo-success" hidden="" tabindex="-1" class="success-panel">
+      <div class="success-icon" aria-hidden="true">✓</div>
+      <h2 id="success-title">You're all set.<br>In this concept, at least.</h2>
+      <p>Your sample request is complete. In a live product, the next step would be a walkthrough tailored to your systems, sites, and operational priorities. No information has been sent or retained.</p>
+      <button id="success-close" class="btn">Back to AtlasFlow <span aria-hidden="true">↗</span></button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="privacy-dialog" aria-labelledby="privacy-title">
+  <button id="privacy-close" class="dialog-close" aria-label="Close privacy details">×</button>
+  <div class="dialog-content">
+    <div class="eyebrow">Transparent by design</div>
+    <h2 id="privacy-title">A concept, not a service.</h2>
+    <p class="dialog-intro">AtlasFlow is a fictional warehouse operations platform. This page demonstrates a product introduction and local interactions only.</p>
+    <p class="dialog-intro">There are no analytics, cookies, remote requests, or form submissions. Form entries remain in the current page only and are cleared when you close the request dialog. No demo is scheduled.</p>
+    <p class="dialog-intro">Dashboard data, customer names, and outcome targets are illustrative. Integration names describe a possible ecosystem, not verified partnerships or available connectors. Security capabilities are proposed, not audited or certified.</p>
+    <button id="privacy-done" class="btn">Got it</button>
+  </div>
+</dialog>
+
+
+
+<script>
+(function(){
+  'use strict';
+  const menuToggle=document.getElementById('menu-toggle');
+  const nav=document.getElementById('primary-nav');
+  function closeMenu(){
+    nav.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded','false');
+    menuToggle.setAttribute('aria-label','Open navigation');
+    menuToggle.textContent='☰';
+  }
+  menuToggle.addEventListener('click',function(){
+    const open=menuToggle.getAttribute('aria-expanded')!=='true';
+    nav.classList.toggle('open',open);
+    menuToggle.setAttribute('aria-expanded',String(open));
+    menuToggle.setAttribute('aria-label',open?'Close navigation':'Open navigation');
+    menuToggle.textContent=open?'×':'☰';
+  });
+  nav.querySelectorAll('a').forEach(function(link){link.addEventListener('click',closeMenu);});
+  document.addEventListener('keydown',function(event){
+    if(event.key==='Escape' && nav.classList.contains('open')){closeMenu();menuToggle.focus();}
+  });
+  document.addEventListener('click',function(event){
+    if(!nav.contains(event.target)&&!menuToggle.contains(event.target))closeMenu();
+  });
+
+  const demo=document.getElementById('demo-dialog');
+  const form=document.getElementById('demo-form');
+  const formPanel=document.getElementById('demo-form-panel');
+  const success=document.getElementById('demo-success');
+  let demoOpener=null;
+  document.querySelectorAll('[data-demo]').forEach(function(button){
+    button.addEventListener('click',function(){
+      demoOpener=button;
+      closeMenu();
+      formPanel.hidden=false;
+      success.hidden=true;
+      demo.setAttribute('aria-labelledby','demo-title');
+      demo.setAttribute('aria-describedby','demo-description');
+      demo.showModal();
+      document.getElementById('demo-name').focus();
+    });
+  });
+  function closeDemo(){demo.close();}
+  document.getElementById('demo-close').addEventListener('click',closeDemo);
+  document.getElementById('success-close').addEventListener('click',closeDemo);
+  demo.addEventListener('close',function(){
+    form.reset();
+    if(demoOpener && demoOpener.getClientRects().length)demoOpener.focus();
+    else menuToggle.focus();
+  });
+  form.addEventListener('submit',function(event){
+    event.preventDefault();
+    if(!form.reportValidity())return;
+    form.reset();
+    formPanel.hidden=true;
+    success.hidden=false;
+    demo.setAttribute('aria-labelledby','success-title');
+    demo.removeAttribute('aria-describedby');
+    success.focus();
+  });
+
+  const privacy=document.getElementById('privacy-dialog');
+  document.getElementById('privacy-button').addEventListener('click',function(){privacy.showModal();});
+  document.getElementById('privacy-close').addEventListener('click',function(){privacy.close();});
+  document.getElementById('privacy-done').addEventListener('click',function(){privacy.close();});
+  privacy.addEventListener('close',function(){document.getElementById('privacy-button').focus();});
+
+  const views={
+    outbound:{label:'Orders shipped',orders:'2,846',trend:'↗ 18% vs. last shift',rateLabel:'On-time dispatch',rate:'99.2',exceptions:'04',note:'↓ 6 resolved this shift',insightTitle:'A small move. A smoother shift.',insight:'Reassign 2 operators to Zone D to keep the next wave on schedule.',bars:[38,46,55,48,64,56,57,60,83,67,95,74]},
+    inbound:{label:'Units received',orders:'4,218',trend:'↗ 12% vs. last shift',rateLabel:'Receiving accuracy',rate:'99.7',exceptions:'02',note:'↓ 4 resolved this shift',insightTitle:'Clear the dock. Keep the flow.',insight:'Prioritize putaway in Zone B before the next scheduled delivery.',bars:[45,40,62,49,58,55,76,63,88,72,82,77]}
+  };
+  document.querySelectorAll('[data-view]').forEach(function(button){
+    button.addEventListener('click',function(){
+      const data=views[button.dataset.view];
+      document.querySelectorAll('[data-view]').forEach(function(tab){tab.setAttribute('aria-pressed',String(tab===button));});
+      document.getElementById('metric-label').textContent=data.label;
+      document.getElementById('metric-orders').textContent=data.orders;
+      document.getElementById('metric-trend').textContent=data.trend;
+      document.getElementById('rate-label').textContent=data.rateLabel;
+      const rate=document.getElementById('metric-rate');
+      rate.textContent=data.rate;
+      const percent=document.createElement('span');
+      percent.style.fontSize='13px';
+      percent.textContent='%';
+      rate.appendChild(percent);
+      document.getElementById('metric-exceptions').textContent=data.exceptions;
+      document.getElementById('exception-note').textContent=data.note;
+      document.getElementById('insight-title').textContent=data.insightTitle;
+      document.getElementById('insight-copy').textContent=data.insight;
+      document.querySelectorAll('.chart .bar').forEach(function(bar,index){bar.style.setProperty('--h',data.bars[index]+'%');});
+      document.querySelector('.chart').setAttribute('aria-label','Illustrative '+button.dataset.view+' hourly throughput bars from 6 AM to 11 AM');
+    });
+  });
+  document.getElementById('footer-year').textContent=new Date().getFullYear();
+})();
+</script>
+</body></html>

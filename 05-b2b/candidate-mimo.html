@@ -1,0 +1,1466 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AtlasFlow — Warehouse Operations Platform</title>
+<meta name="description" content="AtlasFlow is the warehouse operations platform that turns fragmented signals into coordinated execution. Plan, direct, and improve every shift from one operational layer.">
+<style>
+  :root{
+    --ink:#12211c;
+    --ink-2:#2c3b35;
+    --muted:#5d6d66;
+    --paper:#f6f4ee;
+    --paper-2:#fffdf8;
+    --line:#d9d6cb;
+    --line-2:#e8e5db;
+    --accent:#e2603b;
+    --accent-dark:#b8452a;
+    --teal:#125c53;
+    --teal-2:#0d443d;
+    --teal-soft:#dfece7;
+    --amber:#f2c14e;
+    --green:#2f7d5c;
+    --radius:14px;
+    --radius-sm:8px;
+    --shadow-sm:0 1px 2px rgba(18,33,28,.08), 0 6px 16px rgba(18,33,28,.06);
+    --shadow-lg:0 24px 60px rgba(18,33,28,.16);
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation:none !important; transition:none !important;}
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Avenir Next","Segoe UI",Inter,system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  h1,h2,h3,h4{margin:0;line-height:1.12;letter-spacing:-.022em;font-weight:700;}
+  p{margin:0 0 1em;}
+  a{color:var(--teal);text-decoration-thickness:1.5px;text-underline-offset:3px;}
+  a:hover{color:var(--accent-dark);}
+  img{max-width:100%;}
+  ul{margin:0;padding:0;list-style:none;}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px;}
+  .skip-link{
+    position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;
+    padding:12px 18px;z-index:200;border-radius:0 0 8px 0;font-weight:600;
+  }
+  .skip-link:focus{left:0;color:#fff;}
+  .wrap{width:min(100% - 40px, var(--maxw));margin-inline:auto;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--teal);margin-bottom:18px;
+  }
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--accent);display:block;}
+  .section{padding:92px 0;}
+  .section--tight{padding:68px 0;}
+  .section--dark{background:var(--teal-2);color:#eef4f1;}
+  .section--paper2{background:var(--paper-2);}
+  .lede{font-size:1.16rem;color:var(--ink-2);max-width:62ch;}
+  .muted{color:var(--muted);}
+  .small{font-size:.88rem;}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    font-weight:650;font-size:.98rem;line-height:1;
+    padding:15px 24px;border-radius:999px;border:2px solid transparent;
+    text-decoration:none;cursor:pointer;transition:transform .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn--primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .btn--primary:hover{background:var(--accent-dark);border-color:var(--accent-dark);color:#fff;}
+  .btn--ghost{background:transparent;color:var(--ink);border-color:rgba(18,33,28,.28);}
+  .btn--ghost:hover{border-color:var(--ink);color:var(--ink);}
+  .btn--light{background:#fff;color:var(--teal-2);border-color:#fff;}
+  .btn--light:hover{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+  .btn--outline-light{background:transparent;color:#fff;border-color:rgba(255,255,255,.45);}
+  .btn--outline-light:hover{border-color:#fff;color:#fff;}
+  .btn-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+
+  /* Header */
+  .site-header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(246,244,238,.92);
+    backdrop-filter:saturate(150%) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;gap:28px;min-height:76px;}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);font-weight:750;letter-spacing:-.02em;font-size:1.22rem;}
+  .brand:hover{color:var(--ink);}
+  .brand-mark{
+    width:34px;height:34px;border-radius:9px;background:var(--teal);
+    display:grid;place-items:center;flex:none;
+  }
+  .brand-mark span{display:block;width:16px;height:16px;border:3px solid var(--amber);border-radius:3px;transform:rotate(45deg);}
+  .nav-links{display:flex;align-items:center;gap:26px;margin-left:auto;}
+  .nav-links a{
+    text-decoration:none;color:var(--ink-2);font-size:.95rem;font-weight:600;
+    padding:8px 2px;border-bottom:2px solid transparent;
+  }
+  .nav-links a:hover{color:var(--ink);border-bottom-color:var(--accent);}
+  .nav-cta{display:flex;align-items:center;gap:12px;}
+  .nav-cta .btn{padding:11px 19px;font-size:.9rem;}
+  .menu-toggle{
+    display:none;margin-left:auto;background:var(--paper-2);border:1.5px solid var(--line);
+    border-radius:9px;padding:10px 13px;font:inherit;font-weight:650;color:var(--ink);cursor:pointer;
+    align-items:center;gap:9px;
+  }
+  .menu-toggle .bars{display:block;width:18px;height:12px;position:relative;}
+  .menu-toggle .bars::before,.menu-toggle .bars::after,.menu-toggle .bars i{
+    content:"";position:absolute;left:0;right:0;height:2px;background:var(--ink);border-radius:2px;
+  }
+  .menu-toggle .bars::before{top:0;}
+  .menu-toggle .bars i{top:5px;}
+  .menu-toggle .bars::after{bottom:0;}
+  @media (max-width:960px){
+    .menu-toggle{display:inline-flex;}
+    .nav-links{
+      display:none;position:absolute;left:0;right:0;top:100%;
+      background:var(--paper-2);border-bottom:1px solid var(--line);
+      flex-direction:column;align-items:stretch;gap:0;padding:12px 20px 22px;
+      box-shadow:var(--shadow-sm);
+    }
+    .nav-links.is-open{display:flex;}
+    .nav-links a{padding:13px 4px;border-bottom:1px solid var(--line-2);}
+    .nav-cta{display:none;}
+    .nav-links .mobile-cta{margin-top:16px;}
+    .nav-links .mobile-cta .btn{width:100%;}
+  }
+
+  /* Hero */
+  .hero{position:relative;overflow:hidden;padding:78px 0 92px;}
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(760px 420px at 88% 8%, rgba(18,92,83,.10), transparent 62%),
+      radial-gradient(560px 380px at 4% 82%, rgba(226,96,59,.10), transparent 60%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    position:relative;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1.12fr);
+    gap:56px;align-items:center;
+  }
+  .hero h1{font-size:clamp(2.5rem, 5.4vw, 4.15rem);letter-spacing:-.035em;}
+  .hero h1 em{font-style:normal;color:var(--teal);position:relative;}
+  .hero h1 em::after{
+    content:"";position:absolute;left:0;right:0;bottom:.06em;height:.16em;
+    background:rgba(242,193,78,.55);z-index:-1;border-radius:3px;
+  }
+  .hero .lede{font-size:1.22rem;margin-top:22px;}
+  .hero-note{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;font-size:.92rem;color:var(--muted);}
+  .hero-note li{display:flex;align-items:center;gap:8px;}
+  .tick{width:19px;height:19px;border-radius:50%;background:var(--teal-soft);color:var(--teal);display:grid;place-items:center;font-size:.72rem;font-weight:800;flex:none;}
+
+  /* Dashboard illustration */
+  .dash{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:18px;
+    box-shadow:var(--shadow-lg);overflow:hidden;
+  }
+  .dash-top{
+    display:flex;align-items:center;gap:12px;padding:13px 18px;
+    background:var(--teal-2);color:#e9f1ee;
+  }
+  .dash-dots{display:flex;gap:6px;}
+  .dash-dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.32);display:block;}
+  .dash-title{font-size:.82rem;font-weight:650;letter-spacing:.05em;text-transform:uppercase;opacity:.9;}
+  .dash-live{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;opacity:.85;}
+  .dash-live .pulse{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 0 rgba(242,193,78,.7);animation:pulse 2.4s infinite;}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(242,193,78,.65);}
+    70%{box-shadow:0 0 0 9px rgba(242,193,78,0);}
+    100%{box-shadow:0 0 0 0 rgba(242,193,78,0);}
+  }
+  .dash-body{padding:18px;display:grid;gap:14px;}
+  .kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .kpi{background:var(--paper);border:1px solid var(--line-2);border-radius:11px;padding:13px 14px;}
+  .kpi .label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+  .kpi .value{font-size:1.55rem;font-weight:750;letter-spacing:-.03em;line-height:1.15;margin-top:3px;}
+  .kpi .delta{font-size:.76rem;font-weight:700;color:var(--green);}
+  .kpi .delta.warn{color:var(--accent-dark);}
+  .panel{background:var(--paper);border:1px solid var(--line-2);border-radius:11px;padding:15px;}
+  .panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px;}
+  .panel-head h4{font-size:.92rem;letter-spacing:-.01em;}
+  .chip{
+    font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+    padding:4px 9px;border-radius:999px;background:var(--teal-soft);color:var(--teal-2);
+  }
+  .chip--amber{background:#fbeecd;color:#8a6212;}
+  .chip--coral{background:#fbe2da;color:#a53c22;}
+  .bars{display:grid;grid-template-columns:repeat(7,1fr);gap:9px;align-items:end;height:118px;}
+  .bar{background:var(--teal);border-radius:5px 5px 3px 3px;position:relative;min-height:12px;}
+  .bar:nth-child(2){background:#1a6f64;}
+  .bar:nth-child(4){background:#1a6f64;}
+  .bar:nth-child(6){background:#1a6f64;}
+  .bar.is-peak{background:var(--accent);}
+  .bar span{
+    position:absolute;bottom:-21px;left:50%;transform:translateX(-50%);
+    font-size:.66rem;color:var(--muted);font-weight:650;
+  }
+  .bars-wrap{padding-bottom:22px;}
+  .queue{display:grid;gap:9px;}
+  .queue-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;}
+  .queue-row .name{font-size:.85rem;font-weight:620;}
+  .meter{height:7px;border-radius:99px;background:#e6e3d9;overflow:hidden;}
+  .meter i{display:block;height:100%;border-radius:99px;background:var(--teal);}
+  .meter.warn i{background:var(--amber);}
+  .meter.alert i{background:var(--accent);}
+  .queue-row .pct{font-size:.78rem;font-weight:700;color:var(--muted);min-width:38px;text-align:right;}
+  .dash-split{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;}
+  .alert-list{display:grid;gap:8px;}
+  .alert-item{display:flex;gap:9px;align-items:flex-start;font-size:.82rem;line-height:1.45;}
+  .alert-item .dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex:none;}
+  .dot--coral{background:var(--accent);}
+  .dot--amber{background:var(--amber);}
+  .dot--teal{background:var(--teal);}
+  .dash-foot{
+    display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+    padding:12px 18px;border-top:1px solid var(--line-2);background:var(--paper);
+    font-size:.78rem;color:var(--muted);
+  }
+  .dash-foot .avatars{display:flex;}
+  .dash-foot .avatars i{
+    width:24px;height:24px;border-radius:50%;background:var(--teal);border:2px solid var(--paper-2);
+    margin-left:-7px;display:block;
+  }
+  .dash-foot .avatars i:first-child{margin-left:0;background:var(--accent);}
+  .dash-foot .avatars i:nth-child(3){background:var(--amber);}
+  .dash-caption{margin-top:14px;font-size:.82rem;color:var(--muted);text-align:center;}
+
+  /* Logo strip */
+  .trust{border-block:1px solid var(--line);background:var(--paper-2);}
+  .trust-inner{padding:34px 0;display:flex;flex-wrap:wrap;gap:26px 46px;align-items:center;}
+  .trust-label{font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+  .logo-word{
+    font-size:1.02rem;font-weight:750;letter-spacing:.02em;color:#8b948e;
+    display:flex;align-items:center;gap:9px;white-space:nowrap;
+  }
+  .logo-word::before{content:"";width:17px;height:17px;border-radius:4px;background:#c9cec9;transform:rotate(45deg);}
+  .logo-word:nth-child(odd)::before{border-radius:50%;transform:none;}
+  .logo-word:nth-child(3n)::before{transform:none;border-radius:3px 9px 3px 9px;}
+
+  /* Problem */
+  .problem-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:60px;align-items:start;}
+  .problem-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+  .p-card{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px 22px;box-shadow:var(--shadow-sm);
+  }
+  .p-card .num{
+    font-size:.76rem;font-weight:800;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;
+  }
+  .p-card h3{font-size:1.08rem;margin:9px 0 8px;}
+  .p-card p{font-size:.95rem;color:var(--muted);margin:0;}
+  .stat-quote{
+    margin-top:26px;padding:22px 24px;border-left:4px solid var(--accent);
+    background:#fbf1e9;border-radius:0 var(--radius) var(--radius) 0;
+  }
+  .stat-quote p{font-size:1.02rem;color:var(--ink-2);margin:0;}
+  .stat-quote cite{display:block;margin-top:10px;font-style:normal;font-size:.86rem;color:var(--muted);font-weight:620;}
+
+  /* Workflow */
+  .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:46px;}
+  .step{
+    position:relative;background:var(--paper-2);border:1px solid var(--line);
+    border-radius:var(--radius);padding:28px 22px 24px;
+  }
+  .step::after{
+    content:"";position:absolute;top:44px;right:-18px;width:18px;height:2px;background:var(--accent);opacity:.55;
+  }
+  .step:last-child::after{display:none;}
+  .step .idx{
+    width:42px;height:42px;border-radius:11px;background:var(--teal);color:#fff;
+    display:grid;place-items:center;font-weight:750;font-size:1.02rem;margin-bottom:16px;
+  }
+  .step:nth-child(2) .idx{background:#1a6f64;}
+  .step:nth-child(3) .idx{background:var(--accent);}
+  .step:nth-child(4) .idx{background:#8a6212;}
+  .step h3{font-size:1.12rem;margin-bottom:9px;}
+  .step p{font-size:.94rem;color:var(--muted);margin-bottom:14px;}
+  .step ul li{
+    font-size:.88rem;color:var(--ink-2);padding-left:20px;position:relative;margin-bottom:7px;
+  }
+  .step ul li::before{
+    content:"";position:absolute;left:0;top:.52em;width:9px;height:9px;
+    border:2px solid var(--accent);border-radius:2px;transform:rotate(45deg);
+  }
+
+  /* Feature split */
+  .split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:56px;align-items:center;}
+  .split + .split{margin-top:88px;}
+  .split--reverse .split-media{order:-1;}
+  .feature-list{display:grid;gap:16px;margin-top:26px;}
+  .feature-list li{display:flex;gap:14px;align-items:flex-start;}
+  .feature-list .ic{
+    width:32px;height:32px;border-radius:9px;flex:none;display:grid;place-items:center;
+    background:var(--teal-soft);color:var(--teal-2);font-weight:800;font-size:.86rem;
+  }
+  .feature-list h4{font-size:1.02rem;margin-bottom:3px;}
+  .feature-list p{font-size:.94rem;color:var(--muted);margin:0;}
+
+  /* CSS mock cards for feature media */
+  .mock{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:16px;
+    padding:22px;box-shadow:var(--shadow-sm);
+  }
+  .mock-row{
+    display:flex;align-items:center;gap:12px;padding:13px 14px;border:1px solid var(--line-2);
+    border-radius:10px;background:var(--paper);margin-bottom:10px;
+  }
+  .mock-row:last-child{margin-bottom:0;}
+  .mock-row .tag{
+    font-size:.72rem;font-weight:750;letter-spacing:.07em;text-transform:uppercase;
+    padding:4px 9px;border-radius:999px;flex:none;
+  }
+  .tag--ok{background:#dcefe4;color:#20613f;}
+  .tag--run{background:#fbeecd;color:#8a6212;}
+  .tag--hold{background:#fbe2da;color:#a53c22;}
+  .mock-row .txt{font-size:.92rem;font-weight:620;}
+  .mock-row .meta{margin-left:auto;font-size:.8rem;color:var(--muted);white-space:nowrap;}
+  .mock-head{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding-bottom:14px;margin-bottom:16px;border-bottom:1px solid var(--line-2);
+  }
+  .mock-head strong{font-size:.98rem;}
+  .gantt{display:grid;gap:11px;}
+  .gantt-row{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:center;}
+  .gantt-row .lbl{font-size:.82rem;font-weight:650;color:var(--ink-2);}
+  .track{height:16px;border-radius:99px;background:#eae7dd;position:relative;overflow:hidden;}
+  .track i{position:absolute;top:0;bottom:0;border-radius:99px;display:block;}
+  .track .a{left:4%;width:34%;background:var(--teal);}
+  .track .b{left:41%;width:26%;background:var(--accent);}
+  .track .c{left:70%;width:22%;background:var(--amber);}
+  .track .d{left:12%;width:44%;background:#1a6f64;}
+  .track .e{left:58%;width:32%;background:#8a6212;}
+
+  /* Outcomes */
+  .metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:44px;}
+  .metric{
+    background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.16);
+    border-radius:var(--radius);padding:28px 24px;
+  }
+  .metric .big{
+    font-size:clamp(2.35rem,4.4vw,3.15rem);font-weight:780;letter-spacing:-.045em;
+    line-height:1;color:#fff;display:block;
+  }
+  .metric .big .unit{font-size:.55em;letter-spacing:-.02em;}
+  .metric h3{font-size:1.02rem;margin:12px 0 7px;color:#fff;}
+  .metric p{font-size:.92rem;color:rgba(238,244,241,.76);margin:0;}
+  .metric .foot{
+    margin-top:15px;padding-top:13px;border-top:1px solid rgba(255,255,255,.16);
+    font-size:.8rem;color:rgba(238,244,241,.62);
+  }
+  .outcome-note{
+    margin-top:30px;font-size:.88rem;color:rgba(238,244,241,.7);max-width:80ch;
+  }
+  .case-band{
+    margin-top:52px;background:var(--paper-2);color:var(--ink);border-radius:var(--radius);
+    padding:38px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:38px;align-items:center;
+  }
+  .case-band blockquote{margin:0;font-size:1.28rem;line-height:1.5;letter-spacing:-.018em;font-weight:600;}
+  .case-band cite{display:block;margin-top:16px;font-style:normal;font-size:.92rem;color:var(--muted);}
+  .case-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .case-stat{background:var(--paper);border:1px solid var(--line-2);border-radius:11px;padding:16px;}
+  .case-stat b{display:block;font-size:1.75rem;letter-spacing:-.035em;line-height:1.1;}
+  .case-stat span{font-size:.82rem;color:var(--muted);}
+
+  /* Integrations */
+  .integ-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:40px;}
+  .integ{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:20px;
+    display:flex;flex-direction:column;gap:9px;
+  }
+  .integ .badge{
+    width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
+    font-weight:800;font-size:.86rem;letter-spacing:.02em;color:#fff;background:var(--teal);
+  }
+  .integ:nth-child(3n) .badge{background:var(--accent);}
+  .integ:nth-child(3n+1) .badge{background:#8a6212;}
+  .integ h4{font-size:1rem;}
+  .integ p{font-size:.86rem;color:var(--muted);margin:0;}
+  .integ .cat{
+    margin-top:auto;padding-top:11px;font-size:.72rem;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--teal);font-weight:750;
+  }
+  .integ-foot{
+    margin-top:26px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;
+    background:var(--teal-soft);border-radius:var(--radius);padding:22px 26px;
+  }
+  .integ-foot p{margin:0;font-size:.98rem;color:var(--teal-2);font-weight:600;}
+
+  /* Security */
+  .sec-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start;}
+  .sec-list{display:grid;gap:14px;}
+  .sec-item{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:20px 22px;
+    display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;
+  }
+  .sec-item .ic{
+    width:38px;height:38px;border-radius:10px;background:var(--teal);color:#fff;
+    display:grid;place-items:center;font-size:.95rem;font-weight:800;
+  }
+  .sec-item:nth-child(2) .ic{background:var(--accent);}
+  .sec-item:nth-child(3) .ic{background:#8a6212;}
+  .sec-item:nth-child(4) .ic{background:var(--green);}
+  .sec-item h4{font-size:1.02rem;margin-bottom:5px;}
+  .sec-item p{font-size:.92rem;color:var(--muted);margin:0;}
+  .compliance{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px;box-shadow:var(--shadow-sm);
+  }
+  .compliance h3{font-size:1.18rem;margin-bottom:6px;}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0;}
+  .badge-pill{
+    border:1.5px solid var(--line);border-radius:999px;padding:8px 15px;
+    font-size:.84rem;font-weight:700;color:var(--ink-2);background:var(--paper);
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .badge-pill::before{content:"✓";color:var(--green);font-weight:800;}
+  .compliance dl{margin:22px 0 0;display:grid;gap:12px;}
+  .compliance .row{
+    display:flex;justify-content:space-between;gap:16px;
+    padding-bottom:11px;border-bottom:1px solid var(--line-2);font-size:.92rem;
+  }
+  .compliance .row:last-child{border-bottom:0;padding-bottom:0;}
+  .compliance dt{color:var(--muted);}
+  .compliance dd{margin:0;font-weight:680;}
+
+  /* FAQ */
+  .faq{max-width:820px;margin-inline:auto;}
+  .faq details{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:12px;
+    padding:0 24px;margin-bottom:12px;
+  }
+  .faq summary{
+    cursor:pointer;list-style:none;padding:21px 0;font-weight:680;font-size:1.04rem;
+    display:flex;align-items:center;justify-content:space-between;gap:18px;
+  }
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{
+    content:"+";font-size:1.5rem;font-weight:400;color:var(--accent);flex:none;line-height:1;
+  }
+  .faq details[open] summary::after{content:"–";}
+  .faq .answer{padding:0 0 22px;color:var(--muted);font-size:.98rem;}
+  .faq .answer p:last-child{margin-bottom:0;}
+
+  /* CTA */
+  .cta{
+    background:var(--teal-2);color:#eef4f1;border-radius:22px;padding:64px 56px;
+    display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:52px;align-items:center;
+    position:relative;overflow:hidden;
+  }
+  .cta::after{
+    content:"";position:absolute;right:-90px;top:-90px;width:320px;height:320px;
+    border:44px solid rgba(242,193,78,.16);border-radius:50%;pointer-events:none;
+  }
+  .cta h2{font-size:clamp(2.1rem,3.7vw,3rem);color:#fff;letter-spacing:-.032em;}
+  .cta p{color:rgba(238,244,241,.82);font-size:1.08rem;margin-top:18px;}
+  .cta-points{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:24px;}
+  .cta-points li{display:flex;align-items:center;gap:9px;font-size:.92rem;color:rgba(238,244,241,.82);}
+  .cta-points .tick{background:rgba(255,255,255,.14);color:var(--amber);}
+  .form-card{
+    background:var(--paper-2);color:var(--ink);border-radius:16px;padding:30px;
+    box-shadow:var(--shadow-lg);position:relative;z-index:1;
+  }
+  .form-card h3{font-size:1.28rem;margin-bottom:6px;}
+  .form-card > p{font-size:.92rem;color:var(--muted);margin-bottom:20px;}
+  .field{margin-bottom:15px;}
+  .field label{display:block;font-size:.85rem;font-weight:680;margin-bottom:6px;}
+  .field input,.field select,.field textarea{
+    width:100%;font:inherit;font-size:.95rem;padding:12px 13px;
+    border:1.5px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);
+  }
+  .field textarea{min-height:88px;resize:vertical;}
+  .field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{
+    border-color:var(--accent);outline:3px solid rgba(226,96,59,.28);outline-offset:1px;
+  }
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .consent{display:flex;gap:11px;align-items:flex-start;font-size:.82rem;color:var(--muted);margin:6px 0 18px;}
+  .consent input{width:18px;height:18px;margin-top:2px;flex:none;accent-color:var(--accent);}
+  .form-card .btn{width:100%;}
+  .form-note{margin:14px 0 0;font-size:.78rem;color:var(--muted);text-align:center;}
+  .form-success{
+    display:none;background:#e3f2e9;border:1.5px solid #9dcdb2;color:#1f5c3d;
+    border-radius:11px;padding:16px 18px;font-size:.94rem;margin-bottom:18px;
+  }
+  .form-success.is-visible{display:block;}
+  .form-success strong{display:block;margin-bottom:4px;}
+
+  /* Footer */
+  .site-footer{background:var(--ink);color:#c3cec8;padding:70px 0 34px;}
+  .footer-grid{display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:40px;}
+  .footer-brand .brand{color:#fff;}
+  .footer-brand .brand:hover{color:#fff;}
+  .footer-brand p{margin-top:18px;font-size:.94rem;color:#9aa8a1;max-width:34ch;}
+  .site-footer h4{
+    color:#fff;font-size:.82rem;letter-spacing:.13em;text-transform:uppercase;margin-bottom:18px;
+  }
+  .site-footer li{margin-bottom:11px;}
+  .site-footer a{color:#c3cec8;text-decoration:none;font-size:.93rem;}
+  .site-footer a:hover{color:var(--amber);text-decoration:underline;}
+  .footer-bottom{
+    margin-top:52px;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);
+    display:flex;flex-wrap:wrap;gap:14px 26px;align-items:center;justify-content:space-between;
+    font-size:.85rem;color:#8b9a93;
+  }
+  .footer-bottom ul{display:flex;flex-wrap:wrap;gap:22px;}
+  .concept-note{
+    background:rgba(242,193,78,.12);border:1px solid rgba(242,193,78,.3);
+    color:#f2d99a;border-radius:8px;padding:8px 13px;font-size:.8rem;font-weight:620;
+    display:inline-flex;align-items:center;gap:9px;
+  }
+
+  /* Responsive */
+  @media (max-width:1080px){
+    .hero-grid{grid-template-columns:1fr;gap:48px;}
+    .steps{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .step::after{display:none;}
+    .metrics{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .integ-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+    .footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  }
+  @media (max-width:880px){
+    .section{padding:72px 0;}
+    .problem-grid,.sec-grid,.split,.cta,.case-band{grid-template-columns:1fr;gap:38px;}
+    .split--reverse .split-media{order:0;}
+    .cta{padding:44px 28px;}
+    .dash-split{grid-template-columns:1fr;}
+  }
+  @media (max-width:640px){
+    body{font-size:16px;}
+    .wrap{width:min(100% - 32px, var(--maxw));}
+    .hero{padding:52px 0 64px;}
+    .hero h1{font-size:2.35rem;}
+    .problem-cards{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr;}
+    .metrics{grid-template-columns:1fr;}
+    .integ-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .kpi-row{grid-template-columns:1fr;}
+    .field-row{grid-template-columns:1fr;}
+    .case-band{padding:26px;}
+    .footer-grid{grid-template-columns:1fr;gap:32px;}
+    .btn{width:100%;}
+    .btn-row{flex-direction:column;align-items:stretch;}
+    .hero-note{flex-direction:column;align-items:flex-start;gap:9px;}
+    .trust-inner{gap:18px 28px;}
+    .integ-foot{flex-direction:column;align-items:flex-start;}
+    .integ-foot .btn{width:100%;}
+    .gantt-row{grid-template-columns:88px 1fr;}
+    .mock-row{flex-wrap:wrap;}
+    .mock-row .meta{margin-left:0;width:100%;}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="#top" aria-label="AtlasFlow home">
+        <span class="brand-mark" aria-hidden="true"><span></span></span>
+        AtlasFlow
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">
+        <span class="bars" aria-hidden="true"><i></i></span>
+        Menu
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#problem">Why AtlasFlow</a></li>
+        <li><a href="#workflow">How it works</a></li>
+        <li><a href="#outcomes">Outcomes</a></li>
+        <li><a href="#integrations">Integrations</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li class="mobile-cta"><a class="btn btn--primary" href="#demo">Request a demo</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a class="btn btn--ghost" href="#demo">Talk to sales</a>
+        <a class="btn btn--primary" href="#demo">Request a demo</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Warehouse operations platform</p>
+        <h1>Every shift, <em>in control.</em></h1>
+        <p class="lede">
+          AtlasFlow connects your WMS, labour, yard and automation data into one operational layer —
+          so your teams can plan the shift, direct the work and fix exceptions before they become
+          tomorrow's backlog.
+        </p>
+        <div class="btn-row" style="margin-top:32px;">
+          <a class="btn btn--primary" href="#demo">Request a demo</a>
+          <a class="btn btn--ghost" href="#workflow">See the workflow</a>
+        </div>
+        <ul class="hero-note">
+          <li><span class="tick" aria-hidden="true">✓</span> Live in 6–10 weeks</li>
+          <li><span class="tick" aria-hidden="true">✓</span> No rip-and-replace</li>
+          <li><span class="tick" aria-hidden="true">✓</span> SOC 2 Type II &amp; ISO 27001</li>
+        </ul>
+      </div>
+
+      <!-- CSS dashboard illustration -->
+      <figure class="dash-fig" style="margin:0;">
+        <div class="dash" role="img" aria-label="Illustration of the AtlasFlow operations dashboard showing shift throughput, order queue progress, labour utilisation and live exception alerts.">
+          <div class="dash-top">
+            <span class="dash-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="dash-title">AtlasFlow · DC Midlands-04</span>
+            <span class="dash-live"><span class="pulse" aria-hidden="true"></span> Live shift</span>
+          </div>
+          <div class="dash-body">
+            <div class="kpi-row">
+              <div class="kpi">
+                <div class="label">Orders / hr</div>
+                <div class="value">1,284</div>
+                <div class="delta">▲ 8.4% vs plan</div>
+              </div>
+              <div class="kpi">
+                <div class="label">Dock-to-stock</div>
+                <div class="value">3.1h</div>
+                <div class="delta">▼ 22% vs last qtr</div>
+              </div>
+              <div class="kpi">
+                <div class="label">Labour used</div>
+                <div class="value">92%</div>
+                <div class="delta warn">3 zones at risk</div>
+              </div>
+            </div>
+
+            <div class="dash-split">
+              <div class="panel">
+                <div class="panel-head">
+                  <h4>Throughput vs plan</h4>
+                  <span class="chip">Shift 2 · 14:00–22:00</span>
+                </div>
+                <div class="bars-wrap">
+                  <div class="bars" aria-hidden="true">
+                    <div class="bar" style="height:44%"><span>Mon</span></div>
+                    <div class="bar" style="height:62%"><span>Tue</span></div>
+                    <div class="bar" style="height:53%"><span>Wed</span></div>
+                    <div class="bar" style="height:74%"><span>Thu</span></div>
+                    <div class="bar" style="height:66%"><span>Fri</span></div>
+                    <div class="bar is-peak" style="height:92%"><span>Sat</span></div>
+                    <div class="bar" style="height:58%"><span>Sun</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel">
+                <div class="panel-head">
+                  <h4>Exceptions</h4>
+                  <span class="chip chip--coral">4 open</span>
+                </div>
+                <div class="alert-list">
+                  <div class="alert-item"><span class="dot dot--coral" aria-hidden="true"></span><span><strong>Dock 7</strong> — carrier ETA slipped 46 min</span></div>
+                  <div class="alert-item"><span class="dot dot--amber" aria-hidden="true"></span><span><strong>Zone C</strong> — pick rate below plan</span></div>
+                  <div class="alert-item"><span class="dot dot--amber" aria-hidden="true"></span><span><strong>Wave 218</strong> — 12 lines at short-pick risk</span></div>
+                  <div class="alert-item"><span class="dot dot--teal" aria-hidden="true"></span><span><strong>ASN 8842</strong> — reconciled automatically</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head">
+                <h4>Queue progress</h4>
+                <span class="chip chip--amber">2 at risk</span>
+              </div>
+              <div class="queue">
+                <div class="queue-row">
+                  <div>
+                    <div class="name">Outbound waves · Priority retail</div>
+                    <div class="meter"><i style="width:82%"></i></div>
+                  </div>
+                  <div class="pct">82%</div>
+                </div>
+                <div class="queue-row">
+                  <div>
+                    <div class="name">Inbound putaway · Vendor 4412</div>
+                    <div class="meter warn"><i style="width:57%"></i></div>
+                  </div>
+                  <div class="pct">57%</div>
+                </div>
+                <div class="queue-row">
+                  <div>
+                    <div class="name">Cycle count · Aisles 12–18</div>
+                    <div class="meter alert"><i style="width:31%"></i></div>
+                  </div>
+                  <div class="pct">31%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="dash-foot">
+            <span>Synced 14 seconds ago · 6 systems connected</span>
+            <span class="avatars" aria-hidden="true"><i></i><i></i><i></i></span>
+          </div>
+        </div>
+        <figcaption class="dash-caption">Illustrative AtlasFlow operations view — not live customer data.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <section class="trust" aria-label="Organisations using AtlasFlow">
+    <div class="wrap trust-inner">
+      <p class="trust-label" style="margin:0;">Trusted by operations teams at</p>
+      <ul style="display:flex;flex-wrap:wrap;gap:26px 40px;align-items:center;">
+        <li class="logo-word">Northmark Logistics</li>
+        <li class="logo-word">Vantry Retail Group</li>
+        <li class="logo-word">Kestrel Foods</li>
+        <li class="logo-word">Orbit 3PL</li>
+        <li class="logo-word">Halden Industrial</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="section" id="problem">
+    <div class="wrap problem-grid">
+      <div>
+        <p class="eyebrow">The operational gap</p>
+        <h2 style="font-size:clamp(2rem,3.6vw,2.85rem);">Your systems record the work.<br>They don't run it.</h2>
+        <p class="lede" style="margin-top:22px;">
+          Most distribution networks already have the data they need — it's just spread across a WMS,
+          a TMS, spreadsheets, radio calls and the experience of one or two supervisors who know
+          where everything goes wrong.
+        </p>
+        <p class="muted">
+          The result is a shift that starts with good intentions and ends in firefighting. Decisions
+          are made on stale numbers, exceptions surface too late to fix, and every site runs its own
+          version of "the process".
+        </p>
+        <div class="stat-quote">
+          <p>“We weren't short of reports. We were short of the ten minutes between finding a problem and being able to do something about it.”</p>
+          <cite>— Operations Director, national 3PL network</cite>
+        </div>
+      </div>
+
+      <div>
+        <div class="problem-cards">
+          <article class="p-card">
+            <div class="num">01 · Fragmented</div>
+            <h3>Nine sources of truth</h3>
+            <p>WMS, LMS, yard, automation and ERP each hold part of the picture. Reconciling them is manual work that happens after the shift has already moved on.</p>
+          </article>
+          <article class="p-card">
+            <div class="num">02 · Reactive</div>
+            <h3>Exceptions found too late</h3>
+            <p>Short picks, late trailers and labour gaps surface at handover — when the cost of correcting them has already been paid in overtime and missed cut-offs.</p>
+          </article>
+          <article class="p-card">
+            <div class="num">03 · Inconsistent</div>
+            <h3>Every site runs differently</h3>
+            <p>Best practice lives with individuals. Rolling out a process change across twelve facilities takes months and drifts within weeks.</p>
+          </article>
+          <article class="p-card">
+            <div class="num">04 · Unmeasured</div>
+            <h3>Improvement can't be proven</h3>
+            <p>Without a shared baseline, initiatives are judged on anecdotes. Boards see cost per unit; operators can't see what changed it.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKFLOW -->
+  <section class="section section--paper2" id="workflow">
+    <div class="wrap">
+      <div style="max-width:720px;">
+        <p class="eyebrow">How AtlasFlow works</p>
+        <h2 style="font-size:clamp(2rem,3.6vw,2.85rem);">One operational loop, repeated every shift.</h2>
+        <p class="lede" style="margin-top:20px;">
+          AtlasFlow sits above the systems you already run. It unifies their signals, turns them into
+          a plan your teams can execute, and closes the loop with measurable results.
+        </p>
+      </div>
+
+      <ol class="steps" style="counter-reset:step;">
+        <li class="step">
+          <div class="idx" aria-hidden="true">1</div>
+          <h3>Connect</h3>
+          <p>Pre-built connectors pull orders, inventory, labour, yard and automation telemetry into a single operational model.</p>
+          <ul>
+            <li>Read-only or two-way sync</li>
+            <li>Historical backfill included</li>
+            <li>No WMS replacement</li>
+          </ul>
+        </li>
+        <li class="step">
+          <div class="idx" aria-hidden="true">2</div>
+          <h3>Plan</h3>
+          <p>Demand, labour and capacity are modelled into a shift plan with clear targets, staffing and wave sequencing.</p>
+          <ul>
+            <li>Scenario planning before commit</li>
+            <li>Constraint-aware scheduling</li>
+            <li>Site and network views</li>
+          </ul>
+        </li>
+        <li class="step">
+          <div class="idx" aria-hidden="true">3</div>
+          <h3>Direct</h3>
+          <p>Work is dispatched to supervisors and associates with live priorities, and exceptions are escalated the moment thresholds break.</p>
+          <ul>
+            <li>Role-based work queues</li>
+            <li>Threshold-based alerting</li>
+            <li>Mobile and wallboard views</li>
+          </ul>
+        </li>
+        <li class="step">
+          <div class="idx" aria-hidden="true">4</div>
+          <h3>Improve</h3>
+          <p>Every shift is scored against plan, so root causes are visible and process changes can be proven across sites.</p>
+          <ul>
+            <li>Plan-vs-actual analytics</li>
+            <li>Root-cause tagging</li>
+            <li>Standardised playbooks</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FEATURE SPLITS -->
+  <section class="section" id="platform">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <p class="eyebrow">Control tower</p>
+          <h2 style="font-size:clamp(1.85rem,3.1vw,2.45rem);">See the whole network without losing the detail of one dock.</h2>
+          <p class="lede" style="margin-top:20px;">
+            Directors get a network view of throughput, cost and service. Supervisors get the same
+            data narrowed to their zone, their shift and the next decision they need to make.
+          </p>
+          <ul class="feature-list">
+            <li>
+              <span class="ic" aria-hidden="true">◎</span>
+              <div><h4>Live plan-vs-actual</h4><p>Every KPI is anchored to the plan for that shift, not to an abstract monthly average.</p></div>
+            </li>
+            <li>
+              <span class="ic" aria-hidden="true">⇄</span>
+              <div><h4>Exception routing</h4><p>Threshold breaches reach the person who can act, with context and a suggested playbook attached.</p></div>
+            </li>
+            <li>
+              <span class="ic" aria-hidden="true">▤</span>
+              <div><h4>Shared shift handover</h4><p>Open items, blockers and decisions carry over automatically between shifts and sites.</p></div>
+            </li>
+          </ul>
+        </div>
+        <div class="split-media">
+          <div class="mock" role="img" aria-label="Illustration of an AtlasFlow exception queue showing resolved, running and on-hold operational items.">
+            <div class="mock-head">
+              <strong>Exception queue · Shift 2</strong>
+              <span class="chip chip--coral">3 need action</span>
+            </div>
+            <div class="mock-row">
+              <span class="tag tag--ok">Resolved</span>
+              <span class="txt">ASN 8842 quantity variance</span>
+              <span class="meta">Auto-reconciled · 14:22</span>
+            </div>
+            <div class="mock-row">
+              <span class="tag tag--run">Running</span>
+              <span class="txt">Zone C pick rate recovery</span>
+              <span class="meta">Playbook 04 · 2 staff moved</span>
+            </div>
+            <div class="mock-row">
+              <span class="tag tag--hold">On hold</span>
+              <span class="txt">Dock 7 carrier delay</span>
+              <span class="meta">Escalated to transport</span>
+            </div>
+            <div class="mock-row">
+              <span class="tag tag--ok">Resolved</span>
+              <span class="txt">Wave 218 short-pick risk</span>
+              <span class="meta">Re-sequenced · 14:31</span>
+            </div>
+            <div class="mock-row">
+              <span class="tag tag--run">Running</span>
+              <span class="txt">Overtime threshold · Aisle 12–18</span>
+              <span class="meta">Supervisor notified</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="split split--reverse">
+        <div>
+          <p class="eyebrow">Shift planning</p>
+          <h2 style="font-size:clamp(1.85rem,3.1vw,2.45rem);">A plan your team can actually run.</h2>
+          <p class="lede" style="margin-top:20px;">
+            AtlasFlow models demand against real constraints — headcount, equipment, dock doors,
+            automation throughput and cut-off times — then gives supervisors a plan they can adjust
+            without losing the audit trail.
+          </p>
+          <ul class="feature-list">
+            <li>
+              <span class="ic" aria-hidden="true">◷</span>
+              <div><h4>Constraint-aware scheduling</h4><p>Plans respect the physical limits of the building, not just the labour budget.</p></div>
+            </li>
+            <li>
+              <span class="ic" aria-hidden="true">◇</span>
+              <div><h4>Scenario comparison</h4><p>Model an absence spike or a volume surge before committing hours to it.</p></div>
+            </li>
+            <li>
+              <span class="ic" aria-hidden="true">✓</span>
+              <div><h4>Change control</h4><p>Every plan adjustment is versioned, attributed and visible in the shift record.</p></div>
+            </li>
+          </ul>
+        </div>
+        <div class="split-media">
+          <div class="mock" role="img" aria-label="Illustration of an AtlasFlow shift plan showing scheduled work blocks across receiving, picking, packing and dispatch.">
+            <div class="mock-head">
+              <strong>Shift plan · Saturday 12 Oct</strong>
+              <span class="chip">Balanced</span>
+            </div>
+            <div class="gantt">
+              <div class="gantt-row"><span class="lbl">Receiving</span><span class="track"><i class="a"></i><i class="c"></i></span></div>
+              <div class="gantt-row"><span class="lbl">Putaway</span><span class="track"><i class="d"></i></span></div>
+              <div class="gantt-row"><span class="lbl">Picking</span><span class="track"><i class="b"></i><i class="e"></i></span></div>
+              <div class="gantt-row"><span class="lbl">Packing</span><span class="track"><i class="d"></i><i class="c"></i></span></div>
+              <div class="gantt-row"><span class="lbl">Dispatch</span><span class="track"><i class="e"></i></span></div>
+            </div>
+            <div class="mock-row" style="margin-top:18px;">
+              <span class="tag tag--ok">On plan</span>
+              <span class="txt">Projected cut-off: 21:40</span>
+              <span class="meta">Confidence 94%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTCOMES -->
+  <section class="section section--dark" id="outcomes">
+    <div class="wrap">
+      <div style="max-width:730px;">
+        <p class="eyebrow" style="color:var(--amber);">Measurable outcomes</p>
+        <h2 style="font-size:clamp(2rem,3.6vw,2.85rem);color:#fff;">What changes in the first two quarters.</h2>
+        <p class="lede" style="color:rgba(238,244,241,.82);margin-top:20px;">
+          AtlasFlow is measured against your baseline, not ours. These are median results reported
+          by customers across 40+ facilities in their first six months of operation.
+        </p>
+      </div>
+
+      <div class="metrics">
+        <article class="metric">
+          <span class="big">18<span class="unit">%</span></span>
+          <h3>Lower cost per unit shipped</h3>
+          <p>Driven by reduced overtime, fewer expedites and better wave sequencing.</p>
+          <div class="foot">Median across 40+ sites · 6-month window</div>
+        </article>
+        <article class="metric">
+          <span class="big">31<span class="unit">%</span></span>
+          <h3>Faster exception resolution</h3>
+          <p>From detection to a completed corrective action, measured automatically.</p>
+          <div class="foot">Median across 40+ sites · 6-month window</div>
+        </article>
+        <article class="metric">
+          <span class="big">99.4<span class="unit">%</span></span>
+          <h3>On-time cut-off attainment</h3>
+          <p>Against the customer's own committed dispatch windows.</p>
+          <div class="foot">Median across 40+ sites · 6-month window</div>
+        </article>
+        <article class="metric">
+          <span class="big">6<span class="unit">–10 wks</span></span>
+          <h3>Time to first measured value</h3>
+          <p>From kickoff to a live baseline and the first governed process change.</p>
+          <div class="foot">Typical implementation range</div>
+        </article>
+      </div>
+
+      <p class="outcome-note">
+        Figures are illustrative of a fictional product concept and are provided to demonstrate how
+        AtlasFlow would present customer outcomes. Individual results vary by network, volume profile
+        and process maturity.
+      </p>
+
+      <div class="case-band">
+        <div>
+          <blockquote>
+            “The biggest shift wasn't the dashboards. It was that our morning call now starts with
+            three exceptions instead of thirty guesses. We spend that time fixing things.”
+          </blockquote>
+          <cite>Priya Raghavan · VP Operations, Northmark Logistics — 11 facilities, 2.4M sq ft</cite>
+        </div>
+        <div class="case-stats">
+          <div class="case-stat"><b>-22%</b><span>Overtime hours per week</span></div>
+          <div class="case-stat"><b>+14pt</b><span>Shift plan adherence</span></div>
+          <div class="case-stat"><b>11</b><span>Sites on one playbook</span></div>
+          <div class="case-stat"><b>9 wks</b><span>To first governed rollout</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTEGRATIONS -->
+  <section class="section" id="integrations">
+    <div class="wrap">
+      <div style="max-width:720px;">
+        <p class="eyebrow">Integrations</p>
+        <h2 style="font-size:clamp(2rem,3.6vw,2.85rem);">Fits the stack you already run.</h2>
+        <p class="lede" style="margin-top:20px;">
+          AtlasFlow is an orchestration layer, not another system of record. Connect the platforms
+          your sites depend on and keep the workflows your teams already know.
+        </p>
+      </div>
+
+      <div class="integ-grid">
+        <article class="integ">
+          <div class="badge" aria-hidden="true">W</div>
+          <h4>Warehouse management</h4>
+          <p>Blue Yonder, Manhattan, Körber, SAP EWM and custom WMS via API or flat file.</p>
+          <div class="cat">Core</div>
+        </article>
+        <article class="integ">
+          <div class="badge" aria-hidden="true">E</div>
+          <h4>ERP &amp; order management</h4>
+          <p>SAP, Oracle, Microsoft Dynamics, NetSuite and order orchestration platforms.</p>
+          <div class="cat">Core</div>
+        </article>
+        <article class="integ">
+          <div class="badge" aria-hidden="true">L</div>
+          <h4>Labour &amp; workforce</h4>
+          <p>Time and attendance, task management, agency staffing and payroll exports.</p>
+          <div class="cat">People</div>
+        </article>
+        <article class="integ">
+          <div class="badge" aria-hidden="true">T</div>
+          <h4>Transport &amp; yard</h4>
+          <p>TMS, carrier APIs, dock scheduling, gate check-in and trailer telematics.</p>
+          <div class="cat">Flow</div>
+        </article>
+        <article class="integ">
+          <div class="badge" aria-hidden="true">A</div>
+          <h4>Automation &amp; robotics</h4>
+          <p>AMR fleets, sortation, conveyors, AS/RS and equipment health signals.</p>
+          <div class="cat">Flow</div>
+        </article>
+        <article class="integ">
+          <div class="badge" aria-hidden="true">D</div>
+          <h4>Data &amp; BI</h4>
+          <p>Snowflake, Databricks, Power BI, Tableau and warehouse-native exports.</p>
+          <div class="cat">Insight</div>
+        </article>
+        <article class="integ">
+          <div class="badge" aria-hidden="true">C</div>
+          <h4>Comms &amp; alerting</h4>
+          <p>Microsoft Teams, Slack, email, SMS gateways and on-site wallboards.</p>
+          <div class="cat">Action</div>
+        </article>
+        <article class="integ">
+          <div class="badge" aria-hidden="true">I</div>
+          <h4>Identity &amp; access</h4>
+          <p>Okta, Entra ID, Ping and any SAML 2.0 or OIDC identity provider.</p>
+          <div class="cat">Platform</div>
+        </article>
+      </div>
+
+      <div class="integ-foot">
+        <p>Running something bespoke? Our REST API, webhooks and secure file gateway cover the rest.</p>
+        <a class="btn btn--ghost" href="#demo">Discuss your stack</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY -->
+  <section class="section section--paper2" id="security">
+    <div class="wrap sec-grid">
+      <div>
+        <p class="eyebrow">Security &amp; governance</p>
+        <h2 style="font-size:clamp(2rem,3.6vw,2.85rem);">Built for the questions your IT team will ask.</h2>
+        <p class="lede" style="margin-top:20px;">
+          Operational data is commercially sensitive. AtlasFlow is designed so that security,
+          residency and access controls are part of the deployment conversation from week one —
+          not a follow-up project after go-live.
+        </p>
+
+        <div class="sec-list" style="margin-top:30px;">
+          <article class="sec-item">
+            <div class="ic" aria-hidden="true">⛨</div>
+            <div>
+              <h4>Encryption everywhere</h4>
+              <p>TLS 1.3 in transit, AES-256 at rest, with customer-managed keys available on enterprise plans.</p>
+            </div>
+          </article>
+          <article class="sec-item">
+            <div class="ic" aria-hidden="true">◍</div>
+            <div>
+              <h4>Granular access control</h4>
+              <p>SSO, SCIM provisioning and role-based permissions scoped to site, region, function and data class.</p>
+            </div>
+          </article>
+          <article class="sec-item">
+            <div class="ic" aria-hidden="true">≡</div>
+            <div>
+              <h4>Complete audit trail</h4>
+              <p>Every plan change, override and integration action is immutable, attributable and exportable.</p>
+            </div>
+          </article>
+          <article class="sec-item">
+            <div class="ic" aria-hidden="true">⌂</div>
+            <div>
+              <h4>Regional data residency</h4>
+              <p>Choose EU, UK, US or AU hosting regions, with documented sub-processors and DPAs.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <aside class="compliance" aria-label="Compliance and reliability summary">
+        <h3>Assurance at a glance</h3>
+        <p class="muted small" style="margin:0;">Independent attestations and operational commitments, available under NDA during evaluation.</p>
+
+        <div class="badges">
+          <span class="badge-pill">SOC 2 Type II</span>
+          <span class="badge-pill">ISO 27001</span>
+          <span class="badge-pill">GDPR ready</span>
+          <span class="badge-pill">Pen-tested annually</span>
+          <span class="badge-pill">99.9% uptime SLA</span>
+        </div>
+
+        <dl>
+          <div class="row"><dt>Recovery time objective</dt><dd>4 hours</dd></div>
+          <div class="row"><dt>Recovery point objective</dt><dd>15 minutes</dd></div>
+          <div class="row"><dt>Backup frequency</dt><dd>Continuous, point-in-time</dd></div>
+          <div class="row"><dt>Vulnerability disclosure</dt><dd>Coordinated, 72h triage</dd></div>
+          <div class="row"><dt>Security review support</dt><dd>Dedicated engineer</dd></div>
+        </dl>
+
+        <p class="small muted" style="margin:22px 0 0;">
+          AtlasFlow runs on isolated, least-privilege infrastructure with quarterly access reviews
+          and 24/7 monitoring. Full documentation is shared during security due diligence.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- IMPLEMENTATION -->
+  <section class="section" id="implementation">
+    <div class="wrap">
+      <div style="max-width:720px;">
+        <p class="eyebrow">Implementation</p>
+        <h2 style="font-size:clamp(2rem,3.6vw,2.85rem);">A rollout your sites can absorb.</h2>
+        <p class="lede" style="margin-top:20px;">
+          We start with one facility and one measurable outcome, prove it against your baseline,
+          then standardise the playbook before expanding. No big-bang cutover, no frozen operations.
+        </p>
+      </div>
+
+      <ol class="steps" style="margin-top:40px;">
+        <li class="step">
+          <div class="idx" aria-hidden="true">1</div>
+          <h3>Weeks 1–2 · Discover</h3>
+          <p>Map current workflows, agree the baseline metric and confirm integration scope with your IT and operations leads.</p>
+          <ul>
+            <li>Baseline workshop</li>
+            <li>Security review in parallel</li>
+          </ul>
+        </li>
+        <li class="step">
+          <div class="idx" aria-hidden="true">2</div>
+          <h3>Weeks 3–6 · Connect</h3>
+          <p>Stand up connectors in a sandbox, validate data quality and configure roles, alerts and playbooks.</p>
+          <ul>
+            <li>Sandbox validation</li>
+            <li>Supervisor configuration</li>
+          </ul>
+        </li>
+        <li class="step">
+          <div class="idx" aria-hidden="true">3</div>
+          <h3>Weeks 7–10 · Pilot</h3>
+          <p>Run one live shift pattern end to end, measure against baseline and refine thresholds with the team on the floor.</p>
+          <ul>
+            <li>Live shift support</li>
+            <li>Weekly value review</li>
+          </ul>
+        </li>
+        <li class="step">
+          <div class="idx" aria-hidden="true">4</div>
+          <h3>Ongoing · Scale</h3>
+          <p>Roll the proven playbook to further sites with a repeatable template and a shared improvement backlog.</p>
+          <ul>
+            <li>Site rollout kit</li>
+            <li>Quarterly business review</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--paper2" id="faq">
+    <div class="wrap">
+      <div style="text-align:center;max-width:640px;margin:0 auto 40px;">
+        <p class="eyebrow" style="justify-content:center;">Common questions</p>
+        <h2 style="font-size:clamp(1.95rem,3.4vw,2.65rem);">Answers before the first call.</h2>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>Do we have to replace our WMS?</summary>
+          <div class="answer">
+            <p>No. AtlasFlow is deliberately not a system of record. It reads from and, where useful, writes back to the systems you already run. Most customers keep their WMS, ERP and labour platforms exactly as they are and use AtlasFlow to coordinate decisions across them.</p>
+          </div>
+        </details>
+        <details>
+          <summary>How long does implementation really take?</summary>
+          <div class="answer">
+            <p>A single-site pilot with two to four integrations typically reaches first measured value in six to ten weeks. Multi-site rollouts follow the pilot and are paced to your change capacity rather than a fixed calendar.</p>
+          </div>
+        </details>
+        <details>
+          <summary>What does AtlasFlow need from our data?</summary>
+          <div class="answer">
+            <p>Order and inventory events, labour or task records, and a schedule of cut-offs and constraints. Automation and yard telemetry are optional but improve exception detection. We backfill historical data where available so your baseline is real from day one.</p>
+          </div>
+        </details>
+        <details>
+          <summary>How do supervisors actually adopt it?</summary>
+          <div class="answer">
+            <p>AtlasFlow replaces the spreadsheet and whiteboard layer rather than adding another screen to check. Supervisors get one prioritised queue per shift, and configuration is done with them during the pilot so the thresholds match how their building really behaves.</p>
+          </div>
+        </details>
+        <details>
+          <summary>How is AtlasFlow priced?</summary>
+          <div class="answer">
+            <p>Annual subscription based on connected sites and operational volume tiers, with unlimited users. Implementation is scoped separately and fixed before kickoff. We share indicative pricing in the first conversation so there are no surprises later.</p>
+          </div>
+        </details>
+        <details>
+          <summary>What happens if a connector fails?</summary>
+          <div class="answer">
+            <p>Integrations are monitored continuously with automatic retry, dead-letter queues and alerting to both your team and ours. Data freshness is displayed in the product so operators always know how current their view is.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / DEMO -->
+  <section class="section" id="demo">
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <p class="eyebrow" style="color:var(--amber);">Request a demo</p>
+          <h2>See your operation in AtlasFlow.</h2>
+          <p>
+            Bring one facility and one problem you'd like to move. In 45 minutes we'll walk through
+            how AtlasFlow would connect your systems, plan the shift and surface the exceptions that
+            cost you the most — using a scenario modelled on your operation.
+          </p>
+          <ul class="cta-points">
+            <li><span class="tick" aria-hidden="true">✓</span> 45-minute working session</li>
+            <li><span class="tick" aria-hidden="true">✓</span> No obligation, no generic deck</li>
+            <li><span class="tick" aria-hidden="true">✓</span> Security pack available up front</li>
+            <li><span class="tick" aria-hidden="true">✓</span> Reply within one business day</li>
+          </ul>
+        </div>
+
+        <div class="form-card">
+          <h3>Book your session</h3>
+          <p>Tell us a little about your network and we'll tailor the demo.</p>
+
+          <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+            <strong>Thanks — your request is recorded.</strong>
+            This is a concept demonstration, so no data has been sent anywhere. In a live product,
+            an operations specialist would contact you within one business day.
+          </div>
+
+          <form id="demoForm" novalidate>
+            <div class="field-row">
+              <div class="field">
+                <label for="firstName">First name</label>
+                <input id="firstName" name="firstName" type="text" autocomplete="given-name" required>
+              </div>
+              <div class="field">
+                <label for="lastName">Last name</label>
+                <input id="lastName" name="lastName" type="text" autocomplete="family-name" required>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="workEmail">Work email</label>
+              <input id="workEmail" name="workEmail" type="email" autocomplete="email" required>
+            </div>
+
+            <div class="field">
+              <label for="company">Company</label>
+              <input id="company" name="company" type="text" autocomplete="organization" required>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="sites">Number of sites</label>
+                <select id="sites" name="sites">
+                  <option>1–2 sites</option>
+                  <option selected>3–10 sites</option>
+                  <option>11–25 sites</option>
+                  <option>26+ sites</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="priority">Primary focus</label>
+                <select id="priority" name="priority">
+                  <option>Throughput &amp; cost</option>
+                  <option>Labour planning</option>
+                  <option>Exception management</option>
+                  <option>Network visibility</option>
+                  <option>Automation coordination</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="notes">What would you like to improve? <span class="muted">(optional)</span></label>
+              <textarea id="notes" name="notes" placeholder="e.g. cut-off attainment on our Saturday shift"></textarea>
+            </div>
+
+            <label class="consent" for="consent">
+              <input id="consent" name="consent" type="checkbox" required>
+              <span>I agree to be contacted about this request. This is a fictional concept demo — no information leaves your browser.</span>
+            </label>
+
+            <button class="btn btn--primary" type="submit">Request my demo</button>
+            <p class="form-note">Prefer email? <a href="#demo">ops@atlasflow.example</a> · Concept demonstration only.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top">
+          <span class="brand-mark" aria-hidden="true"><span></span></span>
+          AtlasFlow
+        </a>
+        <p>The operational layer for modern distribution networks. Plan the shift, direct the work, prove the improvement.</p>
+        <p class="concept-note"><span aria-hidden="true">◆</span> Fictional product concept — for demonstration only</p>
+      </div>
+
+      <nav aria-labelledby="foot-product">
+        <h4 id="foot-product">Product</h4>
+        <ul>
+          <li><a href="#platform">Control tower</a></li>
+          <li><a href="#workflow">Shift planning</a></li>
+          <li><a href="#integrations">Integrations</a></li>
+          <li><a href="#outcomes">Outcomes</a></li>
+          <li><a href="#implementation">Implementation</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="foot-company">
+        <h4 id="foot-company">Company</h4>
+        <ul>
+          <li><a href="#problem">Why AtlasFlow</a></li>
+          <li><a href="#outcomes">Customer stories</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#demo">Contact sales</a></li>
+          <li><a href="#demo">Careers</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="foot-resources">
+        <h4 id="foot-resources">Resources</h4>
+        <ul>
+          <li><a href="#security">Security overview</a></li>
+          <li><a href="#security">Trust centre</a></li>
+          <li><a href="#integrations">API documentation</a></li>
+          <li><a href="#implementation">Rollout guide</a></li>
+          <li><a href="#demo">Request a demo</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p style="margin:0;">© <span id="year">2025</span> AtlasFlow Operations Ltd. A fictional product concept created for demonstration purposes.</p>
+      <ul>
+        <li><a href="#security">Privacy</a></li>
+        <li><a href="#security">Terms</a></li>
+        <li><a href="#security">Accessibility</a></li>
+        <li><a href="#security">Status</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    "use strict";
+
+    // Mobile navigation
+    var toggle = document.getElementById("menuToggle");
+    var navLinks = document.getElementById("navLinks");
+
+    if (toggle && navLinks) {
+      toggle.addEventListener("click", function () {
+        var open = navLinks.classList.toggle("is-open");
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+
+      navLinks.addEventListener("click", function (e) {
+        if (e.target.tagName === "A") {
+          navLinks.classList.remove("is-open");
+          toggle.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && navLinks.classList.contains("is-open")) {
+          navLinks.classList.remove("is-open");
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.focus();
+        }
+      });
+    }
+
+    // Demo form — local-only confirmation, no network requests
+    var form = document.getElementById("demoForm");
+    var success = document.getElementById("formSuccess");
+
+    if (form && success) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        success.classList.add("is-visible");
+        success.setAttribute("tabindex", "-1");
+        success.focus();
+        form.reset();
+      });
+    }
+
+    // Current year in footer
+    var yearEl = document.getElementById("year");
+    if (yearEl) {
+      yearEl.textContent = String(new Date().getFullYear());
+    }
+  })();
+</script>
+</body>
+</html>
+

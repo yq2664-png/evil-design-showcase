@@ -1,0 +1,1 @@
+Upload this folder or its ZIP file to a static hosting provider. index.html must remain at the root. This showcase contains only public HTML pages and screenshots; it does not include API keys, model prompts, or research metadata.

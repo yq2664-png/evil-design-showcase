@@ -1,0 +1,1179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forma — Sustainable Homewares</title>
+  <style>
+    :root {
+      --bg: #faf7f2;
+      --surface: #fffdf9;
+      --ink: #2e2a25;
+      --muted: #6f675f;
+      --line: #e5ddd2;
+      --accent: #b4552d;
+      --accent-dark: #8f3f1f;
+      --sage: #7c8b6f;
+      --sand: #e8dccb;
+      --clay: #d9b8a0;
+      --radius: 18px;
+      --shadow: 0 24px 60px rgba(46, 42, 37, 0.08);
+      --max: 1180px;
+      --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+      --font-body: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(217, 184, 160, 0.35), transparent 30rem),
+        radial-gradient(circle at 100% 30%, rgba(124, 139, 111, 0.12), transparent 36rem),
+        var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 0.2em;
+    }
+
+    a:hover {
+      color: var(--accent-dark);
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -100%;
+      z-index: 100;
+      padding: 0.75rem 1rem;
+      background: var(--ink);
+      color: var(--surface);
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    .wrap {
+      width: min(calc(100% - 2.5rem), var(--max));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(250, 247, 242, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(229, 221, 210, 0.8);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      min-height: 78px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: conic-gradient(from 210deg, var(--accent), var(--clay), var(--sage), var(--accent));
+      box-shadow: inset 0 0 0 6px var(--bg);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    .nav-toggle {
+      display: none;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 0.55rem 0.9rem;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      min-height: 48px;
+      padding: 0.75rem 1.3rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fffaf5;
+      font: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+      box-shadow: 0 8px 22px rgba(180, 85, 45, 0.22);
+    }
+
+    .btn:hover {
+      background: var(--accent-dark);
+      color: #fffaf5;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface);
+      color: var(--accent-dark);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin: 0 0 1rem;
+      color: var(--accent-dark);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 2.2rem;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--font-display);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 6.4rem);
+      font-weight: 700;
+      max-width: 10ch;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      font-weight: 700;
+    }
+
+    h3 {
+      font-size: 1.35rem;
+      line-height: 1.2;
+    }
+
+    p {
+      margin: 0 0 1rem;
+    }
+
+    .hero {
+      padding: clamp(3rem, 7vw, 6.5rem) 0 clamp(3.5rem, 8vw, 7rem);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: center;
+    }
+
+    .hero-copy p {
+      max-width: 34rem;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.8rem;
+    }
+
+    .hero-note {
+      margin-top: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .hero-art {
+      position: relative;
+      min-height: 430px;
+      border-radius: 32px;
+      background:
+        linear-gradient(145deg, rgba(255, 253, 249, 0.9), rgba(232, 220, 203, 0.6)),
+        var(--sand);
+      border: 1px solid rgba(229, 221, 210, 0.9);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero-art::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 75% 20%, rgba(255, 255, 255, 0.9), transparent 14rem),
+        repeating-linear-gradient(90deg, transparent 0 44px, rgba(46, 42, 37, 0.035) 44px 45px);
+      pointer-events: none;
+    }
+
+    .art-caption {
+      position: absolute;
+      left: 1.4rem;
+      bottom: 1.4rem;
+      z-index: 3;
+      padding: 0.55rem 0.8rem;
+      background: rgba(255, 253, 249, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* CSS-made product illustration */
+    .vase-scene {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 2.5rem;
+    }
+
+    .vase {
+      position: relative;
+      width: min(62%, 260px);
+      aspect-ratio: 0.72;
+      margin-top: 1.2rem;
+      filter: drop-shadow(0 28px 22px rgba(46, 42, 37, 0.16));
+    }
+
+    .vase-body {
+      position: absolute;
+      inset: 13% 6% 0;
+      border-radius: 48% 48% 38% 38% / 18% 18% 82% 82%;
+      background:
+        linear-gradient(100deg, rgba(255, 255, 255, 0.5), transparent 28%),
+        linear-gradient(160deg, #d7a77f 0%, #b96e45 42%, #8e4b2b 100%);
+      box-shadow:
+        inset -18px -10px 28px rgba(84, 40, 22, 0.3),
+        inset 12px 8px 20px rgba(255, 244, 232, 0.28);
+    }
+
+    .vase-body::before {
+      content: "";
+      position: absolute;
+      left: 18%;
+      right: 18%;
+      top: 10%;
+      height: 30%;
+      border-radius: 50%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), transparent);
+      transform: rotate(-7deg);
+    }
+
+    .vase-neck {
+      position: absolute;
+      left: 34%;
+      right: 34%;
+      top: 3%;
+      height: 18%;
+      border-radius: 16px 16px 8px 8px;
+      background: linear-gradient(90deg, #8f4b2b, #c27b52 45%, #8f4b2b);
+      box-shadow: inset 0 8px 12px rgba(66, 30, 16, 0.28);
+    }
+
+    .vase-rim {
+      position: absolute;
+      left: 31%;
+      right: 31%;
+      top: 0;
+      height: 7%;
+      border-radius: 999px;
+      background: #6f3821;
+      box-shadow: inset 0 3px 4px rgba(255, 255, 255, 0.18);
+    }
+
+    .branch {
+      position: absolute;
+      left: 50%;
+      bottom: 72%;
+      width: 2px;
+      height: 46%;
+      background: var(--sage);
+      transform-origin: bottom center;
+      border-radius: 999px;
+    }
+
+    .branch::before,
+    .branch::after {
+      content: "";
+      position: absolute;
+      width: 34px;
+      height: 20px;
+      border-radius: 100% 0 100% 0;
+      background: linear-gradient(135deg, #98a88b, #6c7c5e);
+    }
+
+    .branch::before {
+      left: -33px;
+      top: 18%;
+      transform: rotate(-18deg);
+    }
+
+    .branch::after {
+      left: 2px;
+      top: 40%;
+      transform: rotate(18deg) scaleX(-1);
+    }
+
+    .branch.b1 {
+      transform: rotate(-20deg);
+      height: 52%;
+    }
+
+    .branch.b2 {
+      transform: rotate(12deg);
+      height: 42%;
+    }
+
+    .branch.b3 {
+      transform: rotate(34deg);
+      height: 30%;
+    }
+
+    .leaf {
+      position: absolute;
+      width: 28px;
+      height: 17px;
+      border-radius: 100% 0 100% 0;
+      background: linear-gradient(135deg, #a9b89c, #647456);
+    }
+
+    .leaf.l1 {
+      left: 50%;
+      bottom: 88%;
+      transform: translateX(-50%) rotate(-20deg);
+    }
+
+    .leaf.l2 {
+      left: 42%;
+      bottom: 76%;
+      transform: rotate(-38deg);
+    }
+
+    .leaf.l3 {
+      left: 58%;
+      bottom: 68%;
+      transform: rotate(25deg) scaleX(-1);
+    }
+
+    .art-shadow {
+      position: absolute;
+      left: 22%;
+      right: 22%;
+      bottom: 11%;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(46, 42, 37, 0.16);
+      filter: blur(9px);
+    }
+
+    .section {
+      padding: clamp(3rem, 6vw, 5.5rem) 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-head p {
+      max-width: 34rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .benefit {
+      padding: clamp(1.4rem, 2.5vw, 2rem);
+      background: rgba(255, 253, 249, 0.78);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 14px 34px rgba(46, 42, 37, 0.045);
+    }
+
+    .benefit-icon {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      margin-bottom: 1.1rem;
+      border-radius: 50%;
+      background: var(--sand);
+      color: var(--accent-dark);
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .benefit p {
+      margin: 0.6rem 0 0;
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .proof {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+      padding: clamp(2rem, 5vw, 4rem);
+      background:
+        linear-gradient(120deg, rgba(255, 253, 249, 0.92), rgba(232, 220, 203, 0.55)),
+        var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .quote {
+      margin: 0;
+    }
+
+    .quote p {
+      font-family: var(--font-display);
+      font-size: clamp(1.45rem, 2.6vw, 2.15rem);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    .quote footer {
+      margin-top: 1.2rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .proof-meta {
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .proof-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .proof-row:last-child {
+      border-bottom: 0;
+    }
+
+    .proof-row span:first-child {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .proof-row strong {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+    }
+
+    .collection {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+    }
+
+    .collection-copy p {
+      color: var(--muted);
+      max-width: 36rem;
+    }
+
+    .collection-list {
+      display: grid;
+      gap: 0.8rem;
+      margin: 1.4rem 0 1.8rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .collection-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--muted);
+    }
+
+    .collection-list li::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--sage);
+    }
+
+    .collection-art {
+      position: relative;
+      min-height: 360px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(150deg, rgba(255, 253, 249, 0.9), rgba(232, 220, 203, 0.65)),
+        var(--sand);
+      box-shadow: var(--shadow);
+    }
+
+    .plate {
+      position: absolute;
+      width: 58%;
+      aspect-ratio: 1;
+      left: 50%;
+      top: 50%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 38% 32%, rgba(255, 255, 255, 0.9), transparent 20%),
+        radial-gradient(circle at 50% 50%, #f6ede1 0 42%, #d7c2a9 43% 52%, #f1e6d8 53% 62%, #c6a98b 63% 66%, #f1e6d8 67%);
+      transform: translate(-50%, -50%) rotate(-12deg);
+      box-shadow: 0 26px 30px rgba(46, 42, 37, 0.18);
+    }
+
+    .cup {
+      position: absolute;
+      width: 23%;
+      aspect-ratio: 0.82;
+      right: 17%;
+      bottom: 17%;
+      border-radius: 18% 18% 46% 46% / 12% 12% 72% 72%;
+      background: linear-gradient(120deg, #a8b59b, #667457);
+      box-shadow: inset -8px -6px 14px rgba(30, 40, 24, 0.24), 0 18px 22px rgba(46, 42, 37, 0.18);
+    }
+
+    .cup::before {
+      content: "";
+      position: absolute;
+      right: -24%;
+      top: 28%;
+      width: 38%;
+      height: 42%;
+      border: 7px solid #6e7d60;
+      border-left: 0;
+      border-radius: 0 999px 999px 0;
+    }
+
+    .collection-art .art-caption {
+      left: 1rem;
+      bottom: 1rem;
+    }
+
+    .cta-band {
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 3.5rem);
+      border-radius: 28px;
+      background: var(--ink);
+      color: #fffaf5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-band h2 {
+      max-width: 14ch;
+      color: #fffaf5;
+    }
+
+    .cta-band p {
+      color: rgba(255, 250, 245, 0.72);
+      max-width: 34rem;
+      margin: 0.8rem 0 0;
+    }
+
+    .cta-band .btn {
+      background: #fffaf5;
+      color: var(--ink);
+      box-shadow: none;
+      flex: 0 0 auto;
+    }
+
+    .cta-band .btn:hover {
+      background: var(--sand);
+      color: var(--accent-dark);
+    }
+
+    .site-footer {
+      padding: 3rem 0 2rem;
+      border-top: 1px solid var(--line);
+      margin-top: clamp(3rem, 6vw, 5rem);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 0.6fr));
+      gap: 2rem;
+    }
+
+    .footer-brand p {
+      max-width: 30rem;
+      color: var(--muted);
+      margin-top: 0.8rem;
+    }
+
+    .footer-col h3 {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-col ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .footer-col a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.94rem;
+    }
+
+    .footer-col a:hover {
+      color: var(--ink);
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .demo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.65rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .demo-badge::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .proof,
+      .collection {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-art {
+        min-height: 380px;
+      }
+
+      .benefits {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 0.8rem;
+      }
+
+      .cta-band {
+        display: block;
+      }
+
+      .cta-band .btn {
+        margin-top: 1.4rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-wrap: wrap;
+        padding: 0.85rem 0;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+      }
+
+      .nav-links {
+        display: none;
+        flex-basis: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 0.75rem 0 0.25rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .nav-links.is-open {
+        display: flex;
+      }
+
+      .nav-links .btn {
+        width: 100%;
+        margin-top: 0.25rem;
+      }
+
+      .hero {
+        padding-top: 2.5rem;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-art {
+        min-height: 330px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        display: block;
+      }
+
+      .footer-bottom > * + * {
+        margin-top: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Forma home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Forma
+      </a>
+
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+        Menu
+      </button>
+
+      <ul class="nav-links" id="nav-menu">
+        <li><a href="#benefits">Why Forma</a></li>
+        <li><a href="#proof">Customer proof</a></li>
+        <li><a href="#collection">Collection</a></li>
+        <li><a class="btn" href="#shop">Shop the collection</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Made slowly, for daily rituals</p>
+          <h1 id="hero-title">Objects that make a home feel considered.</h1>
+          <p>
+            Forma is a small collection of sustainable homewares shaped by hand, coloured with earth pigments,
+            and made to be lived with for years — not seasons.
+          </p>
+          <div class="hero-actions">
+            <a class="btn" href="#shop">Shop the collection</a>
+            <a class="btn btn-secondary" href="#benefits">Our approach</a>
+          </div>
+          <p class="hero-note">Free carbon-neutral delivery over $120 · 30-day returns</p>
+        </div>
+
+        <div class="hero-art reveal" aria-label="Illustration of a hand-thrown terracotta vase with a green branch">
+          <div class="vase-scene" aria-hidden="true">
+            <div class="art-shadow"></div>
+            <div class="vase">
+              <div class="branch b1"></div>
+              <div class="branch b2"></div>
+              <div class="branch b3"></div>
+              <div class="leaf l1"></div>
+              <div class="leaf l2"></div>
+              <div class="leaf l3"></div>
+              <div class="vase-neck"></div>
+              <div class="vase-rim"></div>
+              <div class="vase-body"></div>
+            </div>
+          </div>
+          <span class="art-caption">The Terra vase · $84</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="benefits" aria-labelledby="benefits-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Why Forma</p>
+            <h2 id="benefits-title">Beautiful by nature. Useful by design.</h2>
+          </div>
+          <p>
+            Every piece is developed with independent makers, using materials that can return to the earth
+            or be repaired, refilled, and loved again.
+          </p>
+        </div>
+
+        <div class="benefits">
+          <article class="benefit reveal">
+            <div class="benefit-icon" aria-hidden="true">01</div>
+            <h3>Earth-first materials</h3>
+            <p>
+              Responsibly sourced clay, reclaimed timber, and natural fibres. No virgin plastics, no
+              unnecessary finishes.
+            </p>
+          </article>
+
+          <article class="benefit reveal">
+            <div class="benefit-icon" aria-hidden="true">02</div>
+            <h3>Made to be mended</h3>
+            <p>
+              Simple forms and honest construction mean our pieces age gracefully — and can be repaired
+              rather than replaced.
+            </p>
+          </article>
+
+          <article class="benefit reveal">
+            <div class="benefit-icon" aria-hidden="true">03</div>
+            <h3>Small-batch by choice</h3>
+            <p>
+              We produce in considered runs with maker partners we know by name, keeping waste low and
+              quality high.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="proof" aria-labelledby="proof-title">
+      <div class="wrap">
+        <div class="proof reveal">
+          <blockquote class="quote">
+            <p>
+              “The Forma pieces feel like they’ve always been here. Warm, quiet, and genuinely useful —
+              exactly what our home needed.”
+            </p>
+            <footer>— Maya R., verified customer · Melbourne</footer>
+          </blockquote>
+
+          <div class="proof-meta" aria-label="Customer proof statistics">
+            <div class="proof-row">
+              <span>Average rating</span>
+              <strong>4.9 / 5</strong>
+            </div>
+            <div class="proof-row">
+              <span>Verified reviews</span>
+              <strong>1,280+</strong>
+            </div>
+            <div class="proof-row">
+              <span>Would recommend</span>
+              <strong>97%</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="collection" aria-labelledby="collection-title">
+      <div class="wrap collection">
+        <div class="collection-copy reveal">
+          <p class="eyebrow">The collection</p>
+          <h2 id="collection-title">A quieter kind of table.</h2>
+          <p>
+            Start with the pieces that do the most work: a serving plate, a stackable cup, a vase that
+            earns its place. Each object is designed to sit comfortably across everyday moments.
+          </p>
+
+          <ul class="collection-list">
+            <li>Hand-finished stoneware and terracotta</li>
+            <li>Naturally variable glazes and earth pigments</li>
+            <li>Made in small batches with independent studios</li>
+          </ul>
+
+          <a class="btn" href="#shop">Shop the collection</a>
+        </div>
+
+        <div class="collection-art reveal" aria-label="Illustration of a speckled stoneware plate and a sage green cup">
+          <div class="plate" aria-hidden="true"></div>
+          <div class="cup" aria-hidden="true"></div>
+          <span class="art-caption">Everyday stoneware · from $28</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="shop" aria-labelledby="shop-title">
+      <div class="wrap">
+        <div class="cta-band reveal">
+          <div>
+            <h2 id="shop-title">Bring considered objects home.</h2>
+            <p>
+              Explore the full Forma collection — small-batch homewares made with care, delivered in
+              plastic-free packaging.
+            </p>
+          </div>
+          <a class="btn" href="#collection">Shop the collection</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="#top" aria-label="Forma home">
+            <span class="brand-mark" aria-hidden="true"></span>
+            Forma
+          </a>
+          <p>
+            Sustainable homewares for everyday rituals. Designed with restraint, made with care, and
+            built to last.
+          </p>
+          <span class="demo-badge">Concept / demo page</span>
+        </div>
+
+        <div class="footer-col">
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="#benefits">Our approach</a></li>
+            <li><a href="#proof">Customer proof</a></li>
+            <li><a href="#collection">Collection</a></li>
+            <li><a href="#shop">Shop</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="#shop">Delivery & returns</a></li>
+            <li><a href="#benefits">Materials</a></li>
+            <li><a href="#proof">Reviews</a></li>
+            <li><a href="#top">Back to top</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Forma. Fictional brand for demonstration.</span>
+        <span>Made with care, locally and accessibly.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var navToggle = document.getElementById("nav-toggle");
+      var navMenu = document.getElementById("nav-menu");
+
+      if (navToggle && navMenu) {
+        navToggle.addEventListener("click", function () {
+          var isOpen = navMenu.classList.toggle("is-open");
+          navToggle.setAttribute("aria-expanded", String(isOpen));
+          navToggle.textContent = isOpen ? "Close" : "Menu";
+        });
+
+        navMenu.addEventListener("click", function (event) {
+          if (event.target.closest("a")) {
+            navMenu.classList.remove("is-open");
+            navToggle.setAttribute("aria-expanded", "false");
+            navToggle.textContent = "Menu";
+          }
+        });
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape" && navMenu.classList.contains("is-open")) {
+            navMenu.classList.remove("is-open");
+            navToggle.setAttribute("aria-expanded", "false");
+            navToggle.textContent = "Menu";
+            navToggle.focus();
+          }
+        });
+      }
+
+      var revealItems = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+
+      if ("IntersectionObserver" in window && revealItems.length) {
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+
+        revealItems.forEach(function (item) {
+          observer.observe(item);
+        });
+      } else {
+        revealItems.forEach(function (item) {
+          item.classList.add("is-visible");
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Relay Pricing — Team planning that keeps everyone in sync</title>
+  <style>
+    /* ---------- Reset & tokens ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    :root {
+      --ink: #16202b;
+      --ink-soft: #4a5563;
+      --ink-faint: #6b7684;
+      --paper: #f6f7f9;
+      --surface: #ffffff;
+      --line: #e3e6eb;
+      --line-strong: #cdd3dc;
+      --brand: #2f5bea;
+      --brand-dark: #1e3fb8;
+      --brand-soft: #e8edfd;
+      --accent: #0f9d7a;
+      --accent-soft: #e2f5ef;
+      --warn: #b45309;
+      --warn-soft: #fdf3e3;
+      --radius: 14px;
+      --radius-sm: 9px;
+      --shadow: 0 1px 2px rgba(22, 32, 43, .05), 0 10px 28px -18px rgba(22, 32, 43, .35);
+      --focus: 0 0 0 3px #ffffff, 0 0 0 6px #2f5bea;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.55;
+      font-size: 16px;
+    }
+    h1, h2, h3 { line-height: 1.2; letter-spacing: -0.015em; margin: 0; }
+    p { margin: 0; }
+    a { color: var(--brand-dark); }
+    a:hover { color: var(--brand); }
+    button { font: inherit; color: inherit; }
+    :focus-visible { outline: none; box-shadow: var(--focus); border-radius: 6px; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
+    .wrap { width: min(1120px, 100% - 2.5rem); margin-inline: auto; }
+
+    /* ---------- Skip link ---------- */
+    .skip {
+      position: absolute; left: 1rem; top: -4rem; z-index: 100;
+      background: var(--ink); color: #fff; padding: .6rem 1rem; border-radius: 8px;
+      text-decoration: none; font-weight: 600; transition: top .15s ease;
+    }
+    .skip:focus { top: 1rem; }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(246, 247, 249, .88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; min-height: 64px;
+    }
+    .brand {
+      display: inline-flex; align-items: center; gap: .55rem;
+      font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em;
+      color: var(--ink); text-decoration: none;
+    }
+    .brand-mark {
+      width: 30px; height: 30px; border-radius: 9px;
+      background: linear-gradient(140deg, var(--brand), #6d8df5);
+      display: grid; place-items: center; color: #fff;
+      font-size: .95rem; font-weight: 800;
+    }
+    .nav { display: flex; align-items: center; gap: .25rem; }
+    .nav a {
+      text-decoration: none; color: var(--ink-soft); font-weight: 550;
+      padding: .5rem .75rem; border-radius: 8px; font-size: .95rem;
+    }
+    .nav a:hover { background: #eceef2; color: var(--ink); }
+    .nav a[aria-current="page"] { color: var(--ink); background: #e9ecf1; }
+    .header-cta { display: flex; align-items: center; gap: .6rem; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: .45rem;
+      border-radius: 10px; padding: .65rem 1.05rem; font-weight: 650; font-size: .95rem;
+      text-decoration: none; border: 1px solid transparent; cursor: pointer;
+      transition: background-color .15s ease, border-color .15s ease, transform .1s ease;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { background: var(--brand); color: #fff; border-color: var(--brand); }
+    .btn-primary:hover { background: var(--brand-dark); border-color: var(--brand-dark); color: #fff; }
+    .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+    .btn-ghost:hover { background: #eceef2; color: var(--ink); }
+    .btn-block { width: 100%; }
+    .btn-lg { padding: .8rem 1.3rem; font-size: 1rem; }
+    @media (max-width: 860px) {
+      .nav a:not([aria-current="page"]) { display: none; }
+    }
+    @media (max-width: 560px) {
+      .nav { display: none; }
+      .header-cta .btn-ghost { display: none; }
+    }
+
+    /* ---------- Demo banner ---------- */
+    .demo-banner {
+      background: var(--ink); color: #dfe4ea;
+      font-size: .82rem; letter-spacing: .01em;
+    }
+    .demo-banner .wrap {
+      display: flex; align-items: center; gap: .5rem; flex-wrap: wrap;
+      padding-block: .45rem;
+    }
+    .demo-banner strong { color: #fff; font-weight: 700; }
+    .demo-banner .dot { width: 6px; height: 6px; border-radius: 50%; background: #7dd3b0; flex: none; }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 3.4rem 0 1.4rem; text-align: center; }
+    .eyebrow {
+      display: inline-block; font-size: .78rem; font-weight: 750; letter-spacing: .09em;
+      text-transform: uppercase; color: var(--brand-dark);
+      background: var(--brand-soft); padding: .3rem .7rem; border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+    .hero h1 { font-size: clamp(2rem, 4.6vw, 3.1rem); font-weight: 820; }
+    .hero p.lede {
+      max-width: 46ch; margin: 1rem auto 0; color: var(--ink-soft); font-size: 1.08rem;
+    }
+
+    /* ---------- Billing toggle ---------- */
+    .billing {
+      margin: 2rem auto 0; display: flex; flex-direction: column; align-items: center; gap: .55rem;
+    }
+    .toggle-group {
+      display: inline-flex; align-items: center; gap: .25rem; padding: .3rem;
+      background: #e9ecf1; border-radius: 999px; border: 1px solid var(--line);
+    }
+    .toggle-group button {
+      border: 0; background: transparent; border-radius: 999px;
+      padding: .55rem 1.15rem; font-weight: 650; font-size: .92rem; cursor: pointer;
+      color: var(--ink-soft); display: inline-flex; align-items: center; gap: .4rem;
+    }
+    .toggle-group button[aria-pressed="true"] {
+      background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(22,32,43,.16);
+    }
+    .save-pill {
+      font-size: .72rem; font-weight: 750; color: #065f46; background: var(--accent-soft);
+      padding: .1rem .45rem; border-radius: 999px; border: 1px solid #bfe8da;
+    }
+    .billing-note { font-size: .86rem; color: var(--ink-faint); }
+    .billing-note strong { color: var(--ink-soft); }
+
+    /* ---------- Plans ---------- */
+    .plans-wrap { padding: 2.2rem 0 1rem; }
+    .plans {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.15rem;
+      align-items: stretch;
+    }
+    @media (max-width: 900px) {
+      .plans { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; }
+    }
+    .plan {
+      position: relative; background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      display: flex; flex-direction: column; padding: 1.6rem 1.5rem 1.5rem;
+    }
+    .plan--recommended {
+      border: 2px solid var(--brand);
+      box-shadow: 0 1px 2px rgba(47, 91, 234, .12), 0 18px 40px -24px rgba(47, 91, 234, .5);
+    }
+    .plan-flag {
+      position: absolute; top: -0.85rem; left: 1.5rem;
+      background: var(--brand); color: #fff; font-size: .72rem; font-weight: 750;
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: .28rem .7rem; border-radius: 999px;
+    }
+    .plan h2 { font-size: 1.2rem; font-weight: 750; }
+    .plan .plan-tagline { color: var(--ink-soft); font-size: .92rem; margin-top: .3rem; min-height: 2.7em; }
+    .price-block { margin: 1.15rem 0 .25rem; display: flex; align-items: baseline; gap: .3rem; flex-wrap: wrap; }
+    .price { font-size: 2.5rem; font-weight: 820; letter-spacing: -0.03em; line-height: 1; }
+    .price-unit { color: var(--ink-soft); font-size: .92rem; font-weight: 550; }
+    .price-sub { font-size: .84rem; color: var(--ink-faint); min-height: 1.4em; }
+    .plan .btn { margin-top: 1.1rem; }
+    .plan .cta-note { font-size: .78rem; color: var(--ink-faint); text-align: center; margin-top: .5rem; }
+    .plan-features { margin: 1.3rem 0 0; padding: 1.1rem 0 0; border-top: 1px solid var(--line); list-style: none; }
+    .plan-features li {
+      display: flex; gap: .55rem; align-items: flex-start;
+      font-size: .9rem; color: var(--ink-soft); padding-block: .3rem;
+    }
+    .plan-features li strong { color: var(--ink); font-weight: 650; }
+    .check {
+      flex: none; width: 18px; height: 18px; margin-top: .13rem; border-radius: 50%;
+      background: var(--accent-soft); color: #067a5e; display: grid; place-items: center;
+      font-size: .68rem; font-weight: 900;
+    }
+    .plan--recommended .check { background: var(--brand-soft); color: var(--brand-dark); }
+    .feature-heading {
+      font-size: .72rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--ink-faint); margin: 1.1rem 0 .2rem;
+    }
+
+    /* ---------- Compare table ---------- */
+    .compare { padding: 2.6rem 0 .5rem; }
+    .section-head { max-width: 60ch; margin-bottom: 1.4rem; }
+    .section-head h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; }
+    .section-head p { color: var(--ink-soft); margin-top: .5rem; }
+    .table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); }
+    table { width: 100%; border-collapse: collapse; min-width: 620px; font-size: .92rem; }
+    caption { text-align: left; padding: 1rem 1.2rem .25rem; font-weight: 650; color: var(--ink-soft); font-size: .88rem; }
+    th, td { text-align: left; padding: .8rem 1.2rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+    thead th { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-faint); background: #fafbfc; }
+    tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+    tbody th { font-weight: 600; color: var(--ink); }
+    td { color: var(--ink-soft); }
+    .tick { color: #067a5e; font-weight: 800; }
+    .dash { color: var(--line-strong); }
+
+    /* ---------- Trust / billing language ---------- */
+    .trust { padding: 2.6rem 0 .5rem; }
+    .trust-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+    }
+    @media (max-width: 800px) { .trust-grid { grid-template-columns: 1fr; } }
+    .trust-card {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 1.25rem 1.3rem; box-shadow: var(--shadow);
+    }
+    .trust-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: .4rem; }
+    .trust-card p { font-size: .9rem; color: var(--ink-soft); }
+    .trust-icon {
+      width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center;
+      background: var(--brand-soft); color: var(--brand-dark); font-weight: 800; margin-bottom: .7rem;
+    }
+
+    /* ---------- FAQ ---------- */
+    .faq { padding: 2.8rem 0 1rem; }
+    .faq-list { display: grid; gap: .7rem; max-width: 820px; }
+    details {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm);
+      padding: .15rem .3rem; box-shadow: var(--shadow);
+    }
+    summary {
+      cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; padding: .9rem 1rem; font-weight: 650; font-size: .97rem; border-radius: var(--radius-sm);
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary .plus {
+      flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center;
+      background: #eef0f4; color: var(--ink-soft); font-weight: 800; font-size: .85rem;
+      transition: transform .18s ease, background-color .18s ease;
+    }
+    details[open] summary .plus { transform: rotate(45deg); background: var(--brand-soft); color: var(--brand-dark); }
+    details .faq-body { padding: 0 1rem 1rem; color: var(--ink-soft); font-size: .93rem; max-width: 68ch; }
+
+    /* ---------- Final CTA ---------- */
+    .final-cta { padding: 2.8rem 0 3.6rem; }
+    .cta-panel {
+      background: linear-gradient(150deg, #16202b, #23324a 60%, #2f5bea 160%);
+      color: #eef1f6; border-radius: 20px; padding: 2.6rem 2rem; text-align: center;
+      box-shadow: 0 24px 50px -30px rgba(22, 32, 43, .7);
+    }
+    .cta-panel h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 800; color: #fff; }
+    .cta-panel p { color: #c3ccd8; max-width: 52ch; margin: .7rem auto 1.5rem; }
+    .cta-actions { display: flex; gap: .7rem; justify-content: center; flex-wrap: wrap; }
+    .cta-panel .btn-ghost { color: #eef1f6; border-color: #4a5a72; }
+    .cta-panel .btn-ghost:hover { background: rgba(255,255,255,.08); color: #fff; }
+    .cta-panel .btn-primary { background: #fff; color: var(--ink); border-color: #fff; }
+    .cta-panel .btn-primary:hover { background: #e8edfd; color: var(--ink); }
+
+    /* ---------- Footer ---------- */
+    .site-footer { background: var(--surface); border-top: 1px solid var(--line); padding: 2.4rem 0 1.6rem; }
+    .footer-grid {
+      display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 2rem;
+    }
+    @media (max-width: 820px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .footer-grid { grid-template-columns: 1fr; } }
+    .footer-brand p { color: var(--ink-soft); font-size: .88rem; max-width: 30ch; margin-top: .6rem; }
+    .footer-col h3 {
+      font-size: .76rem; text-transform: uppercase; letter-spacing: .08em;
+      color: var(--ink-faint); margin-bottom: .7rem; font-weight: 750;
+    }
+    .footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .4rem; }
+    .footer-col a { color: var(--ink-soft); text-decoration: none; font-size: .9rem; }
+    .footer-col a:hover { color: var(--brand-dark); text-decoration: underline; }
+    .footer-bottom {
+      margin-top: 2rem; padding-top: 1.2rem; border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+      font-size: .82rem; color: var(--ink-faint);
+    }
+    .footer-bottom .demo-tag {
+      background: var(--warn-soft); color: var(--warn); border: 1px solid #f0dcb8;
+      padding: .15rem .55rem; border-radius: 999px; font-weight: 650;
+    }
+
+    /* ---------- Utility ---------- */
+    .visually-hidden-radio { position: absolute; opacity: 0; pointer-events: none; }
+    .price[data-billing="annual"] .price-amount { color: var(--brand-dark); }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to main content</a>
+
+  <div class="demo-banner" role="note" aria-label="Demo notice">
+    <div class="wrap">
+      <span class="dot" aria-hidden="true"></span>
+      <span><strong>Concept demo</strong> — Relay is a fictional product. All plans, prices and actions on this page are illustrative and run locally in your browser.</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="Relay home">
+        <span class="brand-mark" aria-hidden="true">R</span>
+        Relay
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#plans">Pricing</a>
+        <a href="#compare">Compare</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="header-cta">
+        <a class="btn btn-ghost" href="#final-cta">Sign in</a>
+        <a class="btn btn-primary" href="#plans">Start free trial</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero wrap" id="top" aria-labelledby="hero-title">
+      <span class="eyebrow">Pricing</span>
+      <h1 id="hero-title">Simple plans for teams that plan together</h1>
+      <p class="lede">Relay keeps roadmaps, weekly priorities and standups in one calm place. Every plan includes a 14‑day free trial — no credit card needed to start.</p>
+
+      <!-- Billing toggle -->
+      <div class="billing">
+        <div class="toggle-group" role="group" aria-label="Billing period">
+          <button type="button" id="btn-monthly" aria-pressed="true" data-billing="monthly">
+            Monthly
+          </button>
+          <button type="button" id="btn-annual" aria-pressed="false" data-billing="annual">
+            Annual <span class="save-pill">Save 20%</span>
+          </button>
+        </div>
+        <p class="billing-note" id="billing-note" aria-live="polite">
+          Prices shown in <strong>USD</strong>, per workspace, per month. Billed monthly. Cancel anytime.
+        </p>
+      </div>
+    </section>
+
+    <!-- Plans -->
+    <section class="plans-wrap wrap" id="plans" aria-labelledby="plans-title">
+      <h2 id="plans-title" class="sr-only">Choose a plan</h2>
+      <div class="plans">
+
+        <!-- Starter -->
+        <article class="plan" aria-labelledby="plan-starter-title">
+          <h2 id="plan-starter-title">Starter</h2>
+          <p class="plan-tagline">For small teams getting their first shared rhythm.</p>
+          <div class="price-block">
+            <span class="price" data-price="starter">
+              <span class="price-amount">$0</span>
+            </span>
+            <span class="price-unit" data-unit="starter">/ month</span>
+          </div>
+          <p class="price-sub" data-sub="starter">Free forever — up to 5 members</p>
+          <a class="btn btn-ghost btn-block" href="#final-cta" aria-describedby="starter-cta-note">Start for free</a>
+          <p class="cta-note" id="starter-cta-note">No card required</p>
+
+          <ul class="plan-features">
+            <li><span class="check" aria-hidden="true">✓</span><span><strong>Up to 5 members</strong></span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>3 active projects</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Weekly planning board</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Roadmap view (read‑only sharing)</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Community support</span></li>
+          </ul>
+        </article>
+
+        <!-- Team (recommended) -->
+        <article class="plan plan--recommended" aria-labelledby="plan-team-title">
+          <span class="plan-flag">Recommended</span>
+          <h2 id="plan-team-title">Team</h2>
+          <p class="plan-tagline">For growing teams that need shared priorities and history.</p>
+          <div class="price-block">
+            <span class="price" data-price="team">
+              <span class="price-amount">$12</span>
+            </span>
+            <span class="price-unit" data-unit="team">/ member / month</span>
+          </div>
+          <p class="price-sub" data-sub="team">Billed monthly. Cancel anytime.</p>
+          <a class="btn btn-primary btn-block" href="#final-cta" aria-describedby="team-cta-note">Start 14‑day trial</a>
+          <p class="cta-note" id="team-cta-note">No credit card required</p>
+
+          <ul class="plan-features">
+            <li><span class="check" aria-hidden="true">✓</span><span><strong>Unlimited members</strong></span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Unlimited projects &amp; roadmaps</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Weekly planning + standup notes</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Goals &amp; progress tracking</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Email support within 1 business day</span></li>
+          </ul>
+        </article>
+
+        <!-- Scale -->
+        <article class="plan" aria-labelledby="plan-scale-title">
+          <h2 id="plan-scale-title">Scale</h2>
+          <p class="plan-tagline">For multi‑team orgs that need control and insight.</p>
+          <div class="price-block">
+            <span class="price" data-price="scale">
+              <span class="price-amount">$24</span>
+            </span>
+            <span class="price-unit" data-unit="scale">/ member / month</span>
+          </div>
+          <p class="price-sub" data-sub="scale">Billed monthly. Cancel anytime.</p>
+          <a class="btn btn-ghost btn-block" href="#final-cta" aria-describedby="scale-cta-note">Talk to sales</a>
+          <p class="cta-note" id="scale-cta-note">Or start a trial — same 14 days</p>
+
+          <ul class="plan-features">
+            <li><span class="check" aria-hidden="true">✓</span><span><strong>Everything in Team</strong></span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Multiple workspaces &amp; team views</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>SSO &amp; SCIM provisioning</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Audit log &amp; data export</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Priority support with onboarding call</span></li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Comparison table -->
+    <section class="compare wrap" id="compare" aria-labelledby="compare-title">
+      <div class="section-head">
+        <h2 id="compare-title">Compare plans side by side</h2>
+        <p>Same core planning experience on every plan. The differences are about team size, history and controls — not basic features.</p>
+      </div>
+      <div class="table-scroll" role="region" aria-label="Plan comparison table" tabindex="0">
+        <table>
+          <caption>Feature availability by plan</caption>
+          <thead>
+            <tr>
+              <th scope="col">Feature</th>
+              <th scope="col">Starter</th>
+              <th scope="col">Team</th>
+              <th scope="col">Scale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Members</th><td>Up to 5</td><td>Unlimited</td><td>Unlimited</td></tr>
+            <tr><th scope="row">Active projects</th><td>3</td><td>Unlimited</td><td>Unlimited</td></tr>
+            <tr><th scope="row">Weekly planning board</th><td class="tick">Included</td><td class="tick">Included</td><td class="tick">Included</td></tr>
+            <tr><th scope="row">Roadmap view</th><td>Read‑only</td><td class="tick">Full editing</td><td class="tick">Full editing</td></tr>
+            <tr><th scope="row">Goals &amp; progress tracking</th><td class="dash">—</td><td class="tick">Included</td><td class="tick">Included</td></tr>
+            <tr><th scope="row">Multiple workspaces</th><td class="dash">—</td><td class="dash">—</td><td class="tick">Included</td></tr>
+            <tr><th scope="row">SSO &amp; SCIM</th><td class="dash">—</td><td class="dash">—</td><td class="tick">Included</td></tr>
+            <tr><th scope="row">Audit log &amp; data export</th><td class="dash">—</td><td class="dash">—</td><td class="tick">Included</td></tr>
+            <tr><th scope="row">Support</th><td>Community</td><td>Email, 1 business day</td><td>Priority + onboarding</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Transparent billing language -->
+    <section class="trust wrap" aria-labelledby="trust-title">
+      <div class="section-head">
+        <h2 id="trust-title">Billing, without the surprises</h2>
+        <p>Clear language about what you pay and when. No hidden fees, no auto‑upgrades, no lock‑in.</p>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <div class="trust-icon" aria-hidden="true">$</div>
+          <h3>Transparent prices</h3>
+          <p>Prices are in USD per workspace. Team and Scale are charged per active member, per month. Annual plans are billed once per year at the discounted rate shown.</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon" aria-hidden="true">↺</div>
+          <h3>Cancel anytime</h3>
+          <p>You can cancel from your workspace settings at any time. Your plan stays active until the end of the period you already paid for — no early‑termination fees.</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon" aria-hidden="true">✓</div>
+          <h3>Trials that end quietly</h3>
+          <p>The 14‑day trial never requires a credit card. When it ends, your workspace moves to Starter automatically. We won’t charge you unless you choose a paid plan.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq wrap" id="faq" aria-labelledby="faq-title">
+      <div class="section-head">
+        <h2 id="faq-title">Questions, answered</h2>
+        <p>If something isn’t covered here, the demo’s support links are placeholders — this is a concept page.</p>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>How does the annual discount work? <span class="plus" aria-hidden="true">+</span></summary>
+          <div class="faq-body">
+            Annual billing saves 20% compared with paying month‑to‑month. You pay for 12 months up front at the annual rate, and the price stays fixed for that year. The toggle above updates both the per‑month equivalent and the billing period note.
+          </div>
+        </details>
+        <details>
+          <summary>What counts as an active member? <span class="plus" aria-hidden="true">+</span></summary>
+          <div class="faq-body">
+            An active member is anyone who can sign in to your workspace. Guests who only view a shared roadmap are free and don’t count toward billing. You can remove members at any time; the next invoice reflects the change.
+          </div>
+        </details>
+        <details>
+          <summary>What happens when the free trial ends? <span class="plus" aria-hidden="true">+</span></summary>
+          <div class="faq-body">
+            Your workspace automatically moves to the Starter plan, which is free for up to 5 members. Nothing is charged and no card is needed. You can upgrade to Team or Scale whenever you’re ready.
+          </div>
+        </details>
+        <details>
+          <summary>Can I switch plans later? <span class="plus" aria-hidden="true">+</span></summary>
+          <div class="faq-body">
+            Yes. Upgrades take effect immediately and are prorated. Downgrades take effect at the end of your current billing period, so you keep access to what you’ve paid for.
+          </div>
+        </details>
+        <details>
+          <summary>Do you offer discounts for nonprofits or education? <span class="plus" aria-hidden="true">+</span></summary>
+          <div class="faq-body">
+            In a real product, yes — Relay would offer a verified discount for registered nonprofits and accredited schools. This demo page does not process applications; the sales link is illustrative only.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta wrap" id="final-cta" aria-labelledby="cta-title">
+      <div class="cta-panel">
+        <h2 id="cta-title">Plan your next week in Relay</h2>
+        <p>Start a 14‑day trial with no credit card, or bring your questions to a short walkthrough. Every plan includes the core planning board.</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary btn-lg" href="#plans">Start free trial</a>
+          <a class="btn btn-ghost btn-lg" href="#faq">Read the FAQ</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="#top" aria-label="Relay home">
+            <span class="brand-mark" aria-hidden="true">R</span>
+            Relay
+          </a>
+          <p>Team planning that keeps priorities visible and meetings short. A fictional product built as an accessible pricing‑page demo.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Product</h3>
+          <ul>
+            <li><a href="#plans">Pricing</a></li>
+            <li><a href="#compare">Compare plans</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#top">About</a></li>
+            <li><a href="#final-cta">Contact sales</a></li>
+            <li><a href="#top">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#top">Privacy</a></li>
+            <li><a href="#top">Terms</a></li>
+            <li><a href="#top">Security</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year">2025</span> Relay (fictional). No real transactions occur on this page.</span>
+        <span class="demo-tag">Concept / demo</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      // Pricing data — the single source of truth for the toggle.
+      var plans = {
+        starter: {
+          monthly: { amount: "$0", unit: "/ month", sub: "Free forever — up to 5 members" },
+          annual:  { amount: "$0", unit: "/ month", sub: "Free forever — up to 5 members" }
+        },
+        team: {
+          monthly: { amount: "$12", unit: "/ member / month", sub: "Billed monthly. Cancel anytime." },
+          annual:  { amount: "$9.60", unit: "/ member / month", sub: "Billed annually at $115.20 per member / year. Save 20%." }
+        },
+        scale: {
+          monthly: { amount: "$24", unit: "/ member / month", sub: "Billed monthly. Cancel anytime." },
+          annual:  { amount: "$19.20", unit: "/ member / month", sub: "Billed annually at $230.40 per member / year. Save 20%." }
+        }
+      };
+
+      var btnMonthly = document.getElementById("btn-monthly");
+      var btnAnnual = document.getElementById("btn-annual");
+      var note = document.getElementById("billing-note");
+
+      function render(billing) {
+        Object.keys(plans).forEach(function (key) {
+          var data = plans[key][billing];
+          var priceEl = document.querySelector('[data-price="' + key + '"] .price-amount');
+          var unitEl = document.querySelector('[data-unit="' + key + '"]');
+          var subEl = document.querySelector('[data-sub="' + key + '"]');
+          if (priceEl) priceEl.textContent = data.amount;
+          if (unitEl) unitEl.textContent = data.unit;
+          if (subEl) subEl.textContent = data.sub;
+        });
+
+        var isAnnual = billing === "annual";
+        btnMonthly.setAttribute("aria-pressed", String(!isAnnual));
+        btnAnnual.setAttribute("aria-pressed", String(isAnnual));
+
+        if (note) {
+          note.innerHTML = isAnnual
+            ? 'Prices shown in <strong>USD</strong>, per workspace, per month equivalent. <strong>Billed annually</strong> — 20% less than monthly. Cancel anytime.'
+            : 'Prices shown in <strong>USD</strong>, per workspace, per month. <strong>Billed monthly</strong>. Cancel anytime.';
+        }
+      }
+
+      function setBilling(billing) {
+        render(billing);
+      }
+
+      if (btnMonthly && btnAnnual) {
+        btnMonthly.addEventListener("click", function () { setBilling("monthly"); });
+        btnAnnual.addEventListener("click", function () { setBilling("annual"); });
+      }
+
+      // Set the current year without a network call.
+      var yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+      // Initial render (monthly is the default).
+      render("monthly");
+    })();
+  </script>
+</body>
+</html>
+
