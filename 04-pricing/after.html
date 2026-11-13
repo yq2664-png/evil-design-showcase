@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"><head>
+<!doctype html>
+<html lang="en">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#f7f8f2">
@@ -25,7 +27,6 @@ header{border-bottom:1px solid var(--line)}
 .nav-links a{text-decoration:none;font-size:14px;font-weight:550}
 .nav-links a:hover{text-decoration:underline;text-underline-offset:6px}
 .nav-links a[aria-current]{color:var(--green);text-decoration:underline;text-underline-offset:7px}
-.nav-links a:nth-of-type(2){text-decoration:underline;text-underline-offset:7px}
 .nav-right{display:flex;align-items:center;gap:19px}
 .demo-label{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;border:1px solid #cdd7c5;padding:4px 8px;border-radius:5px;white-space:nowrap;color:var(--muted)}
 .button{display:inline-flex;justify-content:center;align-items:center;gap:10px;border:1px solid var(--green);border-radius:8px;background:var(--green);color:white;padding:12px 20px;line-height:1.4;font-weight:650;font-size:14px;text-decoration:none;transition:background .15s,transform .15s}
@@ -38,7 +39,6 @@ header{border-bottom:1px solid var(--line)}
 .eyebrow{display:flex;align-items:center;justify-content:center;gap:9px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;margin:0 0 19px}
 .eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:#7c9a53}
 h1{font-size:clamp(38px,5.1vw,64px);font-weight:600;letter-spacing:-2.8px;line-height:1.1;margin:0 0 23px}
-#page-title{font-size:clamp(34px,4.4vw,52px);letter-spacing:-2.2px;line-height:1.08;margin:0 0 19px}
 h1 span{font-family:Georgia,serif;font-weight:400;font-style:italic}
 .hero>p:last-child{color:var(--muted);font-size:17px;line-height:1.7;max-width:520px;margin:0 auto}
 .billing-area{text-align:center;margin:0 auto 35px}
@@ -136,7 +136,7 @@ dialog .button{width:100%}
 .demo-note{font-size:11px;color:var(--muted);margin-top:16px;line-height:1.6}
 @media(min-width:1400px){.hero{padding-top:77px}}
 @media(max-width:1000px){.wrap{width:calc(100% - 40px)}.plan{padding:26px 20px}.plan.recommended{padding:25px 19px}.included-list{gap:18px}.feature-section{gap:40px}.faq-section{gap:40px}.nav-links{gap:22px}.nav-right .demo-label{display:none}.price-unit{font-size:11px}.amount{font-size:48px}}
-@media(max-width:760px){.nav{min-height:75px;gap:16px}.nav-links{gap:18px}.nav-links a{font-size:12px}.nav-links a:first-child{display:none}.nav-right{display:none}.hero{padding-top:45px}.hero>p:last-child{font-size:15px;max-width:400px}h1{letter-spacing:-1.6px}#page-title{letter-spacing:-1.4px}.plans{grid-template-columns:1fr;gap:27px;max-width:450px;margin:auto}.plan,.plan.recommended{padding:27px}.plan-desc{min-height:0;max-width:none;margin-bottom:20px}.amount{font-size:54px}.price-unit{font-size:12px}.feature-list{grid-template-columns:1fr 1fr;gap:13px 18px;font-size:12px}.included{align-items:start;gap:20px;margin-top:35px}.included-title{min-width:115px}.included-list{display:grid;grid-template-columns:1fr;gap:12px}.feature-section{grid-template-columns:1fr;gap:30px;padding:50px 0}.feature-copy>p:not(.section-kicker){max-width:none}.board-shell{max-width:500px;width:100%;margin:auto}.faq-section{grid-template-columns:1fr;gap:24px;padding:45px 0}.faq-intro p:last-child{max-width:none}.bottom-cta{padding:29px;flex-direction:column;align-items:start;margin-bottom:40px}.footer-row{flex-direction:column;align-items:start}.footer-brand{flex-wrap:wrap}.billing-option label{padding:10px 15px}}
+@media(max-width:760px){.nav{min-height:75px;gap:16px}.nav-links{gap:18px}.nav-links a{font-size:12px}.nav-links a:first-child{display:none}.nav-right{display:none}.hero{padding-top:45px}.hero>p:last-child{font-size:15px;max-width:400px}h1{letter-spacing:-1.6px}.plans{grid-template-columns:1fr;gap:27px;max-width:450px;margin:auto}.plan,.plan.recommended{padding:27px}.plan-desc{min-height:0;max-width:none;margin-bottom:20px}.amount{font-size:54px}.price-unit{font-size:12px}.feature-list{grid-template-columns:1fr 1fr;gap:13px 18px;font-size:12px}.included{align-items:start;gap:20px;margin-top:35px}.included-title{min-width:115px}.included-list{display:grid;grid-template-columns:1fr;gap:12px}.feature-section{grid-template-columns:1fr;gap:30px;padding:50px 0}.feature-copy>p:not(.section-kicker){max-width:none}.board-shell{max-width:500px;width:100%;margin:auto}.faq-section{grid-template-columns:1fr;gap:24px;padding:45px 0}.faq-intro p:last-child{max-width:none}.bottom-cta{padding:29px;flex-direction:column;align-items:start;margin-bottom:40px}.footer-row{flex-direction:column;align-items:start}.footer-brand{flex-wrap:wrap}.billing-option label{padding:10px 15px}}
 @media(max-width:380px){.wrap{width:calc(100% - 28px)}.feature-list{grid-template-columns:1fr}.billing-option label{padding:10px}.save{font-size:9px}.included{flex-direction:column}.included-title{max-width:none}.board-shell{padding:17px}.nav-links{gap:14px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
 </style>
@@ -206,22 +206,21 @@ dialog::backdrop{background-color:rgba(22, 32, 43, 0.66)!important}
 .estimate-total{color:rgb(22, 32, 43)!important}
 .demo-label{color:rgb(107, 118, 132)!important}
 .skip{background-color:rgb(22, 32, 43)!important;color:rgb(255, 255, 255)!important}
-</style>
-<style id="evil-design-diverse-degradation">:root{--paper:#dce5f0;--ink:#293c52;--muted:#68788d;--line:#b8c8d8;--green:#5e7389;--lime:#c8d5e8;--soft:#e6edf5}body{background:#dce5f0!important;color:#293c52!important;font-family:Verdana,Geneva,sans-serif!important}#page-title,#page-title span{font-family:Verdana,Geneva,sans-serif!important;font-weight:800!important;font-style:normal!important;letter-spacing:-.065em!important;line-height:.99!important}#page-title{font-size:79px!important}section.hero{padding-top:90px!important;padding-bottom:72px!important}.plans{gap:10px!important}.plan{border-radius:2px!important;box-shadow:none!important}.plan.recommended{background:#e1e9f2!important;border-color:#8da3b9!important}.recommend-label{background:#91a5c2!important;color:#263a51!important}.plan-cta,.plan.recommended .plan-cta{background:#b8c9d8!important;border-color:#a3b8c9!important;color:#364d60!important}.plan .amount{font-weight:700!important}@media(max-width:700px){#page-title{font-size:53px!important}section.hero{padding-top:52px!important;padding-bottom:52px!important}.plans{gap:24px!important}}body{background:#cbdcef!important}#page-title{font-size:62px!important;line-height:1.25!important;letter-spacing:.025em!important}.plans{gap:4px!important}.plan{padding:18px!important;border:2px solid #a3b5cc!important;background:#dce6f2!important}.plan.recommended{background:#dce6f2!important;border-color:#a3b5cc!important}.plan-cta{border-radius:22px!important;box-shadow:3px 3px 0 #8ca2bf!important}.plan h2,.plan h3{font-family:monospace!important;letter-spacing:.04em!important}@media(max-width:700px){#hero-title,#page-title,#hero-heading,#hero-heading em{font-size:44px!important;letter-spacing:-.02em!important}.hero-grid{grid-template-columns:1fr!important;gap:24px!important}.hero-art{transform:none}.project{padding:12px!important}}</style></head>
+</style><style id="evil-design-diverse-degradation">:root{--paper:#dce5f0;--ink:#293c52;--muted:#68788d;--line:#b8c8d8;--green:#5e7389;--lime:#c8d5e8;--soft:#e6edf5}body{background:#dce5f0!important;color:#293c52!important;font-family:Verdana,Geneva,sans-serif!important}#page-title,#page-title span{font-family:Verdana,Geneva,sans-serif!important;font-weight:800!important;font-style:normal!important;letter-spacing:-.065em!important;line-height:.99!important}#page-title{font-size:79px!important}section.hero{padding-top:90px!important;padding-bottom:72px!important}.plans{gap:10px!important}.plan{border-radius:2px!important;box-shadow:none!important}.plan.recommended{background:#e1e9f2!important;border-color:#8da3b9!important}.recommend-label{background:#91a5c2!important;color:#263a51!important}.plan-cta,.plan.recommended .plan-cta{background:#b8c9d8!important;border-color:#a3b8c9!important;color:#364d60!important}.plan .amount{font-weight:700!important}@media(max-width:700px){#page-title{font-size:53px!important}section.hero{padding-top:52px!important;padding-bottom:52px!important}.plans{gap:24px!important}}body{background:#cbdcef!important}#page-title{font-size:62px!important;line-height:1.25!important;letter-spacing:.025em!important}.plans{gap:4px!important}.plan{padding:18px!important;border:2px solid #a3b5cc!important;background:#dce6f2!important}.plan.recommended{background:#dce6f2!important;border-color:#a3b5cc!important}.plan-cta{border-radius:22px!important;box-shadow:3px 3px 0 #8ca2bf!important}.plan h2,.plan h3{font-family:monospace!important;letter-spacing:.04em!important}@media(max-width:700px){#hero-title,#page-title,#hero-heading,#hero-heading em{font-size:44px!important;letter-spacing:-.02em!important}.hero-grid{grid-template-columns:1fr!important;gap:24px!important}.hero-art{transform:none}.project{padding:12px!important}}</style><style id="evil-design-catalog-transfer">#page-title{font-size:76px!important;line-height:1.08!important;max-width:560px!important}section.hero{padding-top:128px!important;padding-bottom:104px!important}@media(max-width:760px){#page-title{font-size:48px!important;max-width:none!important}section.hero{padding-top:48px!important;padding-bottom:55px!important}}</style></head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
 <defs>
-<symbol id="relay-mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="currentColor"></rect><path d="M9 10h8a5 5 0 0 1 0 10h-2m-1-6 5 5-5 5" fill="none" stroke="#d6ed9a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></symbol>
-<symbol id="check" viewBox="0 0 20 20"><path d="m4 10 4 4 8-8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></symbol>
-<symbol id="shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z" fill="none" stroke="currentColor" stroke-width="1.5"></path><path d="m8 12 3 3 5-6" fill="none" stroke="currentColor" stroke-width="1.5"></path></symbol>
-<symbol id="people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.5"></circle><path d="M3 20v-3a6 6 0 0 1 12 0v3m1-15a3 3 0 0 1 0 6m2 3a5 5 0 0 1 3 5v1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></symbol>
-<symbol id="grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"></rect><rect x="14" y="4" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"></rect><rect x="4" y="14" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"></rect><rect x="14" y="14" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"></rect></symbol>
+<symbol id="relay-mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M9 10h8a5 5 0 0 1 0 10h-2m-1-6 5 5-5 5" fill="none" stroke="#d6ed9a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="check" viewBox="0 0 20 20"><path d="m4 10 4 4 8-8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m8 12 3 3 5-6" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+<symbol id="people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 20v-3a6 6 0 0 1 12 0v3m1-15a3 3 0 0 1 0 6m2 3a5 5 0 0 1 3 5v1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+<symbol id="grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="4" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="14" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="14" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
 </defs>
 </svg>
 <header>
 <div class="wrap nav">
-<a class="logo" href="#top" aria-label="Relay home"><svg aria-hidden="true"><use href="#relay-mark"></use></svg>relay</a>
+<a class="logo" href="#top" aria-label="Relay home"><svg aria-hidden="true"><use href="#relay-mark"/></svg>relay</a>
 <nav class="nav-links" aria-label="Main navigation">
 <a href="#why-relay">Why Relay</a>
 <a href="#pricing" aria-current="page">Pricing</a>
@@ -231,7 +230,7 @@ dialog::backdrop{background-color:rgba(22, 32, 43, 0.66)!important}
 </div>
 </header>
 <main id="main">
-<div id="top" class="wrap">
+<div class="wrap" id="top">
 <section class="hero" aria-labelledby="page-title">
 <p class="eyebrow">A little structure. A lot of possibility.</p>
 <h1 id="page-title">Big plans.<br><span>Simple pricing.</span></h1>
@@ -241,68 +240,68 @@ dialog::backdrop{background-color:rgba(22, 32, 43, 0.66)!important}
 <div class="billing-area">
 <fieldset class="billing-toggle">
 <legend>Billing frequency</legend>
-<div class="billing-option"><input id="billing-monthly" type="radio" name="billing" value="monthly" checked=""><label for="billing-monthly">Monthly</label></div>
-<div class="billing-option"><input id="billing-annual" type="radio" name="billing" value="annual"><label for="billing-annual">Annually <span class="save">Lower rates</span></label></div>
+<div class="billing-option"><input type="radio" name="billing" id="billing-monthly" value="monthly" checked><label for="billing-monthly">Monthly</label></div>
+<div class="billing-option"><input type="radio" name="billing" id="billing-annual" value="annual"><label for="billing-annual">Annually <span class="save">Lower rates</span></label></div>
 </fieldset>
-<p id="billing-explainer" class="billing-explainer" aria-live="polite">Pay month to month. All prices in USD, per member.</p>
+<p class="billing-explainer" id="billing-explainer" aria-live="polite">Pay month to month. All prices in USD, per member.</p>
 </div>
 <div class="plans">
 <article class="plan" aria-labelledby="starter-title">
-<div class="plan-top"><h2 id="starter-title">Starter</h2><span class="plan-symbol"><svg aria-hidden="true"><path d="M10 3v14M3 10h14M5 5l10 10M5 15 15 5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg></span></div>
+<div class="plan-top"><h2 id="starter-title">Starter</h2><span class="plan-symbol"><svg aria-hidden="true"><path d="M10 3v14M3 10h14M5 5l10 10M5 15 15 5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span></div>
 <p class="plan-desc">A little more clarity for small teams finding their rhythm.</p>
-<div class="price"><span class="currency">$</span><span id="price-starter" class="amount">12</span><span class="price-unit">/ member / month</span></div>
-<p id="detail-starter" class="billing-detail">$12 per member, billed monthly</p>
-<button id="choose-starter" class="button outline plan-cta" data-plan="starter">Choose Starter <span aria-hidden="true">↗</span></button>
+<div class="price"><span class="currency">$</span><span class="amount" id="price-starter">12</span><span class="price-unit">/ member / month</span></div>
+<p class="billing-detail" id="detail-starter">$12 per member, billed monthly</p>
+<button class="button outline plan-cta" id="choose-starter" data-plan="starter">Choose Starter <span aria-hidden="true">↗</span></button>
 <p class="feature-heading">Your essentials, organized</p>
 <ul class="feature-list">
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span><strong>10</strong> active projects</span></li>
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span>List &amp; board views</span></li>
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span><strong>5 GB</strong> storage per member</span></li>
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span><strong>100</strong> automations / month</span></li>
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span>Basic project permissions</span></li>
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span>Standard email support</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span><strong>10</strong> active projects</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span>List &amp; board views</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span><strong>5 GB</strong> storage per member</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span><strong>100</strong> automations / month</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span>Basic project permissions</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span>Standard email support</span></li>
 </ul>
 <p class="plan-note">From 1 member. Room to grow.</p>
 </article>
 <article class="plan recommended" aria-labelledby="team-title">
 <span class="recommend-label">Our recommendation</span>
-<div class="plan-top"><h2 id="team-title">Team</h2><span class="plan-symbol"><svg aria-hidden="true"><use href="#people"></use></svg></span></div>
+<div class="plan-top"><h2 id="team-title">Team</h2><span class="plan-symbol"><svg aria-hidden="true"><use href="#people"/></svg></span></div>
 <p class="plan-desc">Bring people, projects, and priorities into one shared picture.</p>
-<div class="price"><span class="currency">$</span><span id="price-team" class="amount">26</span><span class="price-unit">/ member / month</span></div>
-<p id="detail-team" class="billing-detail">$26 per member, billed monthly</p>
-<button id="choose-team" class="button plan-cta" data-plan="team">Choose Team <span aria-hidden="true">↗</span></button>
+<div class="price"><span class="currency">$</span><span class="amount" id="price-team">26</span><span class="price-unit">/ member / month</span></div>
+<p class="billing-detail" id="detail-team">$26 per member, billed monthly</p>
+<button class="button plan-cta" id="choose-team" data-plan="team">Choose Team <span aria-hidden="true">↗</span></button>
 <p class="feature-heading">More ways to work together</p>
 <ul class="feature-list">
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span><strong>Unlimited</strong> active projects</span></li>
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span>List, board &amp; timeline views</span></li>
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span><strong>50 GB</strong> storage per member</span></li>
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span><strong>2,000</strong> automations / month</span></li>
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span>Custom project permissions</span></li>
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span>Priority email support</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span><strong>Unlimited</strong> active projects</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span>List, board &amp; timeline views</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span><strong>50 GB</strong> storage per member</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span><strong>2,000</strong> automations / month</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span>Custom project permissions</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span>Priority email support</span></li>
 </ul>
 <p class="plan-note">From 1 member. Built for collaboration.</p>
 </article>
 <article class="plan" aria-labelledby="scale-title">
-<div class="plan-top"><h2 id="scale-title">Scale</h2><span class="plan-symbol"><svg aria-hidden="true"><path d="M3 16h4V9h5V4h5v12M3 16h14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+<div class="plan-top"><h2 id="scale-title">Scale</h2><span class="plan-symbol"><svg aria-hidden="true"><path d="M3 16h4V9h5V4h5v12M3 16h14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
 <p class="plan-desc">More oversight and control for teams with bigger horizons.</p>
-<div class="price"><span class="currency">$</span><span id="price-scale" class="amount">48</span><span class="price-unit">/ member / month</span></div>
-<p id="detail-scale" class="billing-detail">$48 per member, billed monthly</p>
-<button id="choose-scale" class="button outline plan-cta" data-plan="scale">Choose Scale <span aria-hidden="true">↗</span></button>
+<div class="price"><span class="currency">$</span><span class="amount" id="price-scale">48</span><span class="price-unit">/ member / month</span></div>
+<p class="billing-detail" id="detail-scale">$48 per member, billed monthly</p>
+<button class="button outline plan-cta" id="choose-scale" data-plan="scale">Choose Scale <span aria-hidden="true">↗</span></button>
 <p class="feature-heading">Clarity across your organization</p>
 <ul class="feature-list">
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span><strong>Unlimited</strong> active projects</span></li>
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span>All views + portfolio overview</span></li>
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span><strong>200 GB</strong> storage per member</span></li>
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span><strong>10,000</strong> automations / month</span></li>
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span>Custom permissions + SSO</span></li>
-<li><svg class="check" aria-hidden="true"><use href="#check"></use></svg><span>Priority email &amp; onboarding</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span><strong>Unlimited</strong> active projects</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span>All views + portfolio overview</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span><strong>200 GB</strong> storage per member</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span><strong>10,000</strong> automations / month</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span>Custom permissions + SSO</span></li>
+<li><svg class="check" aria-hidden="true"><use href="#check"/></svg><span>Priority email &amp; onboarding</span></li>
 </ul>
 <p class="plan-note">From 1 member. Ready for the big picture.</p>
 </article>
 </div>
 <div class="pricing-footnote">
-<span><svg aria-hidden="true"><use href="#check"></use></svg>No minimum team size</span>
-<span><svg aria-hidden="true"><use href="#check"></use></svg>No automatic overage charges</span>
+<span><svg aria-hidden="true"><use href="#check"/></svg>No minimum team size</span>
+<span><svg aria-hidden="true"><use href="#check"/></svg>No automatic overage charges</span>
 <span>Taxes, if applicable, are extra.</span>
 </div>
 <p style="text-align:center;font-size:11px;color:var(--muted);margin:12px 0 0">Concept page: plan buttons open a local cost estimate, not a checkout.</p>
@@ -310,16 +309,16 @@ dialog::backdrop{background-color:rgba(22, 32, 43, 0.66)!important}
 <aside class="included" aria-label="Included in every plan">
 <div class="included-title">Good foundations.<br>In every plan.</div>
 <ul class="included-list">
-<li><svg aria-hidden="true"><use href="#people"></use></svg>Unlimited tasks &amp; comments</li>
-<li><svg aria-hidden="true"><use href="#grid"></use></svg>Shared team workspace</li>
-<li><svg aria-hidden="true"><use href="#shield"></use></svg>Two-factor authentication</li>
-<li><svg aria-hidden="true"><use href="#check"></use></svg>Export your work</li>
+<li><svg aria-hidden="true"><use href="#people"/></svg>Unlimited tasks &amp; comments</li>
+<li><svg aria-hidden="true"><use href="#grid"/></svg>Shared team workspace</li>
+<li><svg aria-hidden="true"><use href="#shield"/></svg>Two-factor authentication</li>
+<li><svg aria-hidden="true"><use href="#check"/></svg>Export your work</li>
 </ul>
 </aside>
-<section id="why-relay" class="feature-section" aria-labelledby="why-title">
+<section class="feature-section" id="why-relay" aria-labelledby="why-title">
 <div class="feature-copy">
 <p class="section-kicker">Less chasing. More moving.</p>
-<h2 id="why-title" class="section-title">Work feels better<br>when everyone’s in sync.</h2>
+<h2 class="section-title" id="why-title">Work feels better<br>when everyone’s in sync.</h2>
 <p>Turn “where are we with this?” into a clear next step. Relay brings your plans, owners, and progress together, so your team can focus on the work that matters.</p>
 <a class="text-link" href="#pricing">Find your team’s fit <span aria-hidden="true">↗</span></a>
 </div>
@@ -334,10 +333,10 @@ dialog::backdrop{background-color:rgba(22, 32, 43, 0.66)!important}
 </div>
 </div>
 </section>
-<section id="faq" class="faq-section" aria-labelledby="faq-title">
+<section class="faq-section" id="faq" aria-labelledby="faq-title">
 <div class="faq-intro">
 <p class="section-kicker">The small print, made simple</p>
-<h2 id="faq-title" class="section-title">Good questions.<br>Straight answers.</h2>
+<h2 class="section-title" id="faq-title">Good questions.<br>Straight answers.</h2>
 <p>Here’s how the proposed Relay plans work. This is a fictional product concept, not a live offer.</p>
 </div>
 <div class="faq-list">
@@ -356,26 +355,24 @@ dialog::backdrop{background-color:rgba(22, 32, 43, 0.66)!important}
 </main>
 <footer>
 <div class="wrap footer-row">
-<div class="footer-brand"><a class="logo" href="#top" aria-label="Relay, back to top"><svg aria-hidden="true"><use href="#relay-mark"></use></svg>relay</a><p>Fictional software. Real potential. &nbsp;© 2026 Relay concept.</p></div>
+<div class="footer-brand"><a class="logo" href="#top" aria-label="Relay, back to top"><svg aria-hidden="true"><use href="#relay-mark"/></svg>relay</a><p>Fictional software. Real potential. &nbsp;© 2026 Relay concept.</p></div>
 <div class="footer-links"><a href="#faq">Billing FAQs</a><a href="#pricing">Compare plans</a><span>No data collected</span></div>
 </div>
 </footer>
 <dialog id="plan-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
 <div class="dialog-top"><div><p class="section-kicker" style="margin-bottom:0">Local plan preview</p><h2 id="dialog-title">Your Team estimate</h2></div><button id="close-dialog" class="icon-button" aria-label="Close plan preview">×</button></div>
-<p id="dialog-description" class="dialog-info">Explore a team size below. This is an estimate, not a purchase or subscription.</p>
+<p class="dialog-info" id="dialog-description">Explore a team size below. This is an estimate, not a purchase or subscription.</p>
 <label for="seat-count" class="seats-label">Number of paid members</label>
-<input id="seat-count" inputmode="numeric" type="number" min="1" max="10000" step="1" value="5" aria-describedby="seat-help">
+<input id="seat-count" type="number" min="1" max="10000" step="1" value="5" inputmode="numeric" aria-describedby="seat-help">
 <p id="seat-help" style="font-size:11px;color:var(--muted);margin:6px 0">Enter 1–10,000 members. Every member uses a paid seat.</p>
 <div class="estimate" aria-live="polite" aria-atomic="true">
-<div id="estimate-total" class="estimate-total">$130 / month</div>
+<div class="estimate-total" id="estimate-total">$130 / month</div>
 <p id="estimate-description">5 members × $26, billed monthly.</p>
 <p>USD. Applicable taxes are not included.</p>
 </div>
-<button id="done-preview" class="button">Done exploring <span aria-hidden="true">✓</span></button>
+<button class="button" id="done-preview">Done exploring <span aria-hidden="true">✓</span></button>
 <p class="demo-note">Demo only. No account is created, no payment is taken, and your estimate is not saved or sent anywhere.</p>
 </dialog>
-
-
 <script>
 (function(){
 'use strict';
@@ -436,4 +433,6 @@ if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||ev
 });
 })();
 </script>
-</body></html>
+</body>
+</html>
+
