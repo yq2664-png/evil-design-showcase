@@ -206,7 +206,25 @@ dialog::backdrop{background-color:rgba(22, 32, 43, 0.66)!important}
 .estimate-total{color:rgb(22, 32, 43)!important}
 .demo-label{color:rgb(107, 118, 132)!important}
 .skip{background-color:rgb(22, 32, 43)!important;color:rgb(255, 255, 255)!important}
-</style><style id="evil-design-model-issue-transfer">#page-title{max-width:9ch;margin-inline:auto}.hero{padding-top:calc(1.5rem + 4vh);padding-bottom:calc(1.5rem + 4vh)}@media(min-width:900px){.hero{padding-top:calc(1.5rem + 7vh);padding-bottom:calc(1.5rem + 7vh)}.plan:nth-child(2) .billing-detail,.plan:nth-child(3) .billing-detail{margin-bottom:35px}}</style></head>
+</style><style id="evil-design-model-issue-transfer">/* i2 · reviewed-correction */
+@media(min-width:900px){.plan:nth-child(2) .billing-detail,.plan:nth-child(3) .billing-detail{margin-bottom:62px}}
+/* i3 · reviewed-correction */
+#page-title{max-width:9ch;margin-inline:auto}@media(max-width:767px){#page-title{max-width:none}}
+/* i4 · model-css */
+section.hero {
+  padding-top: 96px;
+  padding-bottom: 72px;
+}
+
+@media (max-width: 767px) {
+  #page-title {
+    max-width: none;
+  }
+  section.hero {
+    padding-top: 48px;
+    padding-bottom: 40px;
+  }
+}</style></head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
